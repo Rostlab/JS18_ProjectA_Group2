@@ -74,5 +74,3 @@ dll/
 #vs code folder
 /.vscode
 
-#package lock file
-package-lock.json
