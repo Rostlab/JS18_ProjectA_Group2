@@ -21,10 +21,10 @@ import { PostsService } from './posts/posts.service';
   template: `
     <header>
       <mat-toolbar color="primary">
-        <a [routerLink]="['/']" class="logotTxt">MEAN</a>
-        <a class="links" [routerLink]="['/posts']">Posts</a>
+        <a [routerLink]="['/']" class="logotTxt">iGraph</a>
+        <!--a class="links" [routerLink]="['/posts']">Posts</a>
         <a class="links" [routerLink]="['/react']">React</a>
-        <a class="links" href="/api/graphql">GraphQL browser</a>        
+        <a class="links" href="/api/graphql">GraphQL browser</a-->        
       </mat-toolbar>
     </header>
     <router-outlet></router-outlet>
@@ -34,9 +34,9 @@ import { PostsService } from './posts/posts.service';
   providers: [PostsService]
 })
 export class AppComponent implements OnInit {
-  public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Mean stack starter';
-  public url = 'https://mean.io';
+
+  public name = 'iGraph Project Start';
+  public url = 'http://localhost:3000/';
 
   constructor(
     public appState: AppState
