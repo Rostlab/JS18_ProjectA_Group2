@@ -70,3 +70,9 @@ dll/
 *.css.shim.ts
 *.ngsummary.json
 *.shim.ngstyle.ts
+
+#vs code folder
+/.vscode
+
+#package lock file
+package-lock.json
