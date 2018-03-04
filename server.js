@@ -1,39 +1,90 @@
-import mongoose from 'mongoose';
-import util from 'util';
+/*
+*
+* @author :: Jyotirmay Senapati
+* @Date :: 03rd March, 2018
+*/
+//
+// # SimpleServer
+//
+// A simple server using Socket.IO, Express, and Async.
+//
+var http = require('http');
+var path = require('path');
 
+var async = require('async');
+var socketio = require('socket.io');
+var express = require('express');
+var shell = require("shelljs");
+var app = require('./app.js');
 
-// config should be imported before importing any other file
-import config from './server/config/config';
-import app from './server/config/express';
+//
+// ## SimpleServer `SimpleServer(obj)`
+//
+// Creates a new instance of SimpleServer with the following options:
+//  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
+//
+//var router = express();
+var server = http.createServer(app);
+var io = socketio.listen(server);
 
+app.use(express.static(path.resolve(__dirname, 'client')));
+var messages = [];
+var sockets = [];
 
-const debug = require('debug')('express-mongoose-es6-rest-api:index');
+io.on('connection', function (socket) {
+  messages.forEach(function (data) {
+    socket.emit('message', data);
+  });
 
-// make bluebird default Promise
-Promise = require('bluebird'); // eslint-disable-line no-global-assign
+  sockets.push(socket);
 
-// plugin bluebird promise in mongoose
-mongoose.Promise = Promise;
+  socket.on('disconnect', function () {
+    sockets.splice(sockets.indexOf(socket), 1);
+    updateRoster();
+  });
 
-// connect to mongo db
-const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
-mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
+  socket.on('message', function (msg) {
+    var text = String(msg || '');
+
+    if (!text)
+      return;
+
+    socket.get('name', function (err, name) {
+      var data = {
+        name: name,
+        text: text
+      };
+
+      broadcast('message', data);
+      messages.push(data);
+    });
+  });
+
+  socket.on('identify', function (name) {
+    socket.set('name', String(name || 'Anonymous'), function (err) {
+      updateRoster();
+    });
+  });
 });
 
-// print mongoose logs in dev env
-if (config.MONGOOSE_DEBUG) {
-  mongoose.set('debug', (collectionName, method, query, doc) => {
-    debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+function updateRoster() {
+  async.map(
+    sockets,
+    function (socket, callback) {
+      socket.get('name', callback);
+    },
+    function (err, names) {
+      broadcast('roster', names);
+    }
+  );
+}
+
+function broadcast(event, data) {
+  sockets.forEach(function (socket) {
+    socket.emit(event, data);
   });
 }
-// module.parent check is required to support mocha watch
-// src: https://github.com/mochajs/mocha/issues/1912
-
-  // listen on port config.port
-  app.listen(config.port, () => {
-    console.info(`server started on port ${config.port} (${config.env})`); // eslint-disable-line no-console
-  });
-
-export default app;
+server.listen(process.env.PORT || 3001, process.env.IP || "localhost", function () {
+  var addr = server.address();
+  console.log("Server listening at", addr.address + ":" + addr.port);
+});

@@ -1,0 +1,9 @@
+setup typescript project from below url:
+https://matthewhorne.me/setup-typescript-project/
+
+Configured webpack and karma for angular unit tesing from below url:
+https://medium.com/lacolaco-blog/setting-up-angular-2-testing-environment-with-karma-and-webpack-e9b833befd99
+
+Used jasmine@2.99.0 due to below issue while running test.
+https://github.com/ionic-team/ionic-unit-testing-example/issues/79
+
