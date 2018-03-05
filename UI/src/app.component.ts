@@ -10,7 +10,7 @@ import { ScatterData, Layout, PlotlyHTMLElement, newPlot } from 'plotly.js/lib/c
 export class AppComponent { 
     
     trace1:any = {
-		x: [1999, 2000, 2001, 2002],
+		x: [1998, 2000, 2001, 2002],
 		y: [10, 15, 13, 17],
 		type: 'scatter'
     } as ScatterData;
