@@ -1,7 +1,6 @@
 node_modules/*
 coverage/*
 .vscode
-package-lock.json
 UI/dist
 UI/node_modules
-UI/package-lock.json
+
