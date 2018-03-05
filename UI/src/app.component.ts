@@ -37,10 +37,6 @@ export class AppComponent {
     options: any;
  
     ngOnInit() {
-        console.log("ngOnInit AppComponent");
-        console.log(this.data);
-        console.log(this.layout);
- 
         Plotly.newPlot('myPlotlyDiv', this.data, this.layout, this.options);
     }   
 }
