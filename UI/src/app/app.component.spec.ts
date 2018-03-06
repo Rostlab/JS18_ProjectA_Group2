@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from '../src/app.component';
+import { AppComponent } from './app.component';
 @Component({
     selector: 'test',
     template: `
-    <my-app></my-app>
+    <app-root></app-root>
     `
 })
 class TestComponent {
@@ -22,7 +22,7 @@ describe('##Testing app.component', () => {
     it('##testing app.component parts', async(() => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
-        const el:any = fixture.debugElement.nativeElement as HTMLElement; 
+        const el:any = fixture.debugElement.nativeElement as HTMLElement;
         expect(el.querySelector('p').textContent).toBe('Very simple setup.');
     }));
 });

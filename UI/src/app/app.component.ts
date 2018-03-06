@@ -3,12 +3,11 @@ import * as Plotly from 'plotly.js/lib/core';
 import { ScatterData, Layout, PlotlyHTMLElement, newPlot } from 'plotly.js/lib/core';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: 'template/app.component.html',
-    styleUrls: ['css/app.index.css']
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.css']
 })
 export class AppComponent { 
-    
     trace1:any = {
 		x: [1998, 2000, 2001, 2002],
 		y: [10, 15, 13, 17],
@@ -38,5 +37,5 @@ export class AppComponent {
  
     ngOnInit() {
         Plotly.newPlot('myPlotlyDiv', this.data, this.layout, this.options);
-    }   
+    }
 }

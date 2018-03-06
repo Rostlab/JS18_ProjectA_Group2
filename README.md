@@ -15,14 +15,13 @@ Run below command to start the server. The backend.
 Run below command to install all UI dependency from its package.json.
   >npm install
 
-Build javascript using webpack from typescript. Follow below command. It will open on watch mode everytime. If you don't want, go to UI/webpack.config.js and disable the watch mode by "watch:false". Good to have it on watch mode while developing new features.
-  >npm run build
-
-**Open another terminal** at **UI folder** inside root as previous one will be occupied by webpack build on watch mode.
-Test now, if basic functionlities are working in UI by running below command.
+To test UI app. Use below command.
   >npm test
 
-If everything is fine till now, then go ahead and execute below command to run the UI server.
-And it should open a browser window with pre-defined css loaded into it.
+To start the angular server, use below command which internally runs `"ng serve"`. It builds the application and start it. It will open in watch mode to keep checking changes you do and build simontaneously. 
   >npm start
+
+
+
+
 
