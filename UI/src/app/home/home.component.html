@@ -1,0 +1,20 @@
+<p>Very simple setup.</p>
+<div>
+  <app-text-input id="text-input"
+              (plot)="plotGraph()"
+              [clear]="clear">
+  </app-text-input>
+  <button class="btn btn-md btn-success"
+          type="button"
+          (click)="plotGraph()"
+          [disabled]="shouldDisablePlotButton()">
+    <i class="fa fa-chart-line"></i> Plot
+  </button>
+  <button class="btn btn-md btn-danger"
+          type="button"
+          (click)="clearAll()"
+          [disabled]="shouldDisableClearButton()">
+    <i class="fa fa-redo"></i> Clear
+  </button>
+</div>
+<app-chart></app-chart>
