@@ -1,0 +1,6 @@
+export * from './bar-chart/bar-chart.component'
+export * from './histogram/histogram.component'
+export * from './line-chart/line-chart.component'
+export * from './pie-chart/pie-chart.component'
+export * from './scatter-plot/scatter-plot.component'
+export * from './chart.component'
