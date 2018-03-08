@@ -1,20 +1,36 @@
 <p>Very simple setup.</p>
 <div>
-  <app-text-input id="text-input"
-              (plot)="plotGraph()"
-              [clear]="clear">
-  </app-text-input>
-  <button class="btn btn-md btn-success"
-          type="button"
-          (click)="plotGraph()"
-          [disabled]="shouldDisablePlotButton()">
-    <i class="fa fa-chart-line"></i> Plot
-  </button>
-  <button class="btn btn-md btn-danger"
-          type="button"
-          (click)="clearAll()"
-          [disabled]="shouldDisableClearButton()">
-    <i class="fa fa-redo"></i> Clear
-  </button>
+  <div id="selectBox">
+    <select  class="form-control">
+      <option value="">Choose a dataset</option>
+      <option value="1">Dataset 1</option>
+      <option value="2">Dataset 2</option>
+    </select>
+  </div>
+  <div>
+    <app-text-input #textInput
+                    id="text-input"
+                    (plot)="plotGraph()">
+    </app-text-input>
+  </div>
+  <div id="buttons">
+    <button id="plotButton"
+            class="btn btn-md btn-success"
+            type="button"
+            (click)="plotGraph()"
+            [disabled]="!shouldDisablePlotButton()">
+      <i class="fa fa-chart-line"></i> Plot
+    </button>
+    <button id="resetButton"
+            class="btn btn-md btn-danger"
+            type="button"
+            (click)="clearAll()"
+            [disabled]="shouldDisableClearButton()">
+      <i class="fa fa-redo"></i> Clear
+    </button>
+  </div>
 </div>
-<app-chart></app-chart>
+<app-chart #chart
+           [layout]="layout"
+           [data]="data">
+</app-chart>

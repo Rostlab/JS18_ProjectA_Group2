@@ -10,20 +10,24 @@ export class TextInputComponent implements OnInit {
     textInput: string;
     @Output() plot = new EventEmitter();
 
-    constructor() { }
+    constructor() {}
+
 
     ngOnInit() {
+        this.clear();
     }
 
-    @Input() set clear(val: boolean) {
-        if (val) {
-            this.textInput = "";
-        }
+    clear() {
+        this.textInput = "";
     }
 
-    public plotGraph() {
+    plotGraph() {
         //TODO
         this.plot.emit(/*processed query*/);
+    }
+
+    textIsEmpty() {
+        return (this.textInput === "");
     }
 
 }

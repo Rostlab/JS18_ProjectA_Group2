@@ -1,0 +1,24 @@
+#buttons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#plotButton {
+    width:100px;
+    margin-right: 10px;
+}
+
+#resetButton {
+    width:100px;
+}
+
+#selectBox {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#selectBox > select {
+    width: 200px;
+}

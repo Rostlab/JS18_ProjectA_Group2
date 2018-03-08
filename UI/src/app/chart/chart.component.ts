@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as Plotly from 'plotly.js/lib/core';
-import { ScatterData, Layout, PlotlyHTMLElement, newPlot } from 'plotly.js/lib/core';
 
 @Component({
     selector: 'app-chart',
@@ -9,40 +8,42 @@ import { ScatterData, Layout, PlotlyHTMLElement, newPlot } from 'plotly.js/lib/c
 })
 export class ChartComponent implements OnInit {
 
+
+
     constructor() {
-        Plotly.newPlot('myPlotlyDiv', this.data, this.layout, this.options);
     }
 
     ngOnInit() {
     }
 
-    /**********************************
-     * Example plot
-     *****************************************/
-    trace1:any = {
-        x: [1998, 2000, 2001, 2002],
-        y: [10, 15, 13, 17],
-        type: 'scatter'
-    } as ScatterData;
+    @Input() data: any;
+    @Input() layout: any;
+    @Input() options: any;
 
-    trace2 = {
-        x: [1999, 2000, 2001, 2002],
-        y: [16, 5, 11, 9],
-        type: 'scatter'
-    } as ScatterData;
+    reset() {
+        Plotly.purge("plot");
+    };
 
-    data: any = [this.trace1, this.trace2];
-    layout: any = {
-        title: 'Sales Growth',
-        xaxis: {
-            title: 'Year',
-            showgrid: false,
-            zeroline: false
-        },
-        yaxis: {
-            title: 'Percent',
-            showline: false
+    plot() {
+        Plotly.newPlot("plot", this.data, this.layout, this.options);
+    };
+
+    /*plot() {
+        if(this.userInput === "Draw bar chart"){
+            this.plotTitle = this.userInput;
+            this.displayTitle = true;
+            this.drawBarChart();
+        }else{
+            window.alert("wrong input");
         }
     };
-    options: any;
+
+    drawBarChart() {
+        var div = document.getElementById("plot");
+        Plotly.plot(div, [{
+            x:[1,2,3,4,5],
+            y:[1,2,4,8,16],
+            type:'bar'
+        }]);
+    };*/
 }
