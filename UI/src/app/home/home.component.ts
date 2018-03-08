@@ -14,12 +14,21 @@ export class HomeComponent implements OnInit {
     @ViewChild("chart") chart: ChartComponent;
 
     graphIsEmpty: boolean;
+    datasets: Array<DATASET>;
+    dataset: DATASET;
+    readonly defaultDataset: DATASET = new DATASET(-1, "Choose a dataset");
 
     constructor () {
         this.graphIsEmpty = true;
+        this.datasets = Array<DATASET>();
+        this.dataset = this.defaultDataset;
     }
 
     ngOnInit() {
+        //TODO get from backend
+        this.datasets.push(this.defaultDataset);
+        this.datasets.push(new DATASET(0, "Dataset 1"));
+        this.datasets.push(new DATASET(1, "Dataset 2"));
     }
 
     /**
@@ -39,7 +48,7 @@ export class HomeComponent implements OnInit {
      * Disable method for button
      */
     public shouldDisablePlotButton() {
-        return !(this.textIsEmpty());
+        return (this.textIsEmpty() || (this.dataset === this.defaultDataset));
     }
 
     /**
@@ -105,4 +114,15 @@ export class HomeComponent implements OnInit {
 
     data: any;
 
+}
+
+export class DATASET {
+
+    constructor(id: number, name: string) {
+        this.id = id;
+        this.name = name;
+    }
+
+    id: number;
+    name: string;
 }

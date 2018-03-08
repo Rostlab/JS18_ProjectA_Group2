@@ -1,10 +1,8 @@
 <p>Very simple setup.</p>
 <div>
   <div id="selectBox">
-    <select  class="form-control">
-      <option value="">Choose a dataset</option>
-      <option value="1">Dataset 1</option>
-      <option value="2">Dataset 2</option>
+    <select  class="form-control" [(ngModel)]="dataset">
+      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
     </select>
   </div>
   <div>
@@ -18,7 +16,7 @@
             class="btn btn-md btn-success"
             type="button"
             (click)="plotGraph()"
-            [disabled]="!shouldDisablePlotButton()">
+            [disabled]="shouldDisablePlotButton()">
       <i class="fa fa-chart-line"></i> Plot
     </button>
     <button id="resetButton"
