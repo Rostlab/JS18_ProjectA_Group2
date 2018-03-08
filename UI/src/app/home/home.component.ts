@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ScatterData } from 'plotly.js/lib/core';
 import { TextInputComponent } from "../text-input/text-input.component";
-import {ChartComponent} from "../chart";
+import { ChartComponent } from "../chart";
 
 @Component({
     selector: 'app-home',
@@ -38,8 +38,6 @@ export class HomeComponent implements OnInit {
         //TODO
         // call plot in the graph
         console.log("Plot was pressed");
-        this.data = [this.trace1, this.trace2];
-        this.layout = this.layout2;
         this.chart.plot();
         this.graphIsEmpty = false;
     }
@@ -73,14 +71,12 @@ export class HomeComponent implements OnInit {
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();
+        this.dataset = this.defaultDataset;
 
 
         this.data = null;
         this.layout = null;
     }
-
-
-
 
 
     /**********************************
@@ -98,8 +94,7 @@ export class HomeComponent implements OnInit {
         type: 'scatter'
     } as ScatterData;
 
-    layout: any;
-    layout2: any = {
+    layout: any = {
         title: 'Sales Growth',
         xaxis: {
             title: 'Year',
@@ -112,7 +107,7 @@ export class HomeComponent implements OnInit {
         }
     };
 
-    data: any;
+    data = [this.trace1, this.trace2];
 
 }
 
