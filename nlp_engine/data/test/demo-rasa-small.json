@@ -1,0 +1,280 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "text": "Plot histogram of employee’s age",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 18,
+            "end": 26,
+            "value": "employee",
+            "entity": "x"
+          },
+          {
+            "start": 29,
+            "end": 32,
+            "value": "age",
+            "entity": "y"
+          },
+          {
+            "start": 5,
+            "end": 14,
+            "value": "histogram",
+            "entity": "plot_type"
+          }
+        ]
+      },
+      {
+        "text": "Plot number of employees for each gender as a pie chart",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 46,
+            "end": 49,
+            "value": "pie",
+            "entity": "plot_type"
+          },
+          {
+            "start": 15,
+            "end": 24,
+            "value": "employees",
+            "entity": "x"
+          },
+          {
+            "start": 34,
+            "end": 40,
+            "value": "gender",
+            "entity": "y"
+          },
+          {
+            "start": 5,
+            "end": 24,
+            "value": "number of employees",
+            "entity": "count"
+          }
+        ]
+      },
+      {
+        "text": "something random.",
+        "intent": "no_plot",
+        "entities": []
+      },
+      {
+        "text": "Plot number of employees for each gender as a pie chart for all departments",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 46,
+            "end": 49,
+            "value": "pie",
+            "entity": "plot_type"
+          },
+          {
+            "start": 15,
+            "end": 24,
+            "value": "employees",
+            "entity": "x"
+          },
+          {
+            "start": 34,
+            "end": 40,
+            "value": "gender",
+            "entity": "y"
+          },
+          {
+            "start": 56,
+            "end": 75,
+            "value": "for all departments",
+            "entity": "group"
+          },
+          {
+            "start": 5,
+            "end": 24,
+            "value": "number of employees",
+            "entity": "count"
+          }
+        ]
+      },
+      {
+        "text": "Plot average pay rate of each race as a bar chart",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 40,
+            "end": 43,
+            "value": "bar",
+            "entity": "plot_type"
+          },
+          {
+            "start": 13,
+            "end": 21,
+            "value": "pay rate",
+            "entity": "x"
+          },
+          {
+            "start": 30,
+            "end": 34,
+            "value": "race",
+            "entity": "y"
+          },
+          {
+            "start": 5,
+            "end": 21,
+            "value": "average pay rate",
+            "entity": "average_x"
+          },
+          {
+            "start": 25,
+            "end": 34,
+            "value": "each race",
+            "entity": "group_y"
+          }
+        ]
+      },
+      {
+        "text": "Plot number of employees hired each year as a line chart",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 15,
+            "end": 24,
+            "value": "employees",
+            "entity": "x"
+          },
+          {
+            "start": 36,
+            "end": 40,
+            "value": "year",
+            "entity": "y"
+          },
+          {
+            "start": 46,
+            "end": 50,
+            "value": "line",
+            "entity": "plot_type"
+          },
+          {
+            "start": 5,
+            "end": 24,
+            "value": "number of employees",
+            "entity": "count_x"
+          },
+          {
+            "start": 31,
+            "end": 40,
+            "value": "each year",
+            "entity": "group_y"
+          },
+          {
+            "start": 25,
+            "end": 30,
+            "value": "hired",
+            "entity": "special"
+          }
+        ]
+      },
+      {
+        "text": "Make a scatter plot with age and pay rate",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 7,
+            "end": 14,
+            "value": "scatter",
+            "entity": "plot_type"
+          },
+          {
+            "start": 25,
+            "end": 28,
+            "value": "age",
+            "entity": "x"
+          },
+          {
+            "start": 33,
+            "end": 41,
+            "value": "pay rate",
+            "entity": "y"
+          }
+        ]
+      },
+      {
+        "text": "plot histogram of number of employees per department",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "histogram",
+            "entity": "plot_type"
+          },
+          {
+            "start": 28,
+            "end": 37,
+            "value": "employees",
+            "entity": "x"
+          },
+          {
+            "start": 42,
+            "end": 52,
+            "value": "department",
+            "entity": "y"
+          },
+          {
+            "start": 18,
+            "end": 37,
+            "value": "number of employees",
+            "entity": "count_x"
+          },
+          {
+            "start": 38,
+            "end": 52,
+            "value": "per department",
+            "entity": "group_y"
+          }
+        ]
+      },
+      {
+        "text": "Plot average salary for each gender as a pie chart for all departments",
+        "intent": "plot",
+        "entities": [
+          {
+            "start": 13,
+            "end": 19,
+            "value": "salary",
+            "entity": "x"
+          },
+          {
+            "start": 5,
+            "end": 19,
+            "value": "average salary",
+            "entity": "average_x"
+          },
+          {
+            "start": 29,
+            "end": 35,
+            "value": "gender",
+            "entity": "y"
+          },
+          {
+            "start": 51,
+            "end": 70,
+            "value": "for all departments",
+            "entity": "group"
+          },
+          {
+            "start": 41,
+            "end": 44,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ]
+      },
+      {
+        "text": "plot x vs y ",
+        "intent": "no_plot",
+        "entities": []
+      }
+    ]
+  }
+}
