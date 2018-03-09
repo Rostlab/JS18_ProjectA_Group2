@@ -7,11 +7,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 install:
   - npm install
-  - cd UI
-  - npm install
-  - cd ..
+
 script:
-  - npm run test
-  - cd UI
-  - npm run test
-  - cd ..
+  - npm run test:server
+  - npm run test:ui
