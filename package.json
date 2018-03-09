@@ -4,12 +4,14 @@
   "Description": "Natural language to plot conversion API based application.",
   "private": true,
   "scripts": {
-    "start:server": "nodemon server/server.js",
+    "server": "nodemon server/server.js",
     "test:server": "./node_modules/.bin/mocha server/test",
     "ng": "ng",
-    "start:ui": "ng serve -H 0.0.0.0 --proxy-config UI/proxy.conf.json",
+    "ui": "ng serve -H 0.0.0.0 --proxy-config UI/proxy.conf.json",
     "build:ui": "ng build",
-    "test:ui": "ng test"
+    "test:ui": "ng test",
+    "start:nlp": "node nlp.server.js",
+    "start": "concurrently \"npm run server\" \"npm run ui\""
   },
   "dependencies": {
     "@angular/animations": "^5.2.0",
@@ -23,6 +25,7 @@
     "@angular/router": "^5.2.0",
     "autodetect-decoder-stream": "^1.0.0",
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "cors": "^2.8.4",
@@ -30,8 +33,10 @@
     "express": "^4.16.2",
     "fs": "0.0.1-security",
     "hbs": "^4.0.1",
+    "node-cmd": "^3.0.0",
     "nodemon": "^1.17.1",
     "plotly.js": "^1.34.0",
+    "python-shell": "^0.5.0",
     "rxjs": "^5.5.6",
     "serve-favicon": "^2.4.5",
     "zone.js": "^0.8.19"
