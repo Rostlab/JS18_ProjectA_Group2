@@ -1,24 +1,22 @@
 ## JS18_ProjectA_Group2
 
-[![Build Status](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2.svg?branch=develop)](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2)
-
-**Open a terminal** on **root** folder.
-Run below command to install all the dependency mentioned in server package.json.
+**Open a terminal** on **root** folder. 
+Run below command to install all the dependency for both server and ui.
   >npm install
 
-Run below command to test if basic functionalities are working fine.
-It will generate covarage report. You can check how good your unit testing coverage is from browser.
-  >npm test
+Run below command to test if basic functionalities are working fine for server and ui.
 
-Run below command to start the server. The backend.
-  >npm start
+  >npm run test:server
+  >npm run test:ui
+  
+Run below command to start server and ui.
+server and ui engine runs in watch mode to keep checking changes you do and build simontaneously. 
 
-**Open another terminal** at **UI folder** inside root.
-Run below command to install all UI dependency from its package.json.
-  >npm install
+  >npm run start:server
+  >npm run start:ui
 
-To test UI app. Use below command.
-  >npm test
 
-To start the angular server, use below command which internally runs `"ng serve"`. It builds the application and start it. It will open in watch mode to keep checking changes you do and build simontaneously.
-  >npm start
+To start **NLP Engine** follow below url. Go to NLP root folder and run all the query except the query to train the model. 
+We already trained a model and saved it in project with name **"igraph_nlp"**. Use this while running the NLP engine for this application.
+
+  >https://nlu.rasa.ai/http.html

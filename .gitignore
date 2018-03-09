@@ -1,5 +1,4 @@
 node_modules/*
-coverage/*
 .vscode
-UI/dist
-UI/node_modules
+dist
+nlp_engine

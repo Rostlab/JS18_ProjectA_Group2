@@ -7,6 +7,16 @@ var  app = require('../app');
 
 chai.config.includeStack = true;
 
+
+describe('## Misc', () => {
+  describe('## Simple testing', function() {
+    it('## To test mocha testing utility', (done) => {
+          expect(0).to.equal(0);
+          done();
+    });
+  });
+});
+
 describe('## Misc', () => {
   describe('## Testing NodeIndexRoute', function() {
     it('## Testing function in NodeIndexRoute', (done) => {
