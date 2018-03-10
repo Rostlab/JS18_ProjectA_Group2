@@ -25,10 +25,5 @@ describe('##Testing app.component', () => {
     beforeEach(async(() => {
         TestBed.compileComponents();
     }));
-    it('##testing app.component parts', async(() => {
-        const fixture = TestBed.createComponent(AppComponent);
-        fixture.detectChanges();
-        const el:any = fixture.debugElement.nativeElement as HTMLElement;
-        expect(el.querySelector('p').textContent).toBe('Very simple setup.');
-    }));
+    
 });
