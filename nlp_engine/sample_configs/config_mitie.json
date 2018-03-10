@@ -1,0 +1,6 @@
+{
+  "pipeline": "mitie",
+  "mitie_file": "./data/total_word_feature_extractor.dat",
+  "path" : "./projects",
+  "data" : "./data/test/demo-rasa-small.json"
+}
