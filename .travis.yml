@@ -12,3 +12,7 @@ script:
   - npm run test:server
   - npm run test:ui
 
+deploy:
+  provider: azure_web_apps
+  on: develop
+  verbose: true

@@ -1,0 +1,11 @@
+<div id="text-input">
+    <textarea type="text"
+              cols="100"
+              rows="5"
+              class="form-control"
+              [(ngModel)]="textInput"
+              name="textInput"
+              placeholder="Type a sentence to plot a graph"
+              (keyup.enter)="plotGraph()">
+    </textarea>
+</div>
