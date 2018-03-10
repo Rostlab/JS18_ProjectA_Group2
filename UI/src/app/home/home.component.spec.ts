@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
+import { FormsModule } from '@angular/forms';
+import { TextInputComponent } from '../text-input/text-input.component';
+import { ChartComponent } from '../chart/chart.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +10,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      imports: [ FormsModule],
+      declarations: [ HomeComponent,TextInputComponent, ChartComponent ]
     })
     .compileComponents();
   }));
