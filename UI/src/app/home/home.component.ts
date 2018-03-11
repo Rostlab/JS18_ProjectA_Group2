@@ -37,9 +37,11 @@ export class HomeComponent implements OnInit {
     public plotGraph () {
         //TODO
         // call plot in the graph
-        console.log("Plot was pressed");
-        this.chart.plot();
-        this.graphIsEmpty = false;
+        if (!this.shouldDisablePlotButton()) {
+            console.log("Plot was pressed");
+            this.chart.plot();
+            this.graphIsEmpty = false;
+        }
     }
 
     /**
