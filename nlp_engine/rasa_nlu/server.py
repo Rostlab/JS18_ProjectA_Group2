@@ -130,8 +130,10 @@ class RasaNLU(object):
         return "hello from Rasa NLU: " + __version__
 
     @app.route("/parse", methods=['GET', 'POST', 'OPTIONS'])
-    @requires_auth
-    @check_cors
+    # Commented by Jyotirmay Senapati on 10th March, 2018 to allow api access to this method from any where.
+    # No need of auth varification and cors check.
+    #@requires_auth
+    #@check_cors
     @inlineCallbacks
     def parse_get(self, request):
         request.setHeader('Content-Type', 'application/json')

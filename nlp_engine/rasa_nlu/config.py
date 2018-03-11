@@ -31,7 +31,7 @@ DEFAULT_CONFIG = {
     "path": "projects",
     "port": 5000,
     "token": None,
-    "cors_origins": [],
+    "cors_origins": ['localhost', '127.0.0.1'],
     "max_number_of_ngrams": 7,
     "pipeline": [],
     "response_log": "logs",
