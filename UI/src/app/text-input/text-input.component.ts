@@ -30,4 +30,8 @@ export class TextInputComponent implements OnInit {
         return (this.textInput === "");
     }
 
+    getTextInput() {
+        return this.textInput;
+    }
+
 }

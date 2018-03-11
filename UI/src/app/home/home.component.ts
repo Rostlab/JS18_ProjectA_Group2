@@ -39,6 +39,8 @@ export class HomeComponent implements OnInit {
         // call plot in the graph
         if (!this.shouldDisablePlotButton()) {
             console.log("Plot was pressed");
+            console.log(this.textInput.getTextInput());
+            console.log(this.dataset.name);
             this.chart.plot();
             this.graphIsEmpty = false;
         }
