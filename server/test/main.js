@@ -17,11 +17,10 @@ describe('## Misc', () => {
   });
 });
 
-describe('## Misc', () => {
   describe('## Testing NodeIndexRoute', function() {
-    it('## Testing function in NodeIndexRoute', (done) => {
+    it('## Testing GET endpoint', (done) => {
       request(app)
-        .get('/api')
+        .get('/api/test')
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.text).to.equal("Welcome to iGraph");
@@ -30,7 +29,6 @@ describe('## Misc', () => {
         .catch(done);
     });
   });
-});
 
 // More information: https://mochajs.org/
 

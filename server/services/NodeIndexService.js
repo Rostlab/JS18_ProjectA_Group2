@@ -3,7 +3,9 @@
 *@Date :: 03rd March, 2018
 */
 
-loadCSV = require("../utils/dataLoader");
+utils = require("../utils/nlptodata");
+const DF = require('data-forge');
+var rp = require('request-promise');
 
 console.log('in NodeIndexService');
 
@@ -13,12 +15,25 @@ var NodeIndexService = {
         next(null, "Welcome to iGraph");
     },
     loadCSV: function (next){
-        data = loadCSV("server/data/core_dataset.csv");
-        if (data){
-            next(null, data);
-        } else {
-            next("Data Fetching Error", "");
-        }
+        const csvFilePath="server/data/core_dataset.csv";
+        var df = DF
+        .readFileSync(csvFilePath)
+        .parseCSV();
+        console.log(df);
+
+        next(null, df);
+    },
+    nlp: function(userquery, next){
+        var propertiesObject = { q:userquery, model:'sample_igraph' };
+
+        rp({url:'http://localhost:5000/parse', qs:propertiesObject}).then(function(res){
+            var promise = utils(JSON.parse(res));    
+            promise.then(function(succ){
+                next(null, succ);
+            }, function(err){
+                next(err);
+            });
+        });
     }
 }
 
