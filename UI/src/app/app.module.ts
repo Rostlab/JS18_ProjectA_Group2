@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { TextInputComponent } from './text-input/text-input.component';
+import { TextInputComponent } from './text-input';
 import {
     ChartComponent,
     LineChartComponent,
@@ -14,6 +15,7 @@ import {
     ScatterPlotComponent,
     HistogramComponent
 } from './chart';
+import { BackendConnectorService } from "./services";
 
 @NgModule({
     declarations: [
@@ -29,9 +31,10 @@ import {
     ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
-    providers: [],
+    providers: [BackendConnectorService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
