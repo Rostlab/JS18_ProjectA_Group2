@@ -14,4 +14,7 @@ RUN npm install
 RUN pip install -r requirements_bare.txt
 COPY . .
 
-CMD ["npm", "start"]
+CMD ["./node_modules/.bin/concurrently", \
+    "PORT=3001 node server/server.js", \
+    "PORT=4200 npm run ui", \
+    "npm run start:nlp"]
