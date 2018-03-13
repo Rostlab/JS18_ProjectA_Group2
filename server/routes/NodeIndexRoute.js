@@ -25,7 +25,7 @@ router.get('/test', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-    indexService.loadCSV(function (err, data) {
+    indexService.sayHi(function (err, data) {
 
         if (err) {
           res.send(err);
