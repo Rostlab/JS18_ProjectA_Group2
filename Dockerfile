@@ -16,5 +16,5 @@ COPY . .
 
 CMD ["./node_modules/.bin/concurrently", \
     "PORT=3001 node server/server.js", \
-    "PORT=4200 npm run ui", \
+    "PORT=4200 ./node_modules/.bin/ng serve -H 0.0.0.0 --proxy-config UI/proxy.conf.json --disable-host-check", \
     "npm run start:nlp"]
