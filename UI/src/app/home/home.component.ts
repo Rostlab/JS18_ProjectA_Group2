@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TextInputComponent } from "../text-input";
 import { ChartComponent } from "../chart";
 import { BackendConnectorService } from "../services";
-import { Dataset, Trace } from '../../../models';
+import { Dataset, Layout, Options, Trace } from '../../../models';
 
 @Component({
     selector: 'app-home',
@@ -15,8 +15,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("chart") chart: ChartComponent;
 
     data: Trace[];
-    options: any;
-    layout: any;
+    options: Options;
+    layout: Layout;
 
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
