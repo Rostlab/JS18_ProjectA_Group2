@@ -94,7 +94,10 @@ export class BackendConnectorService {
             .timeout(this.connectionTimeout)
             .map((response: Response) =>
                 response.json()
-            );
+            )
+            .subscribe((data) => {
+                console.log(data);
+            });
     }
 
 
