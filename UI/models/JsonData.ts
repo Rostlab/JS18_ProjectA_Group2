@@ -1,3 +1,3 @@
-export class JsonDatas {
+export class JsonData {
     v: any[];
 }

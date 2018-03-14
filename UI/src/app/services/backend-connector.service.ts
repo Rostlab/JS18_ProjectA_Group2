@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs'
 import { ScatterData } from 'plotly.js/lib/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Data, Options } from '../../../models';
 
 @Injectable()
 export class BackendConnectorService {
@@ -25,16 +22,6 @@ export class BackendConnectorService {
             // .catch(this.handleError)
             .subscribe((data) => {
                 console.log(data);
-                if (data) {
-                    const map = new Map<number, Data[]>();
-                    Data.parseDatas(data as JsonData[]).forEach(d => {
-                        if (!map.has(d.id)) {
-                            map.set(d.id, []);
-                        }
-                        map.get(d.id).push(d);
-                    });
-                    this._latestID.next(map);
-                }
             });
     }
 
@@ -82,38 +69,6 @@ export class BackendConnectorService {
         }
     };
 
-    data2 = [this.trace1, this.trace2];
-
-
-    ////////////////////////////////////////////////
-    /*
-
-    private getLatestIdFromBackend() {
-        const httpRequest = this.getLatestId(this.endpoint, this.getSourceQuery()).subscribe(data => {
-            if (data) {
-                const map = new Map<number, Data[]>();
-                Data.parseDatas(data as JsonData[]).forEach(d => {
-                    if (!map.has(d.id)) {
-                        map.set(d.id, []);
-                    }
-                    map.get(d.id).push(d);
-                });
-                this._latestID.next(map);
-            }
-        });
-    }
-
-    public getLatestId(endpoint: string, searchQueryParam: SearchQuery): Observable<Object> {
-        const searchQuery = new URLSearchParams();
-
-        if (searchQueryParam['source'] !== undefined) {
-            searchQuery.append('source', searchQueryParam['source']);
-        }
-
-        const uri = "/latestDataById";
-
-        return this.httpService.get(endpoint + uri, searchQuery, false);
-    }*/
-
+    data = [this.trace1, this.trace2];
 
 }

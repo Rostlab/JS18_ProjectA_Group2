@@ -1,5 +1,5 @@
 import {Trace} from "./Trace";
-import {JsonDatas} from "./JsonData";
+import {JsonData} from "./JsonData";
 
 export class Data {
     traces: Trace[];
@@ -8,7 +8,7 @@ export class Data {
         this.traces = traces;
     }
 
-    public static parseDatas(jsonArray: JsonDatas[]): Data {
+    public static parseDatas(jsonArray: JsonData[]): Data[] {
         const data = [];
         jsonArray.forEach(json => {
             data.push(Trace.parseTrace(json));
