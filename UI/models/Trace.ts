@@ -1,5 +1,4 @@
-import {Data} from "./Data";
-import {JsonData} from "./JsonData";
+import { JsonTrace } from "./JsonTrace";
 
 export class Trace {
     x: number[];
@@ -12,10 +11,18 @@ export class Trace {
         this.type = type;
     }
 
-    public static parseTrace(jsonTrace: JsonTrace): Trace {
-        const x: number[] = jsonTrace.x;
-        const y: number[] = jsonTrace.y;
-        const type: string = jsonTrace.type;
-        return new Trace(x, y, type);
+    public static parseTraces(jsonArray: JsonTrace[]): Trace[] {
+        const data = [];
+        jsonArray.forEach(json => {
+            data.push(Trace.parseTrace(json));
+        });
+        return data;
+    }
+
+    public static parseTrace(json: JsonTrace): Trace {
+            const x: number[] = json.x;
+            const y: number[] = json.y;
+            const type: string = json.type;
+            return new Trace(x, y, type);
     }
 }

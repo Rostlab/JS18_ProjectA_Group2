@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TextInputComponent } from "../text-input";
 import { ChartComponent } from "../chart";
 import { BackendConnectorService } from "../services";
-import { Dataset } from '../../../models';
+import { Dataset, Trace } from '../../../models';
 
 @Component({
     selector: 'app-home',
@@ -14,8 +14,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("textInput") textInput: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: any[];
+    data: Trace[];
     options: any;
+    layout: any;
 
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
@@ -36,6 +37,15 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     ngAfterViewInit() {
+        this.backendConnector.data.subscribe(data => {
+            this.data = data.get(0);
+        });
+        this.backendConnector.options.subscribe(options => {
+            this.options = options.get(0);
+        });
+        this.backendConnector.layout.subscribe(layout => {
+            this.layout = layout.get(0);
+        });
     }
 
     /**
@@ -48,7 +58,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
             console.log("Plot was pressed");
             console.log(this.textInput.getTextInput());
             console.log(this.dataset.name);
-            this.chart.plot();
+            this.backendConnector.requestData(this.textInput.getTextInput(), this.dataset.id);
+            setTimeout( () => {
+                this.backendConnector.update();
+                setTimeout(() => {
+                    this.chart.plot();
+                }, 1000);
+            }, 500);
             this.graphIsEmpty = false;
         }
     }

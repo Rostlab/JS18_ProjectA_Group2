@@ -1,9 +1,11 @@
-export class Options {
-    beaconId: number;
-    source: string;
+import { JsonOptions } from "./JsonOptions";
 
-    constructor(beaconId: number, source: string) {
-        this.beaconId = beaconId;
-        this.source = source;
+export class Options {
+
+    constructor() {
+    }
+
+    public static parseOptions(json: JsonOptions): Options {
+        return new Options();
     }
 }
