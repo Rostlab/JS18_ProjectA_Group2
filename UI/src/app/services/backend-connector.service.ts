@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ScatterData } from 'plotly.js/lib/core';
-import { JsonLayout, JsonOptions, JsonTrace, Layout, Options, Trace } from "../../../models";
+import { Data, JsonData, Layout, Options, Trace } from "../../../models";
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
@@ -21,15 +21,13 @@ export class BackendConnectorService {
     constructor(private http: HttpClient) {
     }
 
-    update() {
-        this.getOptions();
+    public update() {
         this.getData();
-        this.getLayout();
     }
 
-    getData() {
+    private getData() {
         return this.http
-            .get('localhost:3001/api/data')
+            .get('localhost:3001/api')
             .retry(this.connectionRetries)
             .timeout(this.connectionTimeout)
             .map((response: Response) =>
@@ -38,58 +36,36 @@ export class BackendConnectorService {
             // .catch(this.handleError)
             .subscribe(data => {
                 if(data) {
-                    const map = new Map<number, Trace[]>();
-                    const val = Trace.parseTraces(data as JsonTrace[]);
-                    map.set(0, val);
-                    this._data.next(map);
+                    const val = Data.parseData(data as JsonData);
+                    this.parseData(val.traces);
+                    this.parseLayout(val.layout);
+                    this.parseOptions(val.options);
                 }
                 console.log(data);
             });
     }
 
-    getOptions(){
-        return this.http
-            .get('localhost:3001/api/options')
-            .retry(this.connectionRetries)
-            .timeout(this.connectionTimeout)
-            .map((response: Response) =>
-                response.json() || {}
-            )
-            // .catch(this.handleError)
-            .subscribe((data) => {
-                if(data) {
-                    const map = new Map<number, Options>();
-                    const val = Options.parseOptions(data as JsonOptions);
-                    map.set(0, val);
-                    this._options.next(map);
-                }
-                console.log(data);
-            });
+    private parseData(data: Trace[]){
+        const map = new Map<number, Trace[]>();
+        map.set(0, data);
+        this._data.next(map);
     }
 
-    getLayout(){
-        return this.http
-            .get('localhost:3001/api/layout')
-            .retry(this.connectionRetries)
-            .timeout(this.connectionTimeout)
-            .map((response: Response) =>
-                response.json() || {}
-            )
-            // .catch(this.handleError)
-            .subscribe((data) => {
-                if(data) {
-                    const map = new Map<number, Layout>();
-                    const val = Layout.parseLayout(data as JsonLayout);
-                    map.set(0, val);
-                    this._layout.next(map);
-                }
-                console.log(data);
-            });
+    private parseOptions(data: Options){
+        const map = new Map<number, Options>();
+        map.set(0, data);
+        this._options.next(map);
     }
 
-    requestData(userInput: string, datasetId: number){
+    private parseLayout(data: Layout){
+        const map = new Map<number, Layout>();
+        map.set(0, data);
+        this._layout.next(map);
+    }
+
+    public requestData(userInput: string, datasetId: number){
         return this.http
-            .post('localhost:3001/api', {userinput: userInput, datasetid: datasetId})
+            .post('localhost:3001/api', JSON.stringify({userinput: userInput, datasetid: datasetId}))
             .retry(this.connectionRetries)
             .timeout(this.connectionTimeout)
             .map((response: Response) =>

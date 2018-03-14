@@ -5,3 +5,5 @@ export * from './Trace';
 export * from './JsonTrace';
 export * from './Layout';
 export * from './JsonLayout';
+export * from './Data';
+export * from './JsonData';
