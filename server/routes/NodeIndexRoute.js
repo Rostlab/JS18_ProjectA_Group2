@@ -11,6 +11,19 @@ var qs = require('querystring');
 console.log('in NodeIndexRoute');
 
 /* GET */
+router.get('/', function (req, res, next) {
+  indexService.sayHi(function (err, data) {
+
+    if (err) {
+      res.send(err);
+      return;
+    } else {
+      res.send(data);
+      return;
+    }
+  });
+});
+
 router.get('/test', function (req, res, next) {
   indexService.sayHi(function (err, data) {
 
@@ -24,21 +37,9 @@ router.get('/test', function (req, res, next) {
     })
 });
 
-router.get('/', function (req, res, next) {
-    indexService.loadCSV(function (err, data) {
-
-        if (err) {
-          res.send(err);
-          return;
-        } else {
-          res.send(data);
-          return;
-        }
-      })
-});
-
-router.post('/', function (req, res, next) {
-  indexService.nlp(req.query.userquery, function (err, data) {
+router.post('/nlptodata', function (req, res, next) {
+  console.log(req.query);
+  indexService.nlp(req.query, function (err, data) {
     
       if (err) {
         res.send(err);
@@ -49,4 +50,33 @@ router.post('/', function (req, res, next) {
       }
     })
 });
+
+router.get('/columns', function (req, res, next) {
+  console.log(req.query.dataset);
+  indexService.getColumns(req.query.dataset, function (err, data) {
+    
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.send(data);
+        return;
+      }
+    })
+});
+
+// optinal feature to implement, if time permits.
+/*router.post('/upload', function (req, res, next) {
+  console.log(req.query);
+  indexService.upload(req.query, function (err, data) {
+    
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.send(data);
+        return;
+      }
+    })
+});*/
 module.exports = router;
