@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Plotly from 'plotly.js/lib/core';
+import { Layout, Options, Trace } from "../../../models";
 
 @Component({
     selector: 'app-chart',
@@ -16,9 +17,9 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
     }
 
-    @Input() data: any;
-    @Input() layout: any;
-    @Input() options: any;
+    @Input() data: Trace[];
+    @Input() layout: Layout;
+    @Input() options: Options;
 
     reset() {
         Plotly.purge("plot");

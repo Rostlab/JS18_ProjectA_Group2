@@ -1,28 +1,40 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { FormsModule } from '@angular/forms';
-import { TextInputComponent } from '../text-input/text-input.component';
-import { ChartComponent } from '../chart/chart.component';
+import { HttpClientModule } from "@angular/common/http";
+import { TextInputComponent } from '../text-input';
+import { ChartComponent } from '../chart';
+import { BackendConnectorService } from "../services";
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+    let component: HomeComponent;
+    let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ FormsModule],
-      declarations: [ HomeComponent,TextInputComponent, ChartComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                HttpClientModule
+            ],
+            declarations: [
+                HomeComponent,
+                TextInputComponent,
+                ChartComponent
+            ],
+            providers: [
+                BackendConnectorService
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HomeComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
