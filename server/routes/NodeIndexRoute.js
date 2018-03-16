@@ -37,9 +37,7 @@ router.get('/test', function (req, res, next) {
     })
 });
 
-<<<<<<< HEAD
 router.post('/nlptodata', function (req, res, next) {
-  console.log(req.query);
   indexService.nlp(req.query, function (err, data) {
     
       if (err) {
@@ -50,19 +48,6 @@ router.post('/nlptodata', function (req, res, next) {
         return;
       }
     })
-=======
-router.get('/', function (req, res, next) {
-    indexService.sayHi(function (err, data) {
-
-        if (err) {
-          res.send(err);
-          return;
-        } else {
-          res.send(data);
-          return;
-        }
-      })
->>>>>>> bec403cc243fe98a0d6b94e20f59ac80e2a0bcc4
 });
 
 router.get('/columns', function (req, res, next) {
@@ -78,7 +63,6 @@ router.get('/columns', function (req, res, next) {
       }
     })
 });
-<<<<<<< HEAD
 
 // optinal feature to implement, if time permits.
 /*router.post('/upload', function (req, res, next) {
@@ -95,6 +79,3 @@ router.get('/columns', function (req, res, next) {
     })
 });*/
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> bec403cc243fe98a0d6b94e20f59ac80e2a0bcc4

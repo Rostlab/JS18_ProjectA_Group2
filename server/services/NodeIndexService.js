@@ -14,11 +14,6 @@ var NodeIndexService = {
 	sayHi: function (next) {
         next(null, "Welcome to iGraph");
     },
-<<<<<<< HEAD
-=======
-    nlp: function(userquery, next){
-        var propertiesObject = { q:userquery, model:'sample_igraph' };
->>>>>>> bec403cc243fe98a0d6b94e20f59ac80e2a0bcc4
 
     nlp: function(query, next){
 
