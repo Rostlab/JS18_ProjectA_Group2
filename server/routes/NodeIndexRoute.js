@@ -37,7 +37,8 @@ router.get('/test', function (req, res, next) {
     })
 });
 
-router.post('/nlptodata', function (req, res, next) {
+router.get('/nlptodata', function (req, res, next) {
+  console.log(req.query);
   indexService.nlp(req.query, function (err, data) {
     
       if (err) {
@@ -51,7 +52,6 @@ router.post('/nlptodata', function (req, res, next) {
 });
 
 router.get('/columns', function (req, res, next) {
-  console.log(req.query.dataset);
   indexService.getColumns(req.query.dataset, function (err, data) {
     
       if (err) {

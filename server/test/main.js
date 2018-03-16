@@ -30,7 +30,7 @@ describe('## Testing NodeIndexRoute', function() {
 
   /*it('## Testing nlptodata functionality', (done) => {
     request(app)
-      .post('/api/nlptodata?userquery=plot bar chart of maximum pay rate per department&dataset=core_data')
+      .get('/api/nlptodata?userquery=plot bar chart of maximum pay rate per department&dataset=core_data')
       .expect(httpStatus.OK)
       .expect('Content-Type', /json/)
       .then((res) => {

@@ -7,10 +7,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class TextInputComponent implements OnInit {
 
-    textInput: string;
+    textInput: string = 'Plot a pie chart for number of employees in each department';
     @Output() plot = new EventEmitter();
 
-    constructor() {}
+    constructor() {
+        this.textInput = 'Plot a pie chart for number of employees in each department';
+    }
 
 
     ngOnInit() {

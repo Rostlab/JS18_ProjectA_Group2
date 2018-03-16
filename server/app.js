@@ -23,7 +23,7 @@ var app = express();
 
 // iGraph apis
 var NodeIndexRoute = require('./routes/NodeIndexRoute');
-app.use('/api', NodeIndexRoute);
+
 
 //Conect to DB
 /*mongoose.connect(config.mongoUri, function (err) {
@@ -37,12 +37,14 @@ app.use('/api', NodeIndexRoute);
 */
 
 var corsOptions = {
-  origin: true,
+  origin: '*',
   methods: 'GET,PUT,POST,DELETE',
   maxAge: 1728000
 };
 
 app.use(cors(corsOptions));
+
+app.use('/api', NodeIndexRoute);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
