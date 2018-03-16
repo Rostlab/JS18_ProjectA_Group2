@@ -12,10 +12,10 @@ export class BackendConnectorService {
     private readonly connectionTimeout = 100000;
 
 
-    private _data: BehaviorSubject<Map<number, Trace>> = new BehaviorSubject<Map<number, Trace>>(new Map());
+    private _data: BehaviorSubject<Map<number, Trace[]>> = new BehaviorSubject<Map<number, Trace[]>>(new Map());
     private _options: BehaviorSubject<Map<number, Options>> = new BehaviorSubject<Map<number, Options>>(new Map());
     private _layout: BehaviorSubject<Map<number, Layout>> = new BehaviorSubject<Map<number, Layout>>(new Map());
-    public data: Observable<Map<number, Trace>> = this._data.asObservable();
+    public data: Observable<Map<number, Trace[]>> = this._data.asObservable();
     public options: Observable<Map<number, Options>> = this._options.asObservable();
     public layout: Observable<Map<number, Layout>> = this._layout.asObservable();
 
@@ -41,8 +41,8 @@ export class BackendConnectorService {
             });
     }
 
-    private parseData(data: Trace){
-        const map = new Map<number, Trace>();
+    private parseData(data: Trace[]){
+        const map = new Map<number, Trace[]>();
         map.set(0, data);
         this._data.next(map);
     }

@@ -14,7 +14,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("textInput") textInput: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: Trace;
+    data: Trace[];
     options: Options;
     layout: Layout;
 
