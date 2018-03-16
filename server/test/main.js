@@ -30,11 +30,11 @@ describe('## Testing NodeIndexRoute', function() {
 
   it('## Testing nlptodata functionality', (done) => {
     request(app)
-      .post('/api/nlptodata?userquery="Plot+a+pie+chart+for+number+of+employees+in+each+department"')
+      .post('/api/nlptodata?userquery=plot bar chart of maximum pay rate per department&dataset=core_data')
       .expect(httpStatus.OK)
-      //.expect('Content-Type', /json/)
+      .expect('Content-Type', /json/)
       .then((res) => {
-        expect(1).to.equal(1);
+        expect(res.body.userQuery).to.equal('plot bar chart of maximum pay rate per department');
         done();
     });
   });
