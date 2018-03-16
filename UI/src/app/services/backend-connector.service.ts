@@ -12,37 +12,43 @@ export class BackendConnectorService {
     private readonly connectionTimeout = 100000;
 
 
-    private _data: BehaviorSubject<Map<number, Trace>> = new BehaviorSubject<Map<number, Trace>>(new Map());
+    private _data: BehaviorSubject<Map<number, Trace[]>> = new BehaviorSubject<Map<number, Trace[]>>(new Map());
     private _options: BehaviorSubject<Map<number, Options>> = new BehaviorSubject<Map<number, Options>>(new Map());
     private _layout: BehaviorSubject<Map<number, Layout>> = new BehaviorSubject<Map<number, Layout>>(new Map());
-    public data: Observable<Map<number, Trace>> = this._data.asObservable();
+    public data: Observable<Map<number, Trace[]>> = this._data.asObservable();
     public options: Observable<Map<number, Options>> = this._options.asObservable();
     public layout: Observable<Map<number, Layout>> = this._layout.asObservable();
 
     constructor(private http: HttpClient) {
     }
 
-    public update() {
-        this.getData();
+    public update(userInput: string, datasetName: string) {
+        this.getData(userInput, datasetName);
     }
 
-    private getData() {
+    private getData(userInput: string, datasetName: string) {
         
         return this.http
             .get('http://localhost:3001/api/nlptodata', 
             {
                 params: {
-                    userquery: 'Plot number of employees for each sex as a pie chart for each departments',
-                     dataset: 'core_data'
+                    userquery: userInput,
+                     dataset: datasetName
                 }
             })
             .subscribe((data) => {
                 console.log(data);
+                var t:Trace = new Trace(data["columnA"], data["columnB"], data["plotType"]);
+                var t_a:Trace[] = [t];
+                this.parseData(t_a)
+
+                var l:Layout = new Layout(data['userQuery'], data['matched_columns'][0], data['matched_columns'][1]);
+                this.parseLayout(l);
             });
     }
 
-    private parseData(data: Trace){
-        const map = new Map<number, Trace>();
+    private parseData(data: Trace[]){
+        const map = new Map<number, Trace[]>();
         map.set(0, data);
         this._data.next(map);
     }
@@ -71,10 +77,12 @@ export class BackendConnectorService {
             })
             .subscribe((data) => {
                 console.log(this.that);
-                var t:Trace = new Trace(data["columnA"], data["columnB"], data["plotType"])
-                this.parseData(t)
+                var t:Trace = new Trace(data["columnA"], data["columnB"], data["plotType"]);
+                var t_a:Trace[] = [t];
+                this.parseData(t_a)
 
                 var l:Layout = new Layout(data['userQuery'], data['matched_columns'][0], data['matched_columns'][1]);
+                this.parseLayout(l);
                 fullfill(this.that);
             });
         });
@@ -84,23 +92,30 @@ export class BackendConnectorService {
     /*
     server response.
     {
-    "columnA": {
-        "0": "55",
-        "1": "80",
-        "2": "65",
-        "3": "60",
-        "4": "60.25",
-        "5": "57.12"
-    },
-    "columnB": {
-        "0": "Admin Offices",
-        "1": "Executive Office",
-        "2": "IT/IS",
-        "3": "Production       ",
-        "4": "Sales",
-        "5": "Software Engineering"
-    },
-    "columnC": {},
+    "columnA": [
+        "55",
+        "80",
+        "65",
+        "60",
+        "60.25",
+        "57.12"
+    ],
+    "columnB": [
+        "Admin Offices",
+        "Executive Office",
+        "IT/IS",
+        "Production       ",
+        "Sales",
+        "Software Engineering"
+    ],
+    "columnC": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    ],
     "plotType": "bar",
     "nlp_out": {
         "intent": {

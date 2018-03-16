@@ -85,7 +85,7 @@ var utils = {
 
                         kquery = `knex("`+dataset+`")` + operation_x + operation_y + operation_z + operation_group;
                         //fulfill(kquery);
-                        data = {"columnA":{}, "columnB":{}, "columnC":{}, "plotType": entities.plot_type, "nlp_out":nlpobj,
+                        data = {"columnA":[], "columnB":[], "columnC":[], "plotType": entities.plot_type, "nlp_out":nlpobj,
                         "userQuery": nlpobj.text, "kquery":kquery, "matched_columns": [match_x, match_y, match_z]}
 
                     
@@ -95,13 +95,13 @@ var utils = {
 
                             rows.forEach(function(val, idx){
                                 if(val.columnA != 'undefined'){
-                                    data.columnA[idx] = val.columnA;
+                                    data.columnA.push(val.columnA);
                                 }
                                 if(val.columnB != 'undefined'){
-                                    data.columnB[idx] = val.columnB;
+                                    data.columnB.push(val.columnB);
                                 }
                                 if(val.columnC != 'undefined'){
-                                    data.columnC[idx] = val.columnC;
+                                    data.columnC.push(val.columnC);
                                 }
                             });
                             return data;
