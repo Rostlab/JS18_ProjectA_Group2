@@ -28,7 +28,7 @@ describe('## Testing NodeIndexRoute', function() {
     });
   });
 
-  it('## Testing nlptodata functionality', (done) => {
+  /*it('## Testing nlptodata functionality', (done) => {
     request(app)
       .post('/api/nlptodata?userquery=plot bar chart of maximum pay rate per department&dataset=core_data')
       .expect(httpStatus.OK)
@@ -37,7 +37,7 @@ describe('## Testing NodeIndexRoute', function() {
         expect(res.body.userQuery).to.equal('plot bar chart of maximum pay rate per department');
         done();
     });
-  });
+  });*/
 });
 
 // More information: https://mochajs.org/
