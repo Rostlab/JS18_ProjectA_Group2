@@ -10,12 +10,14 @@ Run below command to install all the dependency for both server and ui.
 Run below command to test if basic functionalities are working fine for server and ui.
 
   >npm run test:server
+
   >npm run test:ui
   
 Run below command to start server and ui.
 server and ui engine runs in watch mode to keep checking changes you do and build simontaneously. 
 
   >npm run server
+
   >npm run ui
 
 To start running entire application form a single command, we can try running below command.

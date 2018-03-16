@@ -1,6 +1,8 @@
 var mysql = require('mysql');
 var sync = require('sync');
-/*var con = mysql.createConnection({
+
+
+var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
@@ -31,7 +33,7 @@ var db = {
     },
 
     query: function(sql){
-        //var conobj = con;//db.connect.sync();
+        var conobj = con;//db.connect.sync();
         
         
        
@@ -42,4 +44,4 @@ var db = {
 
 }
 
-module.exports = db;*/
+module.exports = db;

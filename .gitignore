@@ -5,3 +5,5 @@ node_modules/*
 .awcache
 coverage
 *.log
+
+nlp_engine/*

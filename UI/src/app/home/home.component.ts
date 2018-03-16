@@ -14,7 +14,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("textInput") textInput: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: Trace[];
+    data: Trace;
     options: Options;
     layout: Layout;
 
@@ -32,8 +32,8 @@ export class HomeComponent implements AfterViewInit, OnInit {
     ngOnInit() {
         //TODO get from backend
         this.datasets.push(this.defaultDataset);
-        this.datasets.push(new Dataset(0, "Dataset 1"));
-        this.datasets.push(new Dataset(1, "Dataset 2"));
+        this.datasets.push(new Dataset(0, "core_data"));
+        this.datasets.push(new Dataset(1, "Another_Kaggle_Dataset"));
     }
 
     ngAfterViewInit() {
@@ -58,13 +58,23 @@ export class HomeComponent implements AfterViewInit, OnInit {
             console.log("Plot was pressed");
             console.log(this.textInput.getTextInput());
             console.log(this.dataset.name);
-            this.backendConnector.requestData(this.textInput.getTextInput(), this.dataset.id);
-            setTimeout( () => {
+            console.log(this.chart);
+            this.chart.plot();
+            let promise = this.backendConnector.requestData(this.textInput.getTextInput(), this.dataset.name, this);
+            promise.then(function(err){
+                console.log(err);
+                throw err;
+            }, function(that){
+                console.log(that.chart);
+                that.chart.plot();
+            });
+            /*setTimeout( () => {
                 this.backendConnector.update();
                 setTimeout(() => {
+                    console.log(this.chart);
                     this.chart.plot();
                 }, 1000);
-            }, 500);
+            }, 500);*/
             this.graphIsEmpty = false;
         }
     }
