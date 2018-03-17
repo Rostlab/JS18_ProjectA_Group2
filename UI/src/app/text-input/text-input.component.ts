@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-text-input',
@@ -7,11 +7,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class TextInputComponent implements OnInit {
 
-    textInput: string = 'Plot a pie chart for number of employees in each department';
+    textInput: string;
     @Output() plot = new EventEmitter();
 
     constructor() {
-        this.textInput = 'Plot a pie chart for number of employees in each department';
     }
 
 
@@ -24,8 +23,7 @@ export class TextInputComponent implements OnInit {
     }
 
     plotGraph() {
-        //TODO
-        this.plot.emit(/*processed query*/);
+        this.plot.emit();
     }
 
     textIsEmpty() {
@@ -35,5 +33,4 @@ export class TextInputComponent implements OnInit {
     getTextInput() {
         return this.textInput;
     }
-
 }
