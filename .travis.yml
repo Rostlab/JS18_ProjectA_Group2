@@ -14,3 +14,12 @@ install:
 script:
   - npm run test:server
   - npm run test:ui
+
+deploy:
+  provider: script
+  script:
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" js2018group2.azurecr.io
+    - docker build -t js2018group2.azurecr.io/group2 .
+    - docker push js2018group2.azurecr.io/group2
+  on:
+    branch: feature-8-azure

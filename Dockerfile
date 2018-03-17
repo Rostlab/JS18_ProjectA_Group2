@@ -1,10 +1,8 @@
-FROM ubuntu:16.04
+# docker login -u js2018group2 js2018group2.azurecr.io
+# docker build -t js2018group2.azurecr.io/group2 .
+# docker push js2018group2.azurecr.io/group2
+FROM js2018group2.azurecr.io/base
 EXPOSE 4200
-
-RUN apt-get update
-RUN apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y python python-pip nodejs git
 
 WORKDIR /app
 COPY package.json .
