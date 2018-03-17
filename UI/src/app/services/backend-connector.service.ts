@@ -60,6 +60,105 @@ export class BackendConnectorService {
         this._layout.next(map);
     }
 
+
+
+    /*
+    server response.
+    {
+        "columnA": {
+            "0": "55",
+            "1": "80",
+            "2": "65",
+            "3": "60",
+            "4": "60.25",
+            "5": "57.12"
+        },
+        "columnB": {
+            "0": "Admin Offices",
+            "1": "Executive Office",
+            "2": "IT/IS",
+            "3": "Production       ",
+            "4": "Sales",
+            "5": "Software Engineering"
+        },
+        "columnC": {},
+        "plotType": "bar",
+        "nlp_out": {
+            "intent": {
+                "name": "plot",
+                "confidence": 0.9391686826624535
+            },
+            "entities": [
+                {
+                    "start": 5,
+                    "end": 8,
+                    "value": "bar",
+                    "entity": "plot_type",
+                    "extractor": "ner_crf"
+                },
+                {
+                    "start": 18,
+                    "end": 25,
+                    "value": "maximum",
+                    "entity": "operation_x",
+                    "extractor": "ner_crf"
+                },
+                {
+                    "start": 26,
+                    "end": 34,
+                    "value": "pay rate",
+                    "entity": "x",
+                    "extractor": "ner_crf"
+                },
+                {
+                    "start": 35,
+                    "end": 38,
+                    "value": "group",
+                    "entity": "operation_y",
+                    "extractor": "ner_crf",
+                    "processors": [
+                        "ner_synonyms"
+                    ]
+                },
+                {
+                    "start": 39,
+                    "end": 49,
+                    "value": "department",
+                    "entity": "y",
+                    "extractor": "ner_crf"
+                }
+            ],
+            "intent_ranking": [
+                {
+                    "name": "plot",
+                    "confidence": 0.9391686826624535
+                },
+                {
+                    "name": "no_plot",
+                    "confidence": 0.06083131733754637
+                }
+            ],
+            "text": "plot bar chart of maximum pay rate per department"
+        },
+        "userQuery": "plot bar chart of maximum pay rate per department",
+        "kquery": {
+            "__knexUid": "__knexUid1",
+            "method": "select",
+            "options": {},
+            "timeout": false,
+            "cancelOnTimeout": false,
+            "bindings": [],
+            "__knexQueryUid": "6a8d1ec8-9e74-496d-892c-362e152349d3",
+            "sql": "select `Pay Rate` as `columnA`, max(`Pay Rate`) as `columnA`, `Department` as `columnB` from `core_data` group by `Department`"
+        },
+        "matched_columns": [
+            "Pay Rate",
+            "Department",
+            null
+        ]
+    }
+    */
+
     /**********************************
      * Example plot
      *****************************************/
