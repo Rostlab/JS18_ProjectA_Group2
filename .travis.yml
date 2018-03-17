@@ -1,6 +1,9 @@
+sudo: required
 language: node_js
 node_js:
 - "8"
+services:
+  - docker
 before_install:
   - export CHROME_BIN=chromium-browser
   - export FIREFOX_BIN=firefox
