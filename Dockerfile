@@ -7,7 +7,7 @@ EXPOSE 4200
 WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
-COPY nlp_engine/alt_requirements/requirements_bare.txt .
+COPY docker/requirements_bare.txt .
 RUN npm install
 RUN pip install -r requirements_bare.txt
 COPY . .
