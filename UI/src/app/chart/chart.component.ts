@@ -16,8 +16,8 @@ export class ChartComponent implements OnInit {
     }
 
     @Input() data: Plotly.Data[];
-    @Input() layout: Layout;
-    @Input() options: Options;
+    @Input() layout: Partial<Plotly.Layout>;
+    @Input() options: Partial<Plotly.Config>;
 
     reset() {
         Plotly.purge("plot");
@@ -28,18 +28,6 @@ export class ChartComponent implements OnInit {
             alert("Wrong input");
         } else {
             console.log(this.data);
-            // var data = [{
-            //     values: [19, 26, 55],
-            //     labels: ['Residential', 'Non-Residential', 'Utility'],
-            //     type: 'pie'
-            // }];
-            //
-            // var layout = {
-            //     height: 400,
-            //     width: 500
-            // };
-            //
-            // Plotly.newPlot('plot', data, layout);
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };

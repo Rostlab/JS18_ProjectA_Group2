@@ -1,75 +1,23 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ScatterData} from 'plotly.js/lib/core';
-import {Data, JsonData, Layout, Options, Trace, QueryResponse, Axis} from "../../../models";
-import {BehaviorSubject} from 'rxjs';
+
 import 'rxjs/Rx';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BackendConnectorService {
-    private _data: BehaviorSubject<Map<number, Trace[]>> = new BehaviorSubject<Map<number, Trace[]>>(new Map());
-    private _options: BehaviorSubject<Map<number, Options>> = new BehaviorSubject<Map<number, Options>>(new Map());
-    private _layout: BehaviorSubject<Map<number, Layout>> = new BehaviorSubject<Map<number, Layout>>(new Map());
-    public data: Observable<Map<number, Trace[]>> = this._data.asObservable();
-    public options: Observable<Map<number, Options>> = this._options.asObservable();
-    public layout: Observable<Map<number, Layout>> = this._layout.asObservable();
 
     constructor(private http: HttpClient) {
     }
 
     public getData(userInput: string, datasetName: string) {
 
-        return this.http
-            .get('http://localhost:3001/api/nlptodata',
-                {
-                    params: {
-                        userquery: userInput,
-                        dataset: datasetName
-                    }
-                })
-            // .map((respose: Response) => {
-            //     console.log(respose);
-            //     return JSON.parse(respose) || {}
-            // })
-            .subscribe((data: QueryResponse) => {
-                console.log("Backendconnector" + data);
-                if (data) {
-                    // const val = Data.parseData(data as QueryResponse);
-                    // this.parseData(val.traces);
-                    // this.parseLayout(val.layout);
-                    // this.parseOptions(val.options);
-                    const trace = new Trace(data.x, data.y, data.plot_type);
-                    if(data.delta && data.delta.length > 0){
-                        trace.labels = data.delta;
-                    }
-                    else{
-                        trace.labels = data.x;
-                    }
-                    trace.values = data.y;
-                    this.parseData([trace]);
-                    this.parseLayout(new Layout(data.title, new Axis(data.x_title, false, false), new Axis(data.y_title, false, false)));
-                    this.parseOptions(new Options());
+        return this.http.get('/api/nlptodata',
+            {
+                params: {
+                    userquery: userInput,
+                    dataset: datasetName
                 }
             });
-    }
-
-    private parseData(data: Trace[]) {
-        const map = new Map<number, Trace[]>();
-        map.set(0, data);
-        this._data.next(map);
-    }
-
-    private parseOptions(data: Options) {
-        const map = new Map<number, Options>();
-        map.set(0, data);
-        this._options.next(map);
-    }
-
-    private parseLayout(data: Layout) {
-        const map = new Map<number, Layout>();
-        map.set(0, data);
-        this._layout.next(map);
     }
 
 
