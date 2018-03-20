@@ -1,10 +1,15 @@
 <p>Very simple setup.</p>
 <div>
-  <div id="selectBox">
+  <div>
+    <div id="selectBox">
     <select  class="form-control" [(ngModel)]="dataset">
       <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
     </select>
-  </div>
+    </div>
+    <app-file-upload #fileUpload
+                       id="file-upload">
+    </app-file-upload>
+  </div>  
   <div>
     <app-text-input #textInput
                     id="text-input"

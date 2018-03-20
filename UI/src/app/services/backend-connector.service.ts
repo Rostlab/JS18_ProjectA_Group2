@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScatterData } from 'plotly.js/lib/core';
 import { Data, JsonData, Layout, Options, Trace } from "../../../models";
 import { BehaviorSubject } from 'rxjs';
@@ -60,7 +60,26 @@ export class BackendConnectorService {
         this._layout.next(map);
     }
 
+   fileUpload(fileItem:File, extraData?:object):any{
+      var apiCreateEndpoint = 'http://localhost:3001/api/upload';
+      const formData: FormData = new FormData();
 
+      formData.append('fileItem', fileItem, fileItem.name);
+      if (extraData) {
+        for(let key in extraData){
+            // iterate and set other form data
+          formData.append(key, extraData[key])
+        }
+      }
+      var headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+
+      return this.http.post(apiCreateEndpoint, formData, { headers: headers })
+                 .map((res : Response) => { return res.json(); })
+                 .catch(error => Observable.throw(error))
+                 .subscribe(data => console.log('success'), error => console.log(error));
+    }
 
     /*
     server response.

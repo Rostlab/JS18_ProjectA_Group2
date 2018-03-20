@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule  } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './text-input';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 import {
     ChartComponent,
     LineChartComponent,
@@ -27,12 +28,14 @@ import { BackendConnectorService } from "./services";
         BarChartComponent,
         PieChartComponent,
         ScatterPlotComponent,
-        HistogramComponent
+        HistogramComponent,
+		FileUploadComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule
     ],
     providers: [BackendConnectorService],
     bootstrap: [AppComponent]
