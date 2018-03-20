@@ -8,6 +8,7 @@ module.exports = function (config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-phantomjs-launcher'),
+            require('karma-chrome-launcher'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('@angular/cli/plugins/karma')
@@ -27,19 +28,19 @@ module.exports = function (config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['PhantomJS'],
-        /*customLaunchers: {
+        browsers: ['Chrome'],
+        customLaunchers: {
             Chrome_travis_ci: {
                 base: 'Chrome',
                 flags: ['--no-sandbox']
             }
-        },*/
+        },
         singleRun: true
     };
 
-    /*if (process.env.TRAVIS) {
+    if (process.env.TRAVIS) {
         configuration.browsers = ['Chrome_travis_ci'];
-    }*/
+    }
 
     config.set(configuration);
 };
