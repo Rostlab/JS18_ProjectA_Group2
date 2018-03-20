@@ -8,17 +8,19 @@ module.exports = function (config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-phantomjs-launcher'),
+            require('karma-webpack'),
+            require('karma-babel-preprocessor'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('@angular/cli/plugins/karma'),
             require('babel-preset-es2015'),
-            require('babel-register'),
+            require('babel-loader'),
         ],
-        client:{
+        client: {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
         coverageIstanbulReporter: {
-            reports: [ 'html', 'lcovonly' ],
+            reports: ['html', 'lcovonly'],
             fixWebpackSourcePaths: true
         },
         angularCli: {
@@ -27,21 +29,25 @@ module.exports = function (config) {
         reporters: ['progress', 'kjhtml'],
         port: 9876,
         colors: true,
-        logLevel: config.LOG_INFO,
+        logLevel: config.LOG_DEBUG,
         autoWatch: true,
         browsers: ['PhantomJS'],
         /*customLaunchers: {
-            Chrome_travis_ci: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
+         Chrome_travis_ci: {
+         base: 'Chrome',
+         flags: ['--no-sandbox']
+         }
+         },*/
+        singleRun: true,
+        babelPreprocessor: {
+            options: {
+                "presets": ["es2015"]
             }
-        },*/
-        singleRun: true
+        }
     };
 
     /*if (process.env.TRAVIS) {
-        configuration.browsers = ['Chrome_travis_ci'];
-    }*/
-
+     configuration.browsers = ['Chrome_travis_ci'];
+     }*/
     config.set(configuration);
 };
