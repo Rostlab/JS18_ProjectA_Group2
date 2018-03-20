@@ -7,3 +7,4 @@ export * from './Layout';
 export * from './JsonLayout';
 export * from './Data';
 export * from './JsonData';
+export * from './QueryResponse';

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as Plotly from 'plotly.js/lib/core';
+import * as Plotly from 'plotly.js';
 import { Layout, Options, Trace } from "../../../models";
 
 @Component({
@@ -27,6 +27,19 @@ export class ChartComponent implements OnInit {
         if ((this.layout === undefined) || (this.data === undefined) || (this.options === undefined)) {
             alert("Wrong input");
         } else {
+            console.log(this.data);
+            // var data = [{
+            //     values: [19, 26, 55],
+            //     labels: ['Residential', 'Non-Residential', 'Utility'],
+            //     type: 'pie'
+            // }];
+            //
+            // var layout = {
+            //     height: 400,
+            //     width: 500
+            // };
+            //
+            // Plotly.newPlot('plot', data, layout);
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };

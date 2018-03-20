@@ -3,13 +3,11 @@
 *@Date :: 03rd March, 2018
 */
 
-utils = require("../utils/nlptodata_mysql");
-var rp = require('request-promise');
-var config = require('../config');
+// utils = require("../utils/nlptodata_mysql");
+const rp = require('request-promise');
+const config = require('../config');
 
-console.log('in NodeIndexService');
-
-var NodeIndexService = {
+const NodeIndexService = {
 
 	sayHi: function (next) {
         next(null, "Welcome to iGraph");

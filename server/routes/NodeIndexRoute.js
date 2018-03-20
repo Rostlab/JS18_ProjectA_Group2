@@ -1,81 +1,52 @@
 /**
-*@author :: Jyotirmay
-*@Date :: 03rd March, 2018
-*/
+ *@author :: Jyotirmay
+ *@Date :: 03rd March, 2018
+ */
 
-var express = require('express');
-var indexService = require("../services/NodeIndexService")
-var router = express.Router();
-var qs = require('querystring');
+const express = require('express');
+const nlpService = require("../services/NlpService");
+const dataService = require("../services/DataService");
+const router = express.Router();
 
-console.log('in NodeIndexRoute');
-
-/* GET */
-router.get('/', function (req, res, next) {
-  indexService.sayHi(function (err, data) {
-
-    if (err) {
-      res.send(err);
-      return;
-    } else {
-      res.send(data);
-      return;
-    }
-  });
+router.get('/test', function (req, res) {
+    res.send("Welcome to iGraph");
 });
 
-router.get('/test', function (req, res, next) {
-  indexService.sayHi(function (err, data) {
-
-      if (err) {
+router.get('/nlptodata', function (req, res) {
+    console.log(req.query);
+    //TODO:Standardize model object for request
+    const userQuery = req.query.userquery;
+    const dataset = req.query.dataset;
+    nlpService.processQuery(userQuery, dataset).then(nlp_response => {
+        return dataService.getData(nlp_response);
+    }).then(query_response => {
+        res.send(query_response)
+    }).catch(err => {
         res.send(err);
-        return;
-      } else {
-        res.send(data);
-        return;
-      }
-    })
+    });
 });
 
-router.get('/nlptodata', function (req, res, next) {
-  console.log(req.query);
-  indexService.nlp(req.query, function (err, data) {
-    
-      if (err) {
+router.get('/columns', function (req, res) {
+    console.log('inside columns');
+    dataService.getColumns(req.query.dataset).then(columns => {
+        res.send(columns)
+    }).catch(err => {
         res.send(err);
-        return;
-      } else {
-        res.send(data);
-        return;
-      }
-    })
-});
-
-router.get('/columns', function (req, res, next) {
-  indexService.getColumns(req.query.dataset, function (err, data) {
-    
-      if (err) {
-        res.send(err);
-        return;
-      } else {
-        res.send(data);
-        return;
-      }
-    })
+    });
 });
 
 // optinal feature to implement, if time permits.
 /*router.post('/upload', function (req, res, next) {
-  console.log(req.query);
-  indexService.upload(req.query, function (err, data) {
-    
-      if (err) {
-        res.send(err);
-        return;
-      } else {
-        res.send(data);
-        return;
-      }
-    })
-});*/
+ console.log(req.query);
+ indexService.upload(req.query, function (err, data) {
+
+ if (err) {
+ res.send(err);
+ return;
+ } else {
+ res.send(data);
+ return;
+ }
+ })
+ });*/
 module.exports = router;
