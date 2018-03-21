@@ -2,8 +2,7 @@ import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {TextInputComponent} from "../text-input";
 import {ChartComponent} from "../chart";
 import {BackendConnectorService} from "../services";
-import {Dataset} from '../../../models';
-import {Data} from "../../../models/Data";
+import {Dataset, Data} from '../../../models';
 
 @Component({
     selector: 'app-home',
