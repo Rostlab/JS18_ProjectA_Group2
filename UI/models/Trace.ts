@@ -1,5 +1,5 @@
 import * as Plotly from 'plotly.js';
-import Datum from 'plotly.js';
+import {Datum} from 'plotly.js';
 import {PlotType} from './Types'
 
 export class Trace implements Plotly.Data {
