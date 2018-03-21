@@ -1,28 +1,17 @@
-import { JsonTrace } from "./JsonTrace";
+import * as Plotly from 'plotly.js';
+import {Datum} from 'plotly.js';
+import {PlotType} from './Types'
 
-export class Trace {
-    x: number[];
-    y: number[];
-    type: string;
+export class Trace implements Plotly.Data {
+    x: Datum[] | Datum[][];
+    y: Datum[] | Datum[][];
+    xaxis: string;
+    yaxis: string;
+    values: Datum[] | Datum[][];
+    labels: Datum[] | Datum[][];
+    type: PlotType;
 
-    constructor(x: number[], y: number[], type: string,) {
-        this.x = x;
-        this.y = y;
+    constructor(type: PlotType) {
         this.type = type;
-    }
-
-    public static parseTraces(jsonArray: JsonTrace[]): Trace[] {
-        const data = [];
-        jsonArray.forEach(json => {
-            data.push(Trace.parseTrace(json));
-        });
-        return data;
-    }
-
-    public static parseTrace(json: JsonTrace): Trace {
-            const x: number[] = json.x;
-            const y: number[] = json.y;
-            const type: string = json.type;
-            return new Trace(x, y, type);
     }
 }

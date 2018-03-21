@@ -1,11 +1,6 @@
-import { JsonOptions } from "./JsonOptions";
+import * as Plotly from 'plotly.js';
 
-export class Options {
-
+export class Options implements Partial<Plotly.Config> {
     constructor() {
-    }
-
-    public static parseOptions(json: JsonOptions): Options {
-        return new Options();
     }
 }

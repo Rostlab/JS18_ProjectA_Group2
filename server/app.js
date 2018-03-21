@@ -11,6 +11,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+require('babel-register')({
+    presets: [ 'es2015' ]
+});
 //var mongoose = require("mongoose");
 
 //var stacktrace = require("stacktrace");

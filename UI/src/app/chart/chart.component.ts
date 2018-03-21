@@ -15,9 +15,9 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
     }
 
-    @Input() data: Trace[];
-    @Input() layout: Layout;
-    @Input() options: Options;
+    data: Trace[];
+    layout: Layout;
+    options: Options;
 
     reset() {
         Plotly.purge("plot");
@@ -27,6 +27,7 @@ export class ChartComponent implements OnInit {
         if ((this.layout === undefined) || (this.data === undefined) || (this.options === undefined)) {
             alert("Wrong input");
         } else {
+            console.log(this.data);
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };

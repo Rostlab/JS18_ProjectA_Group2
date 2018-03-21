@@ -1,29 +1,27 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { TextInputComponent } from "../text-input";
-import { ChartComponent } from "../chart";
-import { BackendConnectorService } from "../services";
-import { Dataset, Layout, Options, Trace } from '../../../models';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {TextInputComponent} from "../text-input";
+import {ChartComponent} from "../chart";
+import {BackendConnectorService} from "../services";
+import {Dataset, Data} from '../../../models';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements AfterViewInit, OnInit {
 
     @ViewChild("textInput") textInput: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: Trace[];
-    options: Options;
-    layout: Layout;
 
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
     dataset: Dataset;
     readonly defaultDataset: Dataset = new Dataset(-1, "Choose a dataset");
 
-    constructor (private backendConnector: BackendConnectorService) {
+    constructor(private backendConnector: BackendConnectorService) {
         this.graphIsEmpty = true;
         this.datasets = Array<Dataset>();
         this.dataset = this.defaultDataset;
@@ -36,34 +34,33 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.datasets.push(new Dataset(1, "Another_Kaggle_Dataset"));
     }
 
-    ngAfterViewInit() {
-        this.backendConnector.data.subscribe(data => {
-            this.data = data.get(0);
-        });
-        this.backendConnector.options.subscribe(options => {
-            this.options = options.get(0);
-        });
-        this.backendConnector.layout.subscribe(layout => {
-            this.layout = layout.get(0);
-        });
+    ngAfterViewInit(){
+
     }
 
     /**
      * is called by the plot button or hitting "Enter"
      */
-    public plotGraph () {
+    public plotGraph() {
         //TODO
         // call plot in the graph
         if (!this.shouldDisablePlotButton()) {
             console.log("Plot was pressed");
             console.log(this.textInput.getTextInput());
             console.log(this.dataset.name);
-            this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name);
-            setTimeout( () => {
-                console.log(this.chart);
-                this.chart.plot();
-            }, 1000);
-            this.graphIsEmpty = false;
+            const that = this;
+            this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
+                .subscribe((data: Data) => {
+                    console.log("Backendconnector" + data);
+                    if (data) {
+                        that.chart.data = data.traces;
+                        that.chart.options = data.options;
+                        that.chart.layout = data.layout;
+                        that.graphIsEmpty = false;
+                        that.chart.reset();
+                        that.chart.plot();
+                    }
+                });
         }
     }
 
@@ -84,7 +81,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     /**
      * gets from the text-input component, if the text-flied is empty
      */
-    public textIsEmpty () {
+    public textIsEmpty() {
         return this.textInput.textIsEmpty();
     }
 
