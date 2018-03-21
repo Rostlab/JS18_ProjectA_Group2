@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {TextInputComponent} from "../text-input";
 import {ChartComponent} from "../chart";
 import {BackendConnectorService} from "../services";
-import {Dataset, QueryResponse} from '../../../models';
-import * as Plotly from 'plotly.js';
+import {Dataset} from '../../../models';
+import {Data} from "../../../models/Data";
 
 @Component({
     selector: 'app-home',
@@ -16,9 +16,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("textInput") textInput: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: Plotly.Data[];
-    options: Plotly.Config;
-    layout: Plotly.Layout;
 
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
@@ -54,25 +51,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
             console.log(this.dataset.name);
             const that = this;
             this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
-                .subscribe((data: QueryResponse) => {
-                    console.log("Backendconnector" + data.title);
+                .subscribe((data: Data) => {
+                    console.log("Backendconnector" + data);
                     if (data) {
-                        const trace = {
-                            x: data.x,
-                            values:data.y,
-                            xaxis: data.x_title,
-                            y: data.y,
-                            labels: data.x,
-                            yaxis: data.y_title,
-                            type: data.plot_type as 'bar' | 'scatter' | 'scattergl' | 'scatter3d'
-                        };
-                        that.chart.data = [trace];
-
-                        that.chart.options = {};
-
-                        const layout = {title: data.title};
-
-                        that.chart.layout = layout;
+                        that.chart.data = data.traces;
+                        that.chart.options = data.options;
+                        that.chart.layout = data.layout;
                         that.graphIsEmpty = false;
                         that.chart.reset();
                         that.chart.plot();

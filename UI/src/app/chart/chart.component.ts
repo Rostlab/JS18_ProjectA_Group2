@@ -15,9 +15,9 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
     }
 
-    @Input() data: Plotly.Data[];
-    @Input() layout: Partial<Plotly.Layout>;
-    @Input() options: Partial<Plotly.Config>;
+    @Input() data: Trace[];
+    @Input() layout: Layout;
+    @Input() options: Options;
 
     reset() {
         Plotly.purge("plot");

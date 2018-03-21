@@ -1,12 +1,34 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Trace, Layout, Options, Data} from '../../../models'
+import {PlotType} from '../../../models/Types'
 
 import 'rxjs/Rx';
+import {QueryResponse} from "../../../models/QueryResponse";
 
 @Injectable()
 export class BackendConnectorService {
 
     constructor(private http: HttpClient) {
+    }
+
+    private createPlotData(queryResponse: QueryResponse) {
+        if (queryResponse) {
+            const trace = new Trace(queryResponse.plot_type as PlotType);
+            trace.x = queryResponse.x;
+            trace.xaxis = queryResponse.x_title;
+            trace.y = queryResponse.y;
+            trace.yaxis = queryResponse.y_title;
+            trace.labels = queryResponse.x;
+            trace.values = queryResponse.y;
+
+            const layout = new Layout(queryResponse.title);
+
+            const options = new Options();
+            return new Data([trace], layout, options);
+
+        }
+
     }
 
     public getData(userInput: string, datasetName: string) {
@@ -17,7 +39,10 @@ export class BackendConnectorService {
                     userquery: userInput,
                     dataset: datasetName
                 }
-            });
+            }).map((queryResponse: QueryResponse) => {
+            return this.createPlotData(queryResponse);
+
+        })
     }
 
 
