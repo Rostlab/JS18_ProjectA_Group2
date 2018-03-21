@@ -7,7 +7,7 @@ module.exports = function (config) {
         frameworks: ['jasmine', '@angular/cli'],
         plugins: [
             'karma-jasmine',
-            'karma-firefox-launcher',
+            'karma-chrome-launcher',
             'karma-jasmine-html-reporter',
             'karma-coverage-istanbul-reporter',
             '@angular/cli/plugins/karma',
@@ -28,7 +28,7 @@ module.exports = function (config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['FirefoxHeadless'],
+        browsers: ['ChromeHeadless'],
         /*customLaunchers: {
          Chrome_travis_ci: {
          base: 'Chrome',
