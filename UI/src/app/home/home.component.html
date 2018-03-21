@@ -2,8 +2,13 @@
 <hr>
 <div>
   <div id="selectBox">
-    <select  class="form-control" [(ngModel)]="dataset">
-      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
+    <select  class="form-control"
+             [(ngModel)]="dataset">
+      <option *ngFor="let x of datasets"
+              [ngValue]="x"
+              [selected]="x.id === 0">
+        {{ x.name }}
+      </option>
     </select>
   </div>
   <hr>
@@ -11,14 +16,15 @@
     <div class="col-2">
 
     </div>
-    <div class="col-4" style="margin-right: 5px">
+    <div class="col-4 textinput">
       <div class="row">
         <app-text-input #textInput
                         id="text-input"
-                        (plot)="plotGraph()">
+                        (plot)="plotGraph()"
+                        [isPlotTextInput]="true">
         </app-text-input>
       </div>
-      <div class="row" style="margin-top: 20px">
+      <div class="row button">
         <button id="plotButton"
                 class="btn btn-md btn-success"
                 type="button"
@@ -28,19 +34,20 @@
         </button>
       </div>
     </div>
-    <div class="col-4" style="margin-left: 5px">
+    <div class="col-4 textinput">
       <div class="row">
         <app-text-input #textInputUpdate
                         id="text-input-update"
-                        (plot)="updateGraph()">
+                        (plot)="updateGraph()"
+                        [isPlotTextInput]="false">
         </app-text-input>
       </div>
-      <div class="row" style="margin-top: 20px">
+      <div class="row button">
         <button id="updateButton"
                 class="btn btn-md btn-warning"
                 type="button"
                 (click)="updateGraph()"
-                [disabled]="shouldDisablePlotButton()">
+                [disabled]="shouldDisableUpdateButton()">
           <i class="fa fa-chart-line"></i> Update
         </button>
       </div>
@@ -50,9 +57,7 @@
     </div>
   </div>
   <hr>
-  <div id="buttons" class="row" style="padding: 20px">
-
-
+  <div class="row button">
     <button id="resetButton"
             class="btn btn-md btn-danger"
             type="button"

@@ -88,6 +88,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
     /**
      * Disable method for button
      */
+    public shouldDisableUpdateButton() {
+        return (this.textIsEmpty() && this.graphIsEmpty);
+    }
+
+    /**
+     * Disable method for button
+     */
     public shouldDisableClearButton() {
         return (this.textIsEmpty() && this.graphIsEmpty);
     }

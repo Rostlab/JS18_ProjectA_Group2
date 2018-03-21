@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 
 @Component({
     selector: 'app-text-input',
@@ -8,14 +8,23 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class TextInputComponent implements OnInit {
 
     textInput: string;
+    defaultText: string;
+
+    @Input() isPlotTextInput: boolean;
     @Output() plot = new EventEmitter();
 
     constructor() {
+
     }
 
 
     ngOnInit() {
         this.clear();
+        if (this.isPlotTextInput) {
+            this.defaultText = "Type a command in natural language to plot a graph.";
+        } else {
+            this.defaultText = "Type a command in natural language to update the graph.";
+        }
     }
 
     clear() {

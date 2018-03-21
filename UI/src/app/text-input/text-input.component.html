@@ -5,7 +5,7 @@
               class="form-control"
               [(ngModel)]="textInput"
               name="textInput"
-              placeholder="Type a command in natural language"
+              [placeholder]="defaultText"
               (keyup.enter)="plotGraph()">
     </textarea>
 </div>
