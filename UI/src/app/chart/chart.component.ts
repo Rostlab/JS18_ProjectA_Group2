@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as Plotly from 'plotly.js';
+import * as Plotly from 'plotly.js/lib/core';
 import { Layout, Options, Trace } from "../../../models";
 
 @Component({
