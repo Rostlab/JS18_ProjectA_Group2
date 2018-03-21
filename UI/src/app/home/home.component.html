@@ -1,24 +1,63 @@
-<p>Very simple setup.</p>
+<p>Text to Plot.</p>
+<hr>
 <div>
   <div id="selectBox">
-    <select  class="form-control" [(ngModel)]="dataset">
-      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
+    <select  class="form-control"
+             [(ngModel)]="dataset">
+      <option *ngFor="let x of datasets"
+              [ngValue]="x"
+              [selected]="x.id === 0">
+        {{ x.name }}
+      </option>
     </select>
   </div>
-  <div>
-    <app-text-input #textInput
-                    id="text-input"
-                    (plot)="plotGraph()">
-    </app-text-input>
+  <hr>
+  <div class="row">
+    <div class="col-2">
+
+    </div>
+    <div class="col-4 textinput">
+      <div class="row">
+        <app-text-input #textInput
+                        id="text-input"
+                        (plot)="plotGraph()"
+                        [isPlotTextInput]="true">
+        </app-text-input>
+      </div>
+      <div class="row button">
+        <button id="plotButton"
+                class="btn btn-md btn-success"
+                type="button"
+                (click)="plotGraph()"
+                [disabled]="shouldDisablePlotButton()">
+          <i class="fa fa-chart-line"></i> Plot
+        </button>
+      </div>
+    </div>
+    <div class="col-4 textinput">
+      <div class="row">
+        <app-text-input #textInputUpdate
+                        id="text-input-update"
+                        (plot)="updateGraph()"
+                        [isPlotTextInput]="false">
+        </app-text-input>
+      </div>
+      <div class="row button">
+        <button id="updateButton"
+                class="btn btn-md btn-warning"
+                type="button"
+                (click)="updateGraph()"
+                [disabled]="shouldDisableUpdateButton()">
+          <i class="fa fa-chart-line"></i> Update
+        </button>
+      </div>
+    </div>
+    <div class="col-2">
+
+    </div>
   </div>
-  <div id="buttons">
-    <button id="plotButton"
-            class="btn btn-md btn-success"
-            type="button"
-            (click)="plotGraph()"
-            [disabled]="shouldDisablePlotButton()">
-      <i class="fa fa-chart-line"></i> Plot
-    </button>
+  <hr>
+  <div class="row button">
     <button id="resetButton"
             class="btn btn-md btn-danger"
             type="button"

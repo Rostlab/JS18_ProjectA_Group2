@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Plotly from 'plotly.js/lib/core';
 import { Layout, Options, Trace } from "../../../models";
+import {Data} from "../../../models/Data";
+import {lab} from "d3-color";
 
 @Component({
     selector: 'app-chart',
@@ -31,4 +33,25 @@ export class ChartComponent implements OnInit {
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };
+
+    //TODO: Needs to improve
+    update(actions){
+        actions.forEach((task) => {
+            if (task.action === 'updateStyle') {
+                Plotly.restyle("plot", task.value, task.trace);
+            } else if (task.action === 'updateLayout') {
+                Plotly.relayout("plot", task.value);
+            } else if (task.action === 'updateData') {
+                while (this.data.length) {
+                    Plotly.deleteTraces("plot", 0);
+                }
+                Plotly.addTraces("plot", task.value);
+            }
+        });
+    };
+
+    //TODO: Needs to improve
+    public getData(){
+        return new Data(this.data, this.layout, this.options);
+    }
 }

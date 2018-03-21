@@ -13,6 +13,7 @@ import {Dataset, Data} from '../../../models';
 export class HomeComponent implements AfterViewInit, OnInit {
 
     @ViewChild("textInput") textInput: TextInputComponent;
+    @ViewChild("textInputUpdate") textInputUpdate: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
 
@@ -34,7 +35,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.datasets.push(new Dataset(1, "Another_Kaggle_Dataset"));
     }
 
-    ngAfterViewInit(){
+    ngAfterViewInit() {
 
     }
 
@@ -64,11 +65,31 @@ export class HomeComponent implements AfterViewInit, OnInit {
         }
     }
 
+    public updateGraph() {
+        console.log("Update was pressed");
+        const that = this;
+        this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
+            .subscribe((res) => {
+                console.log("Backendconnector" + res);
+                if (res) {
+                    that.chart.update(res);
+                }
+            });
+    }
+
+
     /**
      * Disable method for button
      */
     public shouldDisablePlotButton() {
         return (this.textIsEmpty() || (this.dataset === this.defaultDataset));
+    }
+
+    /**
+     * Disable method for button
+     */
+    public shouldDisableUpdateButton() {
+        return (this.textIsEmpty() && this.graphIsEmpty);
     }
 
     /**
@@ -93,6 +114,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();
+        this.textInputUpdate.clear();
         this.dataset = this.defaultDataset;
     }
 }

@@ -1,7 +1,12 @@
-#buttons{
+.button{
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    padding: 20px;
+}
+
+.textinput {
+    margin-right: 5px;
 }
 
 #plotButton {
