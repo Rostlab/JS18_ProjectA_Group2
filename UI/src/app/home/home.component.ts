@@ -66,15 +66,17 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     public updateGraph() {
-        console.log("Update was pressed");
-        const that = this;
-        this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
-            .subscribe((res) => {
-                console.log("Backendconnector" + res);
-                if (res) {
-                    that.chart.update(res);
-                }
-            });
+        if (!this.shouldDisableUpdateButton()) {
+            console.log("Update was pressed");
+            const that = this;
+            this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
+                .subscribe((res) => {
+                    console.log("Backendconnector" + res);
+                    if (res) {
+                        that.chart.update(res);
+                    }
+                });
+        }
     }
 
 
@@ -82,28 +84,35 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Disable method for button
      */
     public shouldDisablePlotButton() {
-        return (this.textIsEmpty() || (this.dataset === this.defaultDataset));
+        return (this.textIsEmpty(this.textInput) || (this.dataset === this.defaultDataset));
     }
 
     /**
      * Disable method for button
      */
     public shouldDisableUpdateButton() {
-        return (this.textIsEmpty() && this.graphIsEmpty);
+        return (this.textIsEmpty(this.textInputUpdate) || this.graphIsEmpty);
     }
 
     /**
      * Disable method for button
      */
     public shouldDisableClearButton() {
-        return (this.textIsEmpty() && this.graphIsEmpty);
+        return (this.textIsEmpty(this.textInput) && this.textIsEmpty(this.textInputUpdate) && this.graphIsEmpty && (this.dataset === this.defaultDataset));
+    }
+
+    /**
+     * Disable method for update text field
+     */
+    public disableUpdateTextField() {
+        return this.graphIsEmpty;
     }
 
     /**
      * gets from the text-input component, if the text-flied is empty
      */
-    public textIsEmpty() {
-        return this.textInput.textIsEmpty();
+    public textIsEmpty(textInput: TextInputComponent) {
+        return textInput.textIsEmpty();
     }
 
     /**

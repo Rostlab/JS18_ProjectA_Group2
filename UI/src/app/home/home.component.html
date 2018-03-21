@@ -21,7 +21,8 @@
         <app-text-input #textInput
                         id="text-input"
                         (plot)="plotGraph()"
-                        [isPlotTextInput]="true">
+                        [isPlotTextInput]="true"
+                        [disabled]="false">
         </app-text-input>
       </div>
       <div class="row button">
@@ -39,7 +40,8 @@
         <app-text-input #textInputUpdate
                         id="text-input-update"
                         (plot)="updateGraph()"
-                        [isPlotTextInput]="false">
+                        [isPlotTextInput]="false"
+                        [disabled]="disableUpdateTextField()" >
         </app-text-input>
       </div>
       <div class="row button">
