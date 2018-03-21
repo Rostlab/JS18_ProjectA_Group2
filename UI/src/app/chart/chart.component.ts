@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as Plotly from 'plotly.js';
+import * as Plotly from 'plotly.js/lib/core';
 import { Layout, Options, Trace } from "../../../models";
 import {Data} from "../../../models/Data";
 import {lab} from "d3-color";
@@ -17,9 +17,9 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
     }
 
-    @Input() data: Trace[];
-    @Input() layout: Layout;
-    @Input() options: Options;
+    data: Trace[];
+    layout: Layout;
+    options: Options;
 
     reset() {
         Plotly.purge("plot");
