@@ -33,7 +33,7 @@ export class BackendConnectorService {
 
     public getData(userInput: string, datasetName: string) {
 
-        return this.http.get('/api/nlptodata',
+        return this.http.get('/api/plot',
             {
                 params: {
                     userquery: userInput,

@@ -12,7 +12,7 @@ router.get('/test', function (req, res) {
     res.send("Welcome to iGraph");
 });
 
-router.get('/nlptodata', function (req, res) {
+router.get('/plot', function (req, res) {
     console.log(req.query);
     //TODO:Standardize model object for request
     const userQuery = req.query.userquery;
