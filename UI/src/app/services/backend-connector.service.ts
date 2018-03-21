@@ -45,6 +45,33 @@ export class BackendConnectorService {
         })
     }
 
+    public update(userInput: string, data: Data) {
+
+        return this.http.post('https://js2018-group4.azurewebsites.net/api/nlp',
+            {
+                sentence: userInput,
+                data: data.traces,
+                layout: data.layout
+
+            });
+        // .map((queryResponse: QueryResponse) => {
+        //     return this.createPlotData(queryResponse);
+        //
+        // })
+        //
+        //
+        //
+        // return httpPost('https://js2018-group4.azurewebsites.net/api/nlp', {
+        //     sentence,
+        //     data: data.traces,
+        //     layout: data.layout,
+        // })
+        //     .then((res) => {
+        //         doActions(plotDiv, res);
+        //         return res;
+        //     });
+    };
+
 
     /*
      server response.
