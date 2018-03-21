@@ -6,21 +6,18 @@ module.exports = function (config) {
         basePath: '',
         frameworks: ['jasmine', '@angular/cli'],
         plugins: [
-            require('karma-jasmine'),
-            require('karma-phantomjs-launcher'),
-            require('karma-webpack'),
-            require('karma-babel-preprocessor'),
-            require('karma-jasmine-html-reporter'),
-            require('karma-coverage-istanbul-reporter'),
-            require('@angular/cli/plugins/karma'),
-            require('babel-preset-es2015'),
-            require('babel-loader'),
+            'karma-jasmine',
+            'karma-firefox-launcher',
+            'karma-jasmine-html-reporter',
+            'karma-coverage-istanbul-reporter',
+            '@angular/cli/plugins/karma',
+            'karma-babel-preprocessor'
         ],
-        client: {
+        client:{
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
         coverageIstanbulReporter: {
-            reports: ['html', 'lcovonly'],
+            reports: [ 'html', 'lcovonly' ],
             fixWebpackSourcePaths: true
         },
         angularCli: {
@@ -29,9 +26,9 @@ module.exports = function (config) {
         reporters: ['progress', 'kjhtml'],
         port: 9876,
         colors: true,
-        logLevel: config.LOG_DEBUG,
+        logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['PhantomJS'],
+        browsers: ['FirefoxHeadless'],
         /*customLaunchers: {
          Chrome_travis_ci: {
          base: 'Chrome',
@@ -39,9 +36,15 @@ module.exports = function (config) {
          }
          },*/
         singleRun: true,
+        preprocessors: {
+            'UI/**/*.ts': ['babel'],
+            'UI/**/*.js': ['babel'],
+            'server/**/*.js': ['babel']
+        },
         babelPreprocessor: {
             options: {
-                "presets": ["es2015"]
+                presets: ['env'],
+                sourceMap: 'inline'
             }
         }
     };
@@ -49,5 +52,6 @@ module.exports = function (config) {
     /*if (process.env.TRAVIS) {
      configuration.browsers = ['Chrome_travis_ci'];
      }*/
+
     config.set(configuration);
 };
