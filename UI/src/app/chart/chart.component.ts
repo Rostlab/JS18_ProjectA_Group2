@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import * as Plotly from 'plotly.js/lib/core';
+import { Component, OnInit } from '@angular/core';
+import * as Plotly from 'plotly.js';
 import { Layout, Options, Trace } from "../../../models";
 import {Data} from "../../../models/Data";
-import {lab} from "d3-color";
 
 @Component({
     selector: 'app-chart',
