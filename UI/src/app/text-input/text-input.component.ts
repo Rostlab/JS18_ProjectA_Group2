@@ -11,6 +11,7 @@ export class TextInputComponent implements OnInit {
     defaultText: string;
 
     @Input() isPlotTextInput: boolean;
+    @Input() disabled: boolean = false;
     @Output() plot = new EventEmitter();
 
     constructor() {

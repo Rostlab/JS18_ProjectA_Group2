@@ -6,6 +6,7 @@
               [(ngModel)]="textInput"
               name="textInput"
               [placeholder]="defaultText"
-              (keyup.enter)="plotGraph()">
+              (keyup.enter)="plotGraph()"
+              [disabled]="disabled" >
     </textarea>
 </div>
