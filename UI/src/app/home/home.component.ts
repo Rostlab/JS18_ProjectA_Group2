@@ -1,29 +1,28 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { TextInputComponent } from "../text-input";
-import { ChartComponent } from "../chart";
-import { BackendConnectorService } from "../services";
-import { Dataset, Layout, Options, Trace } from '../../../models';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {TextInputComponent} from "../text-input";
+import {ChartComponent} from "../chart";
+import {BackendConnectorService} from "../services";
+import {Dataset, Data} from '../../../models';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements AfterViewInit, OnInit {
 
     @ViewChild("textInput") textInput: TextInputComponent;
+    @ViewChild("textInputUpdate") textInputUpdate: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-    data: Trace[];
-    options: Options;
-    layout: Layout;
 
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
     dataset: Dataset;
     readonly defaultDataset: Dataset = new Dataset(-1, "Choose a dataset");
 
-    constructor (private backendConnector: BackendConnectorService) {
+    constructor(private backendConnector: BackendConnectorService) {
         this.graphIsEmpty = true;
         this.datasets = Array<Dataset>();
         this.dataset = this.defaultDataset;
@@ -37,55 +36,83 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     ngAfterViewInit() {
-        this.backendConnector.data.subscribe(data => {
-            this.data = data.get(0);
-        });
-        this.backendConnector.options.subscribe(options => {
-            this.options = options.get(0);
-        });
-        this.backendConnector.layout.subscribe(layout => {
-            this.layout = layout.get(0);
-        });
+
     }
 
     /**
      * is called by the plot button or hitting "Enter"
      */
-    public plotGraph () {
+    public plotGraph() {
         //TODO
         // call plot in the graph
         if (!this.shouldDisablePlotButton()) {
             console.log("Plot was pressed");
             console.log(this.textInput.getTextInput());
             console.log(this.dataset.name);
-            this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name);
-            setTimeout( () => {
-                console.log(this.chart);
-                this.chart.plot();
-            }, 1000);
-            this.graphIsEmpty = false;
+            const that = this;
+            this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
+                .subscribe((data: Data) => {
+                    console.log("Backendconnector" + data);
+                    if (data) {
+                        that.chart.data = data.traces;
+                        that.chart.options = data.options;
+                        that.chart.layout = data.layout;
+                        that.graphIsEmpty = false;
+                        that.chart.reset();
+                        that.chart.plot();
+                    }
+                });
         }
     }
+
+    public updateGraph() {
+        if (!this.shouldDisableUpdateButton()) {
+            console.log("Update was pressed");
+            const that = this;
+            this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
+                .subscribe((res) => {
+                    console.log("Backendconnector" + res);
+                    if (res) {
+                        that.chart.update(res);
+                    }
+                });
+        }
+    }
+
 
     /**
      * Disable method for button
      */
     public shouldDisablePlotButton() {
-        return (this.textIsEmpty() || (this.dataset === this.defaultDataset));
+        return (this.textIsEmpty(this.textInput) || (this.dataset === this.defaultDataset));
+    }
+
+    /**
+     * Disable method for button
+     */
+    public shouldDisableUpdateButton() {
+        return (this.textIsEmpty(this.textInputUpdate) || this.graphIsEmpty);
     }
 
     /**
      * Disable method for button
      */
     public shouldDisableClearButton() {
-        return (this.textIsEmpty() && this.graphIsEmpty);
+        return (this.textIsEmpty(this.textInput) && this.textIsEmpty(this.textInputUpdate) && this.graphIsEmpty && (this.dataset === this.defaultDataset));
+    }
+
+    /**
+     * Disable method for update text field
+     */
+    public disableUpdateTextField() {
+        return this.graphIsEmpty;
     }
 
     /**
      * gets from the text-input component, if the text-flied is empty
      */
-    public textIsEmpty () {
-        return this.textInput.textIsEmpty();
+    public textIsEmpty(textInput: TextInputComponent) {
+        return textInput.textIsEmpty();
     }
 
     /**
@@ -96,6 +123,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();
+        this.textInputUpdate.clear();
         this.dataset = this.defaultDataset;
     }
 }

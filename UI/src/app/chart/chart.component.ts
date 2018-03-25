@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import * as Plotly from 'plotly.js/lib/core';
+import { Component, OnInit } from '@angular/core';
+import * as Plotly from 'plotly.js';
 import { Layout, Options, Trace } from "../../../models";
+import {Data} from "../../../models/Data";
 
 @Component({
     selector: 'app-chart',
@@ -15,9 +16,9 @@ export class ChartComponent implements OnInit {
     ngOnInit() {
     }
 
-    @Input() data: Trace[];
-    @Input() layout: Layout;
-    @Input() options: Options;
+    data: Trace[];
+    layout: Layout;
+    options: Options;
 
     reset() {
         Plotly.purge("plot");
@@ -27,7 +28,29 @@ export class ChartComponent implements OnInit {
         if ((this.layout === undefined) || (this.data === undefined) || (this.options === undefined)) {
             alert("Wrong input");
         } else {
+            console.log(this.data);
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };
+
+    //TODO: Needs to improve
+    update(actions){
+        actions.forEach((task) => {
+            if (task.action === 'updateStyle') {
+                Plotly.restyle("plot", task.value, task.trace);
+            } else if (task.action === 'updateLayout') {
+                Plotly.relayout("plot", task.value);
+            } else if (task.action === 'updateData') {
+                while (this.data.length) {
+                    Plotly.deleteTraces("plot", 0);
+                }
+                Plotly.addTraces("plot", task.value);
+            }
+        });
+    };
+
+    //TODO: Needs to improve
+    public getData(){
+        return new Data(this.data, this.layout, this.options);
+    }
 }
