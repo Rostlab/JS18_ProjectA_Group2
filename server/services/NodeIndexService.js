@@ -37,6 +37,15 @@ var NodeIndexService = {
             next(err);
         });
     },
+
+    importCsvToMysql: function(filePath, tableName, next){
+        var promise = utils.importCsvToMysql(filePath, tableName);
+        promise.then(function(success){
+            next(null, success);
+        }, function(err){
+            next(err);
+        });
+    }
    /* // Implement if time permits.
     upload: function(query, next){
         var promise = utils.upload(query.uploadeddoc);

@@ -1,6 +1,10 @@
 var Promise = require('promise');
 var stringSimilarity = require('string-similarity');
 var config = require('../config');
+var csvToMysql = require("csv-to-mysql");
+var csvParser = require('csv-parse');
+var fs = require('fs');
+csvMysql = require("./csvtomysql");
 
 var knex = require('knex')({
     client: 'mysql',
@@ -8,6 +12,21 @@ var knex = require('knex')({
     pool: { min: 0, max: 7 },
     acquireConnectionTimeout: 5000
   });
+
+
+var options = {
+    mysql: {
+        host: config.mysql.host,
+        user: config.mysql.user,
+        password: config.mysql.password,
+        database:  config.mysql.database
+    },
+    csv: {
+        comment: '#',
+        quote: '"'
+    },
+    table: 'test'
+};
 
 nlp_model = {
     "x": false, "y": false, "z": false,
@@ -147,7 +166,30 @@ var utils = {
                 reject(error);
             }
         });
+    },
+
+    importCsvToMysql: function(filePath, tableName){
+        return new Promise(function(fulfill, reject){
+            try{
+                   /*csvParser(csvData, {
+                        delimiter: ','
+                    }, function(err, data) {
+                        if (err) {
+                        console.log(err);
+                        } else {
+                        console.log("Parser: " + data);
+                        }
+                    });*/
+                    options.table = tableName;
+                    csvMysql.import(filePath, options);
+                //csvToMysql(config.mysql.host, config.mysql.database, config.mysql.user, config.mysql.password, filePath);
+            } catch(error){
+                reject(error);
+            }
+        });
     }
+
+
 }
 
 module.exports = utils;
