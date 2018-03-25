@@ -76,9 +76,8 @@ export class BackendConnectorService {
       headers.append('Accept', 'application/json');
 
       return this.http.post(apiCreateEndpoint, formData, { headers: headers })
-                 .map((res : Response) => { return res.json(); })
-                 .catch(error => Observable.throw(error))
-                 .subscribe(data => console.log('success'), error => console.log(error));
+                 .map((res : Response) => { return res; })
+                 .catch(error => Observable.throw(error));
     }
 
     /*

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Input, Output } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-
+import { EventEmitter } from 'events';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { BackendConnectorService } from "../services";
+import { Dataset} from '../../../models';
 
 @Component({
   selector: 'app-file-upload',
@@ -28,48 +29,42 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       this.statusFormGroup = new FormGroup({});
     }
 
+    @Input() dataList;
+    //@Output() datasetsChange = new EventEmitter();
+
     ngOnDestroy() {
         if (this.fileUploadSub){
             this.fileUploadSub.unsubscribe();
         }
     }
 
-    handleProgress(event){
-      if (event.type === HttpEventType.DownloadProgress) {
-        this.uploadingProgressing =true
-        this.uploadProgress = Math.round(100 * event.loaded / event.total)
-      }
-
-      if (event.type === HttpEventType.UploadProgress) {
-        this.uploadingProgressing =true
-        this.uploadProgress = Math.round(100 * event.loaded / event.total)
-      }
-
-      if (event.type === HttpEventType.Response) {
-        // console.log(event.body);
-        this.uploadComplete = true;
-        this.serverResponse = event.body;
-      }
-    }
-
-
-
     handleSubmit(event:any, statusNgForm:NgForm, statusFormGroup: FormGroup){
       event.preventDefault()
       if (statusNgForm.submitted){
-
           let submittedData = statusFormGroup.value;
 
           this.fileUploadSub = this.fileUploadService.fileUpload(
                 this.fileToUpload, 
                 submittedData).subscribe(
-                    event=>this.handleProgress(event), 
+                    event=>{ this.handleResponse(event); }, 
                     error=>{
-                        console.log("Server error")
+                        console.log("Server error: " + error.message);
                     });
 
-          statusNgForm.resetForm({})
+          statusNgForm.resetForm({});          
       }
+  }
+
+  handleResponse(response){
+    if(response.fileName){      
+      var fileName = response.fileName;
+
+      //Insert new file into dataset selection list
+      var id = this.dataList[this.dataList.length - 1].id + 1;
+      this.dataList.push(new Dataset(id, fileName));
+    }else{
+      window.alert("Something went wrong, file have not uploaded");
+    }
   }
 
 
