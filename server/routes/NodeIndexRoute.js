@@ -10,15 +10,25 @@ var qs = require('querystring');
 var multer = require('multer');
 var path = require('path');
 const crypto = require('crypto');
+var fs = require('fs');
 
 var DIR = "./server/data/";
 var storage = multer.diskStorage({
   destination: DIR,
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
-      if (err) return cb(err)
-
-      cb(null, raw.toString('hex') + path.extname(file.originalname))
+      if (err) return cb(err);
+      fs.exists(DIR + file.originalname, function(exists) {
+        var fileName;
+        if (exists) {
+          console.log("exists");
+          fileName = Date.now() + '_' + file.originalname;
+        } else {
+          console.log("does not exists");
+          fileName = file.originalname;
+        } 
+        cb(null, fileName)
+    });
     })
   }
 });
@@ -85,15 +95,23 @@ router.get('/columns', function (req, res, next) {
 
 // optinal feature to implement, if time permits.
 router.post('/upload', function (req, res, next) {
-  var path = "";
-
   upload(req, res, function (err) {
     if (err) {
       console.log(err);
       res.send(err);
       return;
     } else {
-      res.send("File upload complete " + req.file.path);
+      var filePath = req.file.path;      
+      //Take file name as a table name
+      var tableName = path.basename(filePath, path.extname(filePath));
+      indexService.importCsvToMysql(filePath, tableName, function(err){        
+        if(err){
+          console.log(err);
+          res.send(err);
+          return;
+        }
+      });
+      res.status(202).send({"fileName" : tableName});
       return;
     }
   })
