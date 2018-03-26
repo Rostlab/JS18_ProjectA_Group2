@@ -10,22 +10,7 @@ var config = require('../config');
 import QueryResponse from '../models/query_response';
 import Column from '../models/column';
 var stringSimilarity = require('string-similarity');
-
 var csvMysql = require("../utils/csvtomysql");
-var options = {
-    mysql: {
-        host: config.mysql.host,
-        user: config.mysql.user,
-        password: config.mysql.password,
-        database:  config.mysql.database
-    },
-    csv: {
-        comment: '#',
-        quote: '"'
-    },
-    table: 'test'
-};
-
 
 let knex = require('knex')({
     client: 'mysql',
@@ -193,8 +178,7 @@ let DataService = {
     importCsvToMysql: function(filePath, tableName){
         return new Promise(function(fulfill, reject){
             try{
-                options.table = tableName;
-                csvMysql.import(filePath, options);
+                csvMysql.import(filePath, tableName);
             } catch(error){
                 reject(error);
             }
