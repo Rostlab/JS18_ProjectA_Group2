@@ -3,9 +3,9 @@ var sync = require('sync');
 
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
+    host : 'localhost',
+    user : 'root',
+    password : '',
     select_db: "igraph"
 });
 con.connect(function(err) {
