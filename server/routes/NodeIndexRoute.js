@@ -25,7 +25,7 @@ var storage = multer.diskStorage({
           console.log("exists");
           fileName = Date.now() + '_' + file.originalname;
         } else {
-          console.log("does not exists");
+          console.log("does not exist");
           fileName = file.originalname;
         } 
         cb(null, fileName)
