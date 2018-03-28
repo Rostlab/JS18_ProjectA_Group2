@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './text-input';
 import { ChartComponent } from './chart';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @Component({
     selector: 'test',
@@ -19,7 +20,7 @@ describe('##Testing app.component', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
-            declarations: [TestComponent, AppComponent, HomeComponent, TextInputComponent, ChartComponent]
+            declarations: [TestComponent, AppComponent, HomeComponent, TextInputComponent, ChartComponent, FileUploadComponent]
         });
     });
     beforeEach(async(() => {
