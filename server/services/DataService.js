@@ -11,6 +11,7 @@ import QueryResponse from '../models/query_response';
 import Column from '../models/column';
 var stringSimilarity = require('string-similarity');
 var csvMysql = require("../utils/csvtomysql");
+var db = require("../utils/db");
 
 let knex = require('knex')({
     client: 'mysql',
@@ -179,6 +180,19 @@ let DataService = {
         return new Promise(function(fulfill, reject){
             try{
                 csvMysql.import(filePath, tableName);
+            } catch(error){
+                reject(error);
+            }
+        });
+    },
+
+    getTables: function(){
+        return new Promise(function(fulfill, reject){
+            try{                
+                db.getTables(function(result){
+                    console.log(result);
+                    fulfill(result);
+                });
             } catch(error){
                 reject(error);
             }

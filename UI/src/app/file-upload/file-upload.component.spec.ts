@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FileUploadComponent } from './file-upload.component';
+import { HttpClientModule } from "@angular/common/http";
+import { BackendConnectorService } from "../services";
 
 describe('FileUploadComponent', () => {
   let component: FileUploadComponent;
@@ -8,7 +10,9 @@ describe('FileUploadComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileUploadComponent ]
+      imports: [ FormsModule, ReactiveFormsModule, HttpClientModule ],
+      declarations: [ FileUploadComponent ],
+      providers: [BackendConnectorService]
     })
     .compileComponents();
   }));

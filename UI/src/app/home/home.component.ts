@@ -30,9 +30,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
     ngOnInit() {
         //TODO get from backend
-        this.datasets.push(this.defaultDataset);
-        this.datasets.push(new Dataset(0, "core_data"));
-        this.datasets.push(new Dataset(1, "Another_Kaggle_Dataset"));
+        this.backendConnector.getDatabaseTables().subscribe(event => this.initSelectionList(event));
     }
 
     ngAfterViewInit() {
@@ -125,5 +123,19 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.textInput.clear();
         this.textInputUpdate.clear();
         this.dataset = this.defaultDataset;
+    }
+
+    private initSelectionList(data){
+        var tables = data.tables;
+        
+        //Add default option        
+        this.datasets.push(this.defaultDataset);
+
+        //Add tables into dataset.
+        var id = 0;
+        for(let table of tables) {
+            this.datasets.push(new Dataset(id, table));
+            id++;
+        }
     }
 }

@@ -51,6 +51,7 @@
     "rxjs": "^5.5.6",
     "serve-favicon": "^2.4.5",
     "string-similarity": "^1.2.0",
+    "sync": "^0.2.5",
     "tables": "0.0.5",
     "zone.js": "^0.8.19"
   },

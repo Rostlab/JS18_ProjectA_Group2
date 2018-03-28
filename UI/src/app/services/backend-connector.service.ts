@@ -92,6 +92,11 @@ export class BackendConnectorService {
       return this.http.post(apiCreateEndpoint, formData, { headers: headers })
                  .map((res : Response) => { return res; })
                  .catch(error => Observable.throw(error));
+    };
+
+    public getDatabaseTables(){
+        var apiCreateEndpoint = 'http://localhost:3001/api/getTables';
+        return this.http.get(apiCreateEndpoint);
     }
 
     /*

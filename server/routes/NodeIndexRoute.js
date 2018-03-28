@@ -88,4 +88,14 @@ router.post('/upload', function (req, res, next) {
   })
 });
 
+router.get('/getTables', function(req, res){
+  dataService.getTables().then(tables => {
+    res.status(202).send({"tables" : tables});
+    return;
+  }).catch(err => {
+    console.log("Err");
+    res.send(err);
+  });
+});
+
 module.exports = router;
