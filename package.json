@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "server": "nodemon server/server.js",
-    "test:server": "./node_modules/.bin/mocha server/test",
+    "test:server": "./node_modules/.bin/mocha server/test --exit",
     "ng": "ng",
     "ui": "ng serve -H 0.0.0.0 --proxy-config UI/proxy.conf.json",
     "build:ui": "ng build",
