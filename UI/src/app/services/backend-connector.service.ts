@@ -1,10 +1,13 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Trace, Layout, Options, Data} from '../../../models'
-import {PlotType} from '../../../models/Types'
 
-import 'rxjs/Rx';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ScatterData } from 'plotly.js/lib/core';
+import { Data, Layout, Options, Trace } from "../../../models";
+import { BehaviorSubject } from 'rxjs';
+import {PlotType} from '../../../models/Types';
+import { Observable } from 'rxjs/Observable';
 import {QueryResponse} from "../../../models/QueryResponse";
+import 'rxjs/Rx';
 
 @Injectable()
 export class BackendConnectorService {
@@ -52,7 +55,6 @@ export class BackendConnectorService {
                 sentence: userInput,
                 data: data.traces,
                 layout: data.layout
-
             });
         // .map((queryResponse: QueryResponse) => {
         //     return this.createPlotData(queryResponse);
@@ -72,6 +74,30 @@ export class BackendConnectorService {
         //     });
     };
 
+   fileUpload(fileItem:File, extraData?:object):any{
+      var apiCreateEndpoint = 'http://localhost:3001/api/upload';
+      const formData: FormData = new FormData();
+
+      formData.append('fileItem', fileItem, fileItem.name);
+      if (extraData) {
+        for(let key in extraData){
+            // iterate and set other form data
+          formData.append(key, extraData[key])
+        }
+      }
+      var headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+
+      return this.http.post(apiCreateEndpoint, formData, { headers: headers })
+                 .map((res : Response) => { return res; })
+                 .catch(error => Observable.throw(error));
+    };
+
+    public getDatabaseTables(){
+        var apiCreateEndpoint = 'http://localhost:3001/api/getTables';
+        return this.http.get(apiCreateEndpoint);
+    }
 
     /*
      server response.

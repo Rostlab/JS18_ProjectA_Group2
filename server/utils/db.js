@@ -5,14 +5,14 @@ var sync = require('sync');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "root",
     select_db: "igraph"
 });
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
-
+/*
 con.query("select * from igraph.core_data limit 10", function (err, result) {
     if (err) throw err;
     out = {"plot": true, "plot_type": "bar", "x": "employee count", "y": 
@@ -22,7 +22,7 @@ con.query("select * from igraph.core_data limit 10", function (err, result) {
         out.data.push([item.x, item.y]);
     });
     console.log(out);
-});
+});*/
 
 var db = {
     connect: function(){
@@ -37,10 +37,19 @@ var db = {
         
         
        
-    }
+    },
     //"select count(`Employee Number`) as x, Department as y from igraph.core_data group by Department"
     
-
+    getTables: function(next){
+        con.query("SHOW TABLES FROM igraph;", function(error, result, fields){
+            if(error) throw error;
+            var list = [];
+            result.forEach(function(row){
+                list.push(row.Tables_in_igraph);
+            });
+            return next(list);
+        });
+    }
 
 }
 
