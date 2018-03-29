@@ -6,35 +6,8 @@
 const express = require('express');
 const nlpService = require("../services/NlpService");
 const dataService = require("../services/DataService");
-const crypto = require('crypto');
 var router = express.Router();
-var qs = require('querystring');
-var multer = require('multer');
 var path = require('path');
-var fs = require('fs');
-
-var DIR = "./server/data/";
-var storage = multer.diskStorage({
-  destination: DIR,
-  filename: function (req, file, cb) {
-    crypto.pseudoRandomBytes(16, function (err, raw) {
-      if (err) return cb(err);
-      fs.exists(DIR + file.originalname, function(exists) {
-        var fileName;
-        if (exists) {
-          console.log("exists");
-          fileName = Date.now() + '_' + file.originalname;
-        } else {
-          console.log("does not exist");
-          fileName = file.originalname;
-        } 
-        cb(null, fileName)
-    });
-    })
-  }
-});
-
-var upload = multer({storage: storage}).single('fileItem');
 
 router.get('/test', function (req, res) {
     res.send("Welcome to iGraph");
@@ -65,7 +38,7 @@ router.get('/columns', function (req, res) {
 
 // optinal feature to implement, if time permits.
 router.post('/upload', function (req, res, next) {
-  upload(req, res, function (err) {
+  dataService.upload(req, res, function (err) {
     if (err) {
       console.log(err);
       res.send(err);

@@ -6,12 +6,36 @@
  *@Date :: 03rd March, 2018
  */
 
-var config = require('../config');
+const config = require('../config');
 import QueryResponse from '../models/query_response';
 import Column from '../models/column';
-var stringSimilarity = require('string-similarity');
-var csvMysql = require("../utils/csvtomysql");
-var db = require("../utils/db");
+const crypto = require('crypto');
+const stringSimilarity = require('string-similarity');
+const csvMysql = require("../utils/csvtomysql");
+const db = require("../utils/db");
+const fs = require('fs');
+const multer = require('multer');
+const DIR = "./server/data/";
+
+const storage = multer.diskStorage({
+  destination: DIR,
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      fs.exists(DIR + file.originalname, function(exists) {
+        var fileName;
+        if (exists) {
+          console.log("exists");
+          fileName = Date.now() + '_' + file.originalname;
+        } else {
+          console.log("does not exist");
+          fileName = file.originalname;
+        } 
+        cb(null, fileName)
+    });
+    })
+  }
+});
 
 let knex = require('knex')({
     client: 'mysql',
@@ -197,7 +221,9 @@ let DataService = {
                 reject(error);
             }
         });
-    }
+    },
+
+    upload: multer({storage: storage}).single('fileItem')
 };
 
 module.exports = DataService;
