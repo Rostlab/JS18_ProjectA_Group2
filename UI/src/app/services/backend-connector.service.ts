@@ -75,7 +75,7 @@ export class BackendConnectorService {
     };
 
    fileUpload(fileItem:File, extraData?:object):any{
-      var apiCreateEndpoint = 'http://localhost:3001/api/upload';
+      var apiCreateEndpoint = '/api/upload';
       const formData: FormData = new FormData();
 
       formData.append('fileItem', fileItem, fileItem.name);
@@ -95,7 +95,7 @@ export class BackendConnectorService {
     };
 
     public getDatabaseTables(){
-        var apiCreateEndpoint = 'http://localhost:3001/api/getTables';
+        var apiCreateEndpoint = '/api/getTables';
         return this.http.get(apiCreateEndpoint);
     }
 
