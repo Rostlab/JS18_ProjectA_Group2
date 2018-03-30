@@ -81,7 +81,7 @@ export class BackendConnectorService {
     };
 
     public getDatabaseTables() {
-        var apiCreateEndpoint = 'http://localhost:3001/api/getTables';
+        var apiCreateEndpoint = '/api/getTables';
         return this.http.get(apiCreateEndpoint);
     }
 }
