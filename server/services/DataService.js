@@ -6,10 +6,17 @@
  *@Date :: 03rd March, 2018
  */
 
-var config = require('../config');
+
 import QueryResponse from '../models/query_response';
 import Column from '../models/column';
-var stringSimilarity = require('string-similarity');
+
+const config = require('../config');
+const crypto = require('crypto');
+const stringSimilarity = require('string-similarity');
+const csvMysql = require("../utils/csvtomysql");
+const fs = require('fs');
+const multer = require('multer');
+const DIR = "./server/data/";
 
 
 let knex = require('knex')({
@@ -32,6 +39,37 @@ const func_alias = {
     "minimum": "Minimum ",
     "average": "Average ",
 };
+
+const storage = multer.diskStorage({
+    destination: DIR,
+    filename: function (req, file, cb) {
+        crypto.pseudoRandomBytes(16, function (err, raw) {
+            if(err){
+                cb(err);
+            }
+            fs.exists(DIR + file.originalname, function(exists) {
+                var error = null;
+                var fileName = "";
+                if (exists) {
+                    console.log("exists");
+                    // Let user upload new csv file with different file name. Current file name table already exist in database.
+                    //fileName = Date.now() + '_' + file.originalname;
+                    error = new Error("Table with "+file.originalname+" exist in the database! Please upload csv with different name.");
+                } else {
+                    console.log("does not exist");
+                    fileName = file.originalname;
+                }
+                if(error){
+                    cb(error);
+                } else {
+                    cb(null, fileName);
+                }
+
+            });
+        })
+    }
+});
+
 //TODO: Take care of changing the original model
 function _buildQuery(columns, table, actualColumns) {
     let querySelect = '';
@@ -173,7 +211,39 @@ let DataService = {
                 reject(err);
             }
         });
-    }
+    },
+
+    importCsvToMysql: function(filePath, tableName){
+        return new Promise(function(fulfill, reject){
+            try{
+                csvMysql.import(filePath, tableName);
+            } catch(error){
+                reject(error);
+            }
+        });
+    },
+
+    getTables: function(){
+        return new Promise(function(resolve, reject){
+            try {
+                let columns = [new Column('table_name'), new Column('table_schema')];
+                columns[1].condition_comparison_value = config.mysql.database;
+
+                _executeSelect(columns, 'information_schema.tables', null).then(rows => {
+                    let column_names = [];
+                rows.forEach((row) => {
+                    column_names.push(row['table_name']);
+            });
+                resolve(column_names);
+            })
+            } catch (err) {
+                reject(err);
+            }
+
+        });
+    },
+
+    upload: multer({storage: storage}).single('fileItem')
 };
 
 module.exports = DataService;

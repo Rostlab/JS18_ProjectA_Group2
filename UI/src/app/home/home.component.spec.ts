@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { TextInputComponent } from '../text-input';
 import { ChartComponent } from '../chart';
 import { BackendConnectorService } from "../services";
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -14,12 +15,14 @@ describe('HomeComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                HttpClientModule
+                HttpClientModule,
+                ReactiveFormsModule
             ],
             declarations: [
                 HomeComponent,
                 TextInputComponent,
-                ChartComponent
+                ChartComponent,
+                FileUploadComponent
             ],
             providers: [
                 BackendConnectorService

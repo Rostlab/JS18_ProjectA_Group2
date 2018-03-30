@@ -1,16 +1,18 @@
 <p>Text to Plot.</p>
 <hr>
 <div>
-  <div id="selectBox">
-    <select  class="form-control"
-             [(ngModel)]="dataset">
-      <option *ngFor="let x of datasets"
-              [ngValue]="x"
-              [selected]="x.id === 0">
-        {{ x.name }}
-      </option>
+  <div>
+    <div id="selectBox">
+    <select  class="form-control" [(ngModel)]="dataset">
+      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
     </select>
-  </div>
+    </div>
+    <app-file-upload #fileUpload
+                     id="file-upload"
+                     [dataList]="datasets">
+    </app-file-upload>
+  </div>  
+
   <hr>
   <div class="row">
     <div class="col-2">
@@ -57,6 +59,7 @@
     <div class="col-2">
 
     </div>
+
   </div>
   <hr>
   <div class="row button">

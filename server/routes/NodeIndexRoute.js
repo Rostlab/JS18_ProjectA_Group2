@@ -6,7 +6,8 @@
 const express = require('express');
 const nlpService = require("../services/NlpService");
 const dataService = require("../services/DataService");
-const router = express.Router();
+var router = express.Router();
+var path = require('path');
 
 router.get('/test', function (req, res) {
     res.send("Welcome to iGraph");
@@ -35,18 +36,42 @@ router.get('/columns', function (req, res) {
     });
 });
 
-// optinal feature to implement, if time permits.
-/*router.post('/upload', function (req, res, next) {
- console.log(req.query);
- indexService.upload(req.query, function (err, data) {
+router.post('/upload', function (req, res) {
+  dataService.upload(req, res, function (err) {
+    if (err) {
+      console.log(err.toString());
+      res.send({"Error" : err.toString()});
+      return;
+    } else {
+      //console.log("received file");s
+      var filePath = req.file.path;      
+      //Take file name as a table name
+      var tableName = path.basename(filePath, path.extname(filePath));
+      console.log(tableName);
+      dataService.importCsvToMysql(filePath, tableName, function(err){        
+        if(err){
+          console.log(err);
+          res.send(err);
+          return;
+        }
+      });
+    // Not waiting for dataset to get uploaded to mysql database. Sent a request above and assuming it will get
+    // uploaded properly once started.
+    res.status(202).send({"fileName" : tableName});
+    return;
+    }
+  })
+});
 
- if (err) {
- res.send(err);
- return;
- } else {
- res.send(data);
- return;
- }
- })
- });*/
+router.get('/getTables', function(req, res){
+  dataService.getTables().then(tables => {
+    res.status(202).send({"tables" : tables});
+    return;
+  }).catch(err => {
+    console.log("Err");
+    res.send(err);
+    return;
+  });
+});
+
 module.exports = router;
