@@ -2,33 +2,52 @@
 
 [![Build Status](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2.svg?branch=develop)](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2)
 
-**Open a terminal** on **root** folder. 
+### Set Up
+
+- Install fresh rasa_nlu instance in the root directory. **JS18_ProjectA_Group2/nlp_engine**
+   
+- Install [Rasa_NLU](https://nlu.rasa.com/installation.html) from *[here](https://nlu.rasa.com/installation.html)*
+   
+- Copy trained model from **nlp_model/projects** folder to your **rasa_nlu** instance directory(root/nlp_engine).
+
+- Install MySql server and run the sql script from **JS18_ProjectA_Group2/server/sql** directory.
+   
+- Provide MySql server credentials in **JS18_ProjectA_Group2/server/config.js**
+   
+### Starting Project
+
+- Open a terminal on **JS18_ProjectA_Group2** folder. 
 Run below command to install all the dependency for both server and ui.
   
-  >npm install
+      npm install
 
-Run below command to test if basic functionalities are working fine for server and ui.
+- Run below command to test if basic functionalities are working fine for server and ui.
 
-  >npm run test:server
+      npm test
 
-  >npm run test:ui
+- Start Mysql server. We use XAMPP PHPMyAdmin to run our mysql server.
+
+- To run the application execute below command.
   
-Run below command to start server and ui.
-server and ui engine runs in watch mode to keep checking changes you do and build simontaneously. 
+      npm start
 
-  >npm run server
+- If you want to run server, ui and nlp engine separately and manually, execute below
+commands one by one in different terminals from the **JS18_ProjectA_Group2** folder. 
 
-  >npm run ui
+      npm run server
 
-To start running entire application form a single command, we can try running below command.
+      npm run ui
   
-  >npm start
+      npm run start:nlp
+      
+- If any issue starting nlp_engine, run below python script from terminal on **JS18_ProjectA_Group2/nlp_engine** folder.
 
-To start **NLP Engine** follow below url. Go to NLP root folder and run all the query except the query to train the model. 
-We already trained a model and saved it in project with name **"igraph_nlp"**. Use this while running the NLP engine for this application.
+      python -m rasa_nlu.server -c sample_configs/config_spacy.json
 
-  >https://nlu.rasa.ai/http.html
+## Proxy Configuration
 
-### Project Architecture
+Proxy configuration has been done on UI to access nlp engine **('/nlp')** and backend **('/api')**.
+
+## Project Architecture
 
 ![Project Architecture](https://github.com/Rostlab/JS18_ProjectA_Group2/blob/develop/mockups/Team%202.%20Project%20Architecture.png)
