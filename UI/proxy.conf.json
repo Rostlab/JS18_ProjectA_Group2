@@ -5,5 +5,12 @@
 		"secure": false,
 		"changeOrigin": true,
 		"pathRewrite": {"^/api" : "http://localhost:3001/api"}
-	} 
+	},
+	"/nlp/*":
+	{
+		"target": "http://localhost:5000",
+		"secure": false,
+		"changeOrigin": true,
+		"pathRewrite": {"^/nlp" : "http://localhost:5000"}
+	}
 }
