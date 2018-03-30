@@ -62,8 +62,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       //Insert new file into dataset selection list
       var id = this.dataList[this.dataList.length - 1].id + 1;
       this.dataList.push(new Dataset(id, fileName));
+      window.alert(response.fileName+" has been uploaded to database!");
     }else{
-      window.alert("Something went wrong, file have not uploaded");
+      window.alert(response.Error);
     }
   }
 

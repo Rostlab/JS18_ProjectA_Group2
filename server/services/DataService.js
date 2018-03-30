@@ -6,36 +6,18 @@
  *@Date :: 03rd March, 2018
  */
 
-const config = require('../config');
+
 import QueryResponse from '../models/query_response';
 import Column from '../models/column';
+
+const config = require('../config');
 const crypto = require('crypto');
 const stringSimilarity = require('string-similarity');
 const csvMysql = require("../utils/csvtomysql");
-const db = require("../utils/db");
 const fs = require('fs');
 const multer = require('multer');
 const DIR = "./server/data/";
 
-const storage = multer.diskStorage({
-  destination: DIR,
-  filename: function (req, file, cb) {
-    crypto.pseudoRandomBytes(16, function (err, raw) {
-      if (err) return cb(err);
-      fs.exists(DIR + file.originalname, function(exists) {
-        var fileName;
-        if (exists) {
-          console.log("exists");
-          fileName = Date.now() + '_' + file.originalname;
-        } else {
-          console.log("does not exist");
-          fileName = file.originalname;
-        } 
-        cb(null, fileName)
-    });
-    })
-  }
-});
 
 let knex = require('knex')({
     client: 'mysql',
@@ -57,6 +39,37 @@ const func_alias = {
     "minimum": "Minimum ",
     "average": "Average ",
 };
+
+const storage = multer.diskStorage({
+    destination: DIR,
+    filename: function (req, file, cb) {
+        crypto.pseudoRandomBytes(16, function (err, raw) {
+            if(err){
+                cb(err);
+            }
+            fs.exists(DIR + file.originalname, function(exists) {
+                var error = null;
+                var fileName = "";
+                if (exists) {
+                    console.log("exists");
+                    // Let user upload new csv file with different file name. Current file name table already exist in database.
+                    //fileName = Date.now() + '_' + file.originalname;
+                    error = new Error("Table with "+file.originalname+" exist in the database! Please upload csv with different name.");
+                } else {
+                    console.log("does not exist");
+                    fileName = file.originalname;
+                }
+                if(error){
+                    cb(error);
+                } else {
+                    cb(null, fileName);
+                }
+
+            });
+        })
+    }
+});
+
 //TODO: Take care of changing the original model
 function _buildQuery(columns, table, actualColumns) {
     let querySelect = '';
@@ -211,15 +224,22 @@ let DataService = {
     },
 
     getTables: function(){
-        return new Promise(function(fulfill, reject){
-            try{                
-                db.getTables(function(result){
-                    console.log(result);
-                    fulfill(result);
-                });
-            } catch(error){
-                reject(error);
+        return new Promise(function(resolve, reject){
+            try {
+                let columns = [new Column('table_name'), new Column('table_schema')];
+                columns[1].condition_comparison_value = config.mysql.database;
+
+                _executeSelect(columns, 'information_schema.tables', null).then(rows => {
+                    let column_names = [];
+                rows.forEach((row) => {
+                    column_names.push(row['table_name']);
+            });
+                resolve(column_names);
+            })
+            } catch (err) {
+                reject(err);
             }
+
         });
     },
 

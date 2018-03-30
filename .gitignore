@@ -7,3 +7,5 @@ coverage
 *.log
 
 nlp_engine/*
+server/data/*
+server/sql/*

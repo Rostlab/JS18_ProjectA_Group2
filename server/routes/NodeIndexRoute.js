@@ -36,18 +36,18 @@ router.get('/columns', function (req, res) {
     });
 });
 
-// optinal feature to implement, if time permits.
-router.post('/upload', function (req, res, next) {
+router.post('/upload', function (req, res) {
   dataService.upload(req, res, function (err) {
     if (err) {
-      console.log(err);
-      res.send(err);
+      console.log(err.toString());
+      res.send({"Error" : err.toString()});
       return;
     } else {
-      console.log("received file");
+      //console.log("received file");s
       var filePath = req.file.path;      
       //Take file name as a table name
       var tableName = path.basename(filePath, path.extname(filePath));
+      console.log(tableName);
       dataService.importCsvToMysql(filePath, tableName, function(err){        
         if(err){
           console.log(err);
@@ -55,8 +55,10 @@ router.post('/upload', function (req, res, next) {
           return;
         }
       });
-      res.status(202).send({"fileName" : tableName});
-      return;
+    // Not waiting for dataset to get uploaded to mysql database. Sent a request above and assuming it will get
+    // uploaded properly once started.
+    res.status(202).send({"fileName" : tableName});
+    return;
     }
   })
 });
@@ -68,6 +70,7 @@ router.get('/getTables', function(req, res){
   }).catch(err => {
     console.log("Err");
     res.send(err);
+    return;
   });
 });
 
