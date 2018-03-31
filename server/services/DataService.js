@@ -23,7 +23,8 @@ let knex = require('knex')({
     client: 'mysql',
     connection: config.mysql,
     pool: {min: 0, max: 7},
-    acquireConnectionTimeout: 5000
+    acquireConnectionTimeout: 5000,
+    fetchAsString: [ 'number', 'clob', 'blob' ]
 });
 
 const func_mapping = {
@@ -32,12 +33,16 @@ const func_mapping = {
     "minimum": "min",
     "average": "avg",
     "group": "groupBy",
+    "countDistinct": "countDistinct",
+    "distinct": "distinct",
 };
 const func_alias = {
     "count": "No of ",
     "maximum": "Maximum ",
     "minimum": "Minimum ",
     "average": "Average ",
+    "countDistinct": "",
+    "distinct": "",
 };
 
 const storage = multer.diskStorage({
@@ -127,6 +132,74 @@ function _executeSelect(columns, table, actualColumns) {
     });
 }
 
+
+function _executeInsert(table, insert_arr) {
+
+    return knex(table).insert(insert_arr).on("query", function (generated_query) {
+        console.log('Executing :' + generated_query.sql);
+    });
+}
+
+
+// To handle no-column queries.
+function _reverseMapping(columns, table) {
+    return new Promise((resolve, reject) => {
+        try {
+            let columns_arr = [];
+            let table_length = new Column("primKey");
+            table_length.operation = "countDistinct";
+            //table_length.alias = "tbl_length";
+            columns_arr.push(table_length)
+
+            columns.forEach(function (column) {
+                if (column == 'primKey') {
+                    return;
+                }
+                let col_ = new Column(column);
+                col_.operation = "countDistinct";
+                //col_.alias = column;
+                columns_arr.push(col_);
+            });
+
+            _executeSelect(columns_arr, table, null).then(rows => {
+                let promises = [];
+                let uniqueness_threshold = 0.5;
+                const table_count = rows[0]["primKey"];
+                columns.forEach((column) => {
+                    let uniqueness = rows[0][column] / table_count;
+                    console.log(uniqueness);
+                    //TODO: uniqueness_threshold can be configured.
+                    if (uniqueness < uniqueness_threshold) {
+                        let col__ = new Column(column);
+                        //col__.alias = column;
+                        col__.operation = "distinct";
+                        promises.push(_executeSelect([col__], table, null));
+                    }
+                });
+
+                Promise.all(promises).then(values => {
+                    let mappings = {};
+                    values.forEach(value => {
+                        value.forEach( val => {
+                            for(var key in val){
+                                mappings[val[key]] = key;
+                            }
+                        });
+                    });
+                    _executeInsert("config", { "tablename":table, "meta": JSON.stringify(mappings) }).then(data => {
+                        console.log(data);
+                        resolve(mappings);
+                    })
+                });
+            });
+
+        } catch(err) {
+            reject(err);
+        }
+    });
+}
+
+
 let DataService = {
     //TODO: Standardize model for nlp engine
     getData: function (nlp_response) {
@@ -213,29 +286,47 @@ let DataService = {
         });
     },
 
-    importCsvToMysql: function(filePath, tableName){
-        return new Promise(function(fulfill, reject){
-            try{
-                csvMysql.import(filePath, tableName);
-            } catch(error){
-                reject(error);
-            }
+    importCsvToMysql: function(filePath, fileName){
+        return new Promise(function(resolve, reject){
+            const that=this;
+            csvMysql.import(filePath, fileName).then(tableName => {
+                console.log(tableName);
+                tableName = fileName;
+                DataService.getColumns(tableName).then(columns => {
+                    console.log(columns);
+                    _reverseMapping(columns, tableName).then(data => {
+                        resolve(tableName);
+                    }, err => {
+                        reject(err);
+                    });
+                }, err => {
+                    reject(err);
+                });
+            }, err => {
+                reject(err);
+            });
         });
     },
 
     getTables: function(){
         return new Promise(function(resolve, reject){
             try {
+                const restrictedTables = ["config"];
                 let columns = [new Column('table_name'), new Column('table_schema')];
                 columns[1].condition_comparison_value = config.mysql.database;
 
                 _executeSelect(columns, 'information_schema.tables', null).then(rows => {
                     let column_names = [];
-                rows.forEach((row) => {
-                    column_names.push(row['table_name']);
-            });
-                resolve(column_names);
-            })
+
+                    rows.forEach((row) => {
+                        if(restrictedTables.includes(row['table_name'])) {
+                            return;
+                        } else {
+                            column_names.push(row['table_name']);
+                        }
+                    });
+                    resolve(column_names);
+                });
             } catch (err) {
                 reject(err);
             }
@@ -243,7 +334,35 @@ let DataService = {
         });
     },
 
-    upload: multer({storage: storage}).single('fileItem')
+    upload: multer({storage: storage}).single('fileItem'),
+
+    test: function(next){
+        let columns = ["countryname", "countrycode", "indicatorname", "indicatorcode", "year", "value"];
+        _reverseMapping(columns, "indicators").then(data => {
+            next(null, data);
+        }, err => {
+            next(err);
+        });
+    }
 };
 
+function _getColumns (dataset) {
+    return new Promise((resolve, reject) => {
+        try {
+            let columns = [new Column('COLUMN_NAME'), new Column('TABLE_SCHEMA'), new Column('TABLE_NAME')];
+            columns[1].condition_comparison_value = config.mysql.database;
+            columns[2].condition_comparison_value = dataset;
+
+            _executeSelect(columns, 'INFORMATION_SCHEMA.COLUMNS', null).then(rows => {
+                let column_names = [];
+                rows.forEach((row, idx) => {
+                    column_names.push(row['COLUMN_NAME']);
+                });
+                resolve(column_names);
+            })
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
 module.exports = DataService;
