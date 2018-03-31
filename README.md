@@ -10,7 +10,7 @@
    
 - Copy trained model from **nlp_model/projects** folder to your **rasa_nlu** instance directory(root/nlp_engine).
 
-- Install MySql server and run the sql script from **JS18_ProjectA_Group2/server/sql** directory.
+- Install MySql server and run **project configuration** sql script from **JS18_ProjectA_Group2/server/sql** directory.
    
 - Provide MySql server credentials in **JS18_ProjectA_Group2/server/config.js**
    
