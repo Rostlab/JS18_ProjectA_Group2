@@ -19,14 +19,7 @@ const fs = require('fs');
 const multer = require('multer');
 const DIR = "./server/data/";
 
-
-let knex = require('knex')({
-    client: 'mysql',
-    connection: config.mysql,
-    pool: {min: 0, max: 7},
-    acquireConnectionTimeout: 5000,
-    fetchAsString: [ 'number', 'clob', 'blob' ]
-});
+let knex = require('knex')(config.knex);
 
 const func_mapping = {
     "count": "count",
@@ -165,7 +158,7 @@ function _reverseMapping(columns, table) {
 
             _executeSelect(columns_arr, table, null).then(rows => {
                 let promises = [];
-                let uniqueness_threshold = 0.10;
+                let uniqueness_threshold = config.revere_mapping.uniqueness_threshold;
                 const table_count = rows[0]["primKey"];
                 columns.forEach((column) => {
                     let uniqueness = rows[0][column] / table_count;

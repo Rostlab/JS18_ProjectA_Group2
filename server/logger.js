@@ -10,11 +10,11 @@ class LogFiles{
         this.debugFilePath = './server/log/debug';
         this.exceptionFilePath = './server/log/exception';
 
-        this.logSetUp();
+        this.setUp();
 
     }
 
-    logSetUp(){
+    setUp(){
         try {
             if (!fs.existsSync(this.logRootPath)) {
                 fs.mkdirSync(this.logRootPath);
@@ -60,4 +60,4 @@ let logger = new (winston.Logger)({
 })
 
 
-module.exports = { logger, logSetup: new LogFiles() };
+module.exports = { logger, log: new LogFiles() };
