@@ -5,7 +5,9 @@ node_modules/*
 .awcache
 coverage
 *.log
+.tables.debug
 
 nlp_engine/*
 server/data/*
 server/sql/*
+log

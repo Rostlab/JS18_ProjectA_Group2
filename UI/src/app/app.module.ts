@@ -17,6 +17,8 @@ import {
     HistogramComponent
 } from './chart';
 import { BackendConnectorService } from "./services";
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+
 
 @NgModule({
     declarations: [
@@ -35,6 +37,7 @@ import { BackendConnectorService } from "./services";
         BrowserModule,
         FormsModule,
         HttpClientModule,
+        NgHttpLoaderModule,
         ReactiveFormsModule
     ],
     providers: [BackendConnectorService],

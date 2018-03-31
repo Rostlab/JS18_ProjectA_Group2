@@ -11,6 +11,7 @@ import QueryResponse from '../models/query_response';
 import Column from '../models/column';
 
 const config = require('../config');
+const logger = config.logger;
 const crypto = require('crypto');
 const stringSimilarity = require('string-similarity');
 const csvMysql = require("../utils/csvtomysql");
@@ -145,6 +146,7 @@ function _executeInsert(table, insert_arr) {
 function _reverseMapping(columns, table) {
     return new Promise((resolve, reject) => {
         try {
+            logger.info('reversemapping started...');
             let columns_arr = [];
             let table_length = new Column("primKey");
             table_length.operation = "countDistinct";
@@ -163,12 +165,13 @@ function _reverseMapping(columns, table) {
 
             _executeSelect(columns_arr, table, null).then(rows => {
                 let promises = [];
-                let uniqueness_threshold = 0.5;
+                let uniqueness_threshold = 0.10;
                 const table_count = rows[0]["primKey"];
                 columns.forEach((column) => {
                     let uniqueness = rows[0][column] / table_count;
-                    console.log(uniqueness);
                     //TODO: uniqueness_threshold can be configured.
+                    //TODO: Eradicate string issue with big blobs with uniqueness ~ 0.5.
+                    console.log(uniqueness);
                     if (uniqueness < uniqueness_threshold) {
                         let col__ = new Column(column);
                         //col__.alias = column;
@@ -189,8 +192,17 @@ function _reverseMapping(columns, table) {
                     _executeInsert("config", { "tablename":table, "meta": JSON.stringify(mappings) }).then(data => {
                         console.log(data);
                         resolve(mappings);
-                    })
+                    }, err => {
+                        reject(err);
+                    }).catch(function(err) {
+                        console.log(err);
+                        reject(err);
+                    });
+                }, err => {
+                    reject(err);
                 });
+            }, err => {
+                reject(err);
             });
 
         } catch(err) {
@@ -287,10 +299,10 @@ let DataService = {
     },
 
     importCsvToMysql: function(filePath, fileName){
+        logger.info('importcsvtomysql started...');
         return new Promise(function(resolve, reject){
-            const that=this;
-            csvMysql.import(filePath, fileName).then(tableName => {
-                console.log(tableName);
+            csvMysql.import_(filePath, fileName).then(tableName => {
+                console.log(filePath);
                 tableName = fileName;
                 DataService.getColumns(tableName).then(columns => {
                     console.log(columns);
@@ -309,6 +321,7 @@ let DataService = {
     },
 
     getTables: function(){
+        logger.info('importcsvtomysql started...');
         return new Promise(function(resolve, reject){
             try {
                 const restrictedTables = ["config"];
@@ -346,23 +359,4 @@ let DataService = {
     }
 };
 
-function _getColumns (dataset) {
-    return new Promise((resolve, reject) => {
-        try {
-            let columns = [new Column('COLUMN_NAME'), new Column('TABLE_SCHEMA'), new Column('TABLE_NAME')];
-            columns[1].condition_comparison_value = config.mysql.database;
-            columns[2].condition_comparison_value = dataset;
-
-            _executeSelect(columns, 'INFORMATION_SCHEMA.COLUMNS', null).then(rows => {
-                let column_names = [];
-                rows.forEach((row, idx) => {
-                    column_names.push(row['COLUMN_NAME']);
-                });
-                resolve(column_names);
-            })
-        } catch (err) {
-            reject(err);
-        }
-    });
-}
 module.exports = DataService;
