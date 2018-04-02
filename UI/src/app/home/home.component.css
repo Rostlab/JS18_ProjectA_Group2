@@ -29,15 +29,16 @@
 }
 
 .column-box {
-
+    text-align: center;
     padding: 2px;
-    border: 1px solid blue;
+    border: 1px solid black;
     box-sizing: border-box;
     background-color: lightgrey;
     margin: 2px 2px 2px 2px;
+    font-family: monospace;
 }
 
 #row-box {
-
-    margin-left: 5%;
+    place-content: center;
+    text-align: center;
 }

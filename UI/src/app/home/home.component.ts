@@ -3,7 +3,6 @@ import {TextInputComponent} from "../text-input";
 import {ChartComponent} from "../chart";
 import {BackendConnectorService} from "../services";
 import {Dataset, Data, Columns} from '../../../models';
-import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'app-home',
@@ -141,11 +140,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     public getColumns(table){
-        console.log(table);
         if(table!=this.defaultDataset){
             this.backendConnector.getColumns(table).subscribe(
                 value => {
-                    console.log(value);
                     this.columns = value;
                 }
             );        }
