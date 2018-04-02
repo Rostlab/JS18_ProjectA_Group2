@@ -27,3 +27,17 @@
 #selectBox > select {
     width: 200px;
 }
+
+.column-box {
+
+    padding: 2px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+    background-color: lightgrey;
+    margin: 2px 2px 2px 2px;
+}
+
+#row-box {
+
+    margin-left: 5%;
+}

@@ -43,6 +43,12 @@ commands one by one in different terminals from the **JS18_ProjectA_Group2** fol
 - If any issue starting nlp_engine, run below python script from terminal on **JS18_ProjectA_Group2/nlp_engine** folder.
 
       python -m rasa_nlu.server -c sample_configs/config_spacy.json
+      
+- Download sample kaggle datasets from [here](https://www.kaggle.com/rhuebner/human-resources-data-set/data) and 
+[here](https://www.kaggle.com/worldbank/world-development-indicators/data).
+
+- Upload sample datasets using the application upload feature. So that necessity features will be processed before
+using them for plot.
 
 ## Proxy Configuration
 

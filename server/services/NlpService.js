@@ -8,6 +8,7 @@ import Column from '../models/column'
 
 const rp = require('request-promise');
 const config = require('../config');
+const logger = config.logger;
 //TODO: Can be generalized further.
 //TODO: Remove y from here after more training.
 const secondary_entities = ['y', 'z'];
@@ -66,7 +67,7 @@ let NlpService = {
         const propertiesObject = {q: query, project: config.nlp_project, model: config.nlp_model};
         return new Promise((resolve, reject) => {
             rp({url: config.nlp_server + '/parse', qs: propertiesObject}).then(function (res) {
-                console.log(res);
+                logger.info(res);
                 const nlp_response = _createResponseObject(JSON.parse(res), dataset);
                 resolve(nlp_response);
             }, function (err) {

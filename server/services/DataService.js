@@ -263,8 +263,14 @@ let DataService = {
                         query_response.title = nlp_response.title;
                         console.log(query_response);
                         resolve(query_response);
-                    })
-                })
+                    }).catch(function(err) {
+                        console.log(err);
+                        reject(err);
+                    });
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
+                });
             } catch (err) {
                 reject(err);
             }
@@ -284,7 +290,10 @@ let DataService = {
                         column_names.push(row['COLUMN_NAME']);
                     });
                     resolve(column_names);
-                })
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
+                });
             } catch (err) {
                 reject(err);
             }
@@ -332,6 +341,9 @@ let DataService = {
                         }
                     });
                     resolve(column_names);
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
                 });
             } catch (err) {
                 reject(err);

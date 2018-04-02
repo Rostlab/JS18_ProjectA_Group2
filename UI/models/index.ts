@@ -5,3 +5,4 @@ export * from './Layout';
 export * from './Data';
 export * from './QueryResponse';
 export * from './Types';
+export * from './Columns';

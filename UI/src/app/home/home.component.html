@@ -3,8 +3,9 @@
 <div>
   <div>
     <div id="selectBox">
-    <select  class="form-control" [(ngModel)]="dataset">
-      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id === 0">{{ x.name }}</option>
+    <select  class="form-control" (change)="getColumns($event.target.value)"
+             [value]='defaultDataset.name'>
+      <option *ngFor="let x of datasets" [ngValue]="x.name" [selected]="x.id === 0">{{ x.name }}</option>
     </select>
     </div>
     <app-file-upload #fileUpload
@@ -14,6 +15,13 @@
   </div>  
 
   <hr>
+  <div class="row" id="columns" [(ngModel)]="columns" id="row-box">
+    <div *ngFor="let col of columns"  class="column-box">
+      {{col}}
+    </div>
+
+  </div>
+
   <div class="row">
     <div class="col-2">
 
