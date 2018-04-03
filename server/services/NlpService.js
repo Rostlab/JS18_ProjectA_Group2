@@ -64,8 +64,11 @@ function _createResponseObject(res, dataset) {
 let NlpService = {
     processQuery: function (query, dataset) {
         //TODO: Standardize model for nlp engine
-        const propertiesObject = {q: query, project: config.nlp_project, model: config.nlp_model};
+
         return new Promise((resolve, reject) => {
+
+
+            const propertiesObject = {q: query, project: config.nlp_project, model: config.nlp_model};
             rp({url: config.nlp_server + '/parse', qs: propertiesObject}).then(function (res) {
                 logger.info(res);
                 const nlp_response = _createResponseObject(JSON.parse(res), dataset);

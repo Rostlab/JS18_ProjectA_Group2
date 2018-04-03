@@ -85,6 +85,10 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Disable method for button
      */
     public shouldDisablePlotButton() {
+        //console.log(this.textIsEmpty(this.textInput));
+        //console.log((this.dataset === this.defaultDataset));
+        //console.log(this.dataset);
+        //console.log(this.defaultDataset);
         return (this.textIsEmpty(this.textInput) || (this.dataset === this.defaultDataset));
     }
 
@@ -132,20 +136,18 @@ export class HomeComponent implements AfterViewInit, OnInit {
         var tables = data.tables;     
         
         //Add tables into dataset.
-        var id = 1;
+        var id = 0;
         for(let table of tables) {
             this.datasets.push(new Dataset(id, table));
             id++;
         }
     }
 
-    public getColumns(table){
-        if(table!=this.defaultDataset){
-            this.backendConnector.getColumns(table).subscribe(
+    public getColumns(){
+            this.backendConnector.getColumns(this.dataset.name).subscribe(
                 value => {
                     this.columns = value;
                 }
-            );        }
-
+            );
     }
 }
