@@ -11,6 +11,7 @@ import QueryResponse from '../models/query_response';
 import Column from '../models/column';
 
 const config = require('../config');
+const logger = config.logger;
 const crypto = require('crypto');
 const stringSimilarity = require('string-similarity');
 const csvMysql = require("../utils/csvtomysql");
@@ -18,13 +19,7 @@ const fs = require('fs');
 const multer = require('multer');
 const DIR = "./server/data/";
 
-
-let knex = require('knex')({
-    client: 'mysql',
-    connection: config.mysql,
-    pool: {min: 0, max: 7},
-    acquireConnectionTimeout: 5000
-});
+let knex = require('knex')(config.knex);
 
 const func_mapping = {
     "count": "count",
@@ -32,12 +27,16 @@ const func_mapping = {
     "minimum": "min",
     "average": "avg",
     "group": "groupBy",
+    "countDistinct": "countDistinct",
+    "distinct": "distinct",
 };
 const func_alias = {
     "count": "No of ",
     "maximum": "Maximum ",
     "minimum": "Minimum ",
     "average": "Average ",
+    "countDistinct": "",
+    "distinct": "",
 };
 
 const storage = multer.diskStorage({
@@ -127,6 +126,85 @@ function _executeSelect(columns, table, actualColumns) {
     });
 }
 
+
+function _executeInsert(table, insert_arr) {
+
+    return knex(table).insert(insert_arr).on("query", function (generated_query) {
+        console.log('Executing :' + generated_query.sql);
+    });
+}
+
+
+// To handle no-column queries.
+function _reverseMapping(columns, table) {
+    return new Promise((resolve, reject) => {
+        try {
+            logger.info('reversemapping started...');
+            let columns_arr = [];
+            let table_length = new Column("primKey");
+            table_length.operation = "countDistinct";
+            //table_length.alias = "tbl_length";
+            columns_arr.push(table_length)
+
+            columns.forEach(function (column) {
+                if (column == 'primKey') {
+                    return;
+                }
+                let col_ = new Column(column);
+                col_.operation = "countDistinct";
+                //col_.alias = column;
+                columns_arr.push(col_);
+            });
+
+            _executeSelect(columns_arr, table, null).then(rows => {
+                let promises = [];
+                let uniqueness_threshold = config.revere_mapping.uniqueness_threshold;
+                const table_count = rows[0]["primKey"];
+                columns.forEach((column) => {
+                    let uniqueness = rows[0][column] / table_count;
+                    //TODO: uniqueness_threshold can be configured.
+                    //TODO: Eradicate string issue with big blobs with uniqueness ~ 0.5.
+                    console.log(uniqueness);
+                    if (uniqueness < uniqueness_threshold) {
+                        let col__ = new Column(column);
+                        //col__.alias = column;
+                        col__.operation = "distinct";
+                        promises.push(_executeSelect([col__], table, null));
+                    }
+                });
+
+                Promise.all(promises).then(values => {
+                    let mappings = {};
+                    values.forEach(value => {
+                        value.forEach( val => {
+                            for(var key in val){
+                                mappings[val[key]] = key;
+                            }
+                        });
+                    });
+                    _executeInsert("config", { "tablename":table, "meta": JSON.stringify(mappings) }).then(data => {
+                        console.log(data);
+                        resolve(mappings);
+                    }, err => {
+                        reject(err);
+                    }).catch(function(err) {
+                        console.log(err);
+                        reject(err);
+                    });
+                }, err => {
+                    reject(err);
+                });
+            }, err => {
+                reject(err);
+            });
+
+        } catch(err) {
+            reject(err);
+        }
+    });
+}
+
+
 let DataService = {
     //TODO: Standardize model for nlp engine
     getData: function (nlp_response) {
@@ -185,8 +263,14 @@ let DataService = {
                         query_response.title = nlp_response.title;
                         console.log(query_response);
                         resolve(query_response);
-                    })
-                })
+                    }).catch(function(err) {
+                        console.log(err);
+                        reject(err);
+                    });
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
+                });
             } catch (err) {
                 reject(err);
             }
@@ -206,36 +290,61 @@ let DataService = {
                         column_names.push(row['COLUMN_NAME']);
                     });
                     resolve(column_names);
-                })
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
+                });
             } catch (err) {
                 reject(err);
             }
         });
     },
 
-    importCsvToMysql: function(filePath, tableName){
-        return new Promise(function(fulfill, reject){
-            try{
-                csvMysql.import(filePath, tableName);
-            } catch(error){
-                reject(error);
-            }
+    importCsvToMysql: function(filePath, fileName){
+        logger.info('importcsvtomysql started...');
+        return new Promise(function(resolve, reject){
+            csvMysql.import_(filePath, fileName).then(tableName => {
+                console.log(filePath);
+                tableName = fileName;
+                DataService.getColumns(tableName).then(columns => {
+                    console.log(columns);
+                    _reverseMapping(columns, tableName).then(data => {
+                        resolve(tableName);
+                    }, err => {
+                        reject(err);
+                    });
+                }, err => {
+                    reject(err);
+                });
+            }, err => {
+                reject(err);
+            });
         });
     },
 
     getTables: function(){
+        logger.info('importcsvtomysql started...');
         return new Promise(function(resolve, reject){
             try {
+                const restrictedTables = ["config"];
                 let columns = [new Column('table_name'), new Column('table_schema')];
                 columns[1].condition_comparison_value = config.mysql.database;
 
                 _executeSelect(columns, 'information_schema.tables', null).then(rows => {
                     let column_names = [];
-                rows.forEach((row) => {
-                    column_names.push(row['table_name']);
-            });
-                resolve(column_names);
-            })
+
+                    rows.forEach((row) => {
+                        if(restrictedTables.includes(row['table_name'])) {
+                            return;
+                        } else {
+                            column_names.push(row['table_name']);
+                        }
+                    });
+                    resolve(column_names);
+                }).catch(function(err) {
+                    console.log(err);
+                    reject(err);
+                });
             } catch (err) {
                 reject(err);
             }
@@ -243,7 +352,16 @@ let DataService = {
         });
     },
 
-    upload: multer({storage: storage}).single('fileItem')
+    upload: multer({storage: storage}).single('fileItem'),
+
+    test: function(next){
+        let columns = ["countryname", "countrycode", "indicatorname", "indicatorcode", "year", "value"];
+        _reverseMapping(columns, "indicators").then(data => {
+            next(null, data);
+        }, err => {
+            next(err);
+        });
+    }
 };
 
 module.exports = DataService;

@@ -11,7 +11,7 @@ describe('BackendConnectorService', () => {
         });
     });
 
-    it('should be created', inject([BackendConnectorService], (service: BackendConnectorService) => {
+    fit('should be created', inject([BackendConnectorService], (service: BackendConnectorService) => {
         expect(service).toBeTruthy();
     }));
 });
