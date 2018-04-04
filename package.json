@@ -9,7 +9,7 @@
     "ng": "ng",
     "ui": "ng serve -H 0.0.0.0 --proxy-config UI/proxy.conf.json",
     "build:ui": "ng build",
-    "test:ui": "ng test --sourcemaps=false --single-run false",
+    "test:ui": "ng test -sm=false",
     "start:nlp": "node nlp.server.js",
     "start": "concurrently \"npm run start:nlp\" \"npm run server\" \"npm run ui\"",
     "test": "concurrently \"npm run test:ui\" \"npm run test:server\""
