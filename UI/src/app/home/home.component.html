@@ -9,16 +9,16 @@
     </div>
     <app-file-upload #fileUpload
                      id="file-upload"
-                     [dataList]="datasets" ngDefaultControl>
+                      [dataList]="datasets">
     </app-file-upload>
-  </div>  
+  </div>
 
   <hr>
-  <div class="row" id="columns" [(ngModel)]="columns" id="row-box">
+
+  <div class="row" id="columns" id="row-box">
     <div *ngFor="let col of columns"  class="column-box">
       {{col}}
     </div>
-
   </div>
 
   <div class="row">

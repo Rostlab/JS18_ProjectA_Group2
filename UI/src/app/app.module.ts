@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, NgForm } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+
+import { HttpClientModule } from "@angular/common/http";
+//import { NgxSelectModule } from 'ngx-select-ex';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +16,8 @@ import {
     BarChartComponent,
     PieChartComponent,
     ScatterPlotComponent,
-    HistogramComponent
+    HistogramComponent//,
+    //NgxSelectModule
 } from './chart';
 import { BackendConnectorService } from "./services";
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';

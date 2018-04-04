@@ -147,7 +147,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
             this.backendConnector.getColumns(this.dataset.name).subscribe(
                 value => {
                     this.columns = value;
-                }
-            );
-    }
+                });
+            }
 }
