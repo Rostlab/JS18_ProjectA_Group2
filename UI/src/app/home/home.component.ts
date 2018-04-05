@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {TextInputComponent} from "../text-input";
-import {ChartComponent} from "../chart";
+import {ChartComponent} from "../chart/chart.component";
 import {BackendConnectorService} from "../services";
 import {Dataset, Data, Columns} from '../../../models';
 
