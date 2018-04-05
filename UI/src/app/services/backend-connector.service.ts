@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScatterData } from 'plotly.js/lib/core';
-import { Data, Layout, Options, Trace } from "../../../models";
+import {Data, Dataset, Layout, Options, Trace} from "../../../models";
 import { BehaviorSubject } from 'rxjs';
 import {PlotType} from '../../../models/Types';
 import { Observable } from 'rxjs/Observable';
@@ -58,7 +58,7 @@ export class BackendConnectorService {
             });
     };
 
-    fileUpload(fileItem: File, extraData?: object): any {
+    public fileUpload(fileItem: File, extraData?: object): any {
         var apiCreateEndpoint = '/api/upload';
         const formData: FormData = new FormData();
 
@@ -82,6 +82,6 @@ export class BackendConnectorService {
 
     public getDatabaseTables() {
         var apiCreateEndpoint = '/api/getTables';
-        return this.http.get(apiCreateEndpoint);
+        return this.http.get<Dataset[]>(apiCreateEndpoint);
     }
 }

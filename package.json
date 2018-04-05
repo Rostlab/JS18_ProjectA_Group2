@@ -84,6 +84,7 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-webpack": "^3.0.0",
     "mocha": "^5.0.4",
+    "protractor": "~5.1.0",
     "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.2",
     "ts-node": "~4.1.0",
