@@ -9,9 +9,11 @@ const dataService = require("../services/DataService");
 var router = express.Router();
 var path = require('path');
 
-router.get('/test || /', function (req, res) {
+
+router.get('/test', function (req, res) {
     res.send("Welcome to iGraph");
 });
+
 
 router.get('/plot', function (req, res) {
     console.log(req.query);
@@ -27,6 +29,7 @@ router.get('/plot', function (req, res) {
     });
 });
 
+
 router.get('/columns', function (req, res) {
     console.log('inside columns');
     dataService.getColumns(req.query.dataset).then(columns => {
@@ -36,6 +39,7 @@ router.get('/columns', function (req, res) {
     });
 });
 
+
 router.post('/upload', function (req, res) {
   dataService.upload(req, res, function (err) {
     if (err) {
@@ -43,25 +47,25 @@ router.post('/upload', function (req, res) {
       res.send({"Error" : err.toString()});
       return;
     } else {
-      //console.log("received file");s
       var filePath = req.file.path;      
       //Take file name as a table name
-      var tableName = path.basename(filePath, path.extname(filePath));
-      console.log(tableName);
-      dataService.importCsvToMysql(filePath, tableName, function(err){        
-        if(err){
-          console.log(err);
-          res.send(err);
-          return;
-        }
+      var tableName = path.basename(filePath, path.extname(filePath)).toLowerCase();
+
+      dataService.importCsvToMysql(filePath, tableName).then(tableName => {
+              res.status(202).send({"fileName" : tableName});
+              return;
+          }, err => {
+              res.send(err);
+              return;
       });
     // Not waiting for dataset to get uploaded to mysql database. Sent a request above and assuming it will get
     // uploaded properly once started.
-    res.status(202).send({"fileName" : tableName});
-    return;
+    //res.status(202).send({"fileName" : tableName});
+    //return;
     }
-  })
+  });
 });
+
 
 router.get('/getTables', function(req, res){
   dataService.getTables().then(tables => {
@@ -72,6 +76,18 @@ router.get('/getTables', function(req, res){
     res.send(err);
     return;
   });
+});
+
+
+// Sample test endpoint to debug newly developed functionality with mocked data from REST client.
+router.get('/func_test', function(req, res){
+    dataService.test(function(err, data) {
+        if(err) {
+            res.send(err)
+        } else {
+            res.send(data);
+        }
+    });
 });
 
 module.exports = router;

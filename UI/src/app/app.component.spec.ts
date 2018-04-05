@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './text-input';
 import { ChartComponent } from './chart';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
 @Component({
     selector: 'test',
@@ -19,7 +20,7 @@ describe('##Testing app.component', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [ FormsModule ],
+            imports: [ FormsModule, NgHttpLoaderModule ],
             declarations: [TestComponent, AppComponent, HomeComponent, TextInputComponent, ChartComponent, FileUploadComponent]
         });
     });
