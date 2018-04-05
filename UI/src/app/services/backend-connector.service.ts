@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import {PlotType} from '../../../models/Types';
 import { Observable } from 'rxjs/Observable';
 import {QueryResponse} from "../../../models/QueryResponse";
+import {Columns} from "../../../models/Columns";
 import 'rxjs/Rx';
 
 @Injectable()
@@ -83,5 +84,17 @@ export class BackendConnectorService {
     public getDatabaseTables() {
         var apiCreateEndpoint = '/api/getTables';
         return this.http.get(apiCreateEndpoint);
+    }
+
+    public getColumns(table) {
+        var apiGetColumnsEndpoint = '/api/columns';
+        return this.http.get(apiGetColumnsEndpoint,
+            {
+                params: {
+                    dataset: table
+                }
+            }).map((columns: Columns) => {
+                return columns;
+        });
     }
 }

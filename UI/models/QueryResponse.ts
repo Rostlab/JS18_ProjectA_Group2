@@ -1,6 +1,6 @@
 /**
- * Created by shayansiddiqui on 19.03.18.
- */
+* Created by shayansiddiqui on 19.03.18.
+*/
 export class QueryResponse {
     x: any[];
     y: any[];

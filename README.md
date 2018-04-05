@@ -10,7 +10,7 @@
    
 - Copy trained model from **nlp_model/projects** folder to your **rasa_nlu** instance directory(root/nlp_engine).
 
-- Install MySql server and run the sql script from **JS18_ProjectA_Group2/server/sql** directory.
+- Install MySql server and run **project configuration** sql script from **JS18_ProjectA_Group2/server/sql** directory.
    
 - Provide MySql server credentials in **JS18_ProjectA_Group2/server/config.js**
    
@@ -43,6 +43,12 @@ commands one by one in different terminals from the **JS18_ProjectA_Group2** fol
 - If any issue starting nlp_engine, run below python script from terminal on **JS18_ProjectA_Group2/nlp_engine** folder.
 
       python -m rasa_nlu.server -c sample_configs/config_spacy.json
+      
+- Download sample kaggle datasets from [here](https://www.kaggle.com/rhuebner/human-resources-data-set/data) and 
+[here](https://www.kaggle.com/worldbank/world-development-indicators/data).
+
+- Upload sample datasets using the application upload feature. So that necessity features will be processed before
+using them for plot.
 
 ## Proxy Configuration
 

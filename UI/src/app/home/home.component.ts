@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {TextInputComponent} from "../text-input";
 import {ChartComponent} from "../chart/chart.component";
 import {BackendConnectorService} from "../services";
-import {Dataset, Data} from '../../../models';
+import {Dataset, Data, Columns} from '../../../models';
 
 @Component({
     selector: 'app-home',
@@ -21,11 +21,12 @@ export class HomeComponent implements AfterViewInit, OnInit {
     datasets: Array<Dataset>;
     dataset: Dataset;
     readonly defaultDataset: Dataset = new Dataset(-1, "Choose a dataset");
+    columns: Columns;
 
     constructor(private backendConnector: BackendConnectorService) {
         this.graphIsEmpty = true;
         this.datasets = Array<Dataset>();
-        this.dataset = this.defaultDataset;
+        this.dataset=this.defaultDataset;
     }
 
     ngOnInit() {
@@ -84,6 +85,10 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * Disable method for button
      */
     public shouldDisablePlotButton() {
+        //console.log(this.textIsEmpty(this.textInput));
+        //console.log((this.dataset === this.defaultDataset));
+        //console.log(this.dataset);
+        //console.log(this.defaultDataset);
         return (this.textIsEmpty(this.textInput) || (this.dataset === this.defaultDataset));
     }
 
@@ -137,4 +142,11 @@ export class HomeComponent implements AfterViewInit, OnInit {
             id++;
         }
     }
+
+    public getColumns(){
+            this.backendConnector.getColumns(this.dataset.name).subscribe(
+                value => {
+                    this.columns = value;
+                });
+            }
 }
