@@ -79,5 +79,10 @@
     </button>
   </div>
 </div>
-<app-chart #chart>
+
+<div id="error" [hidden]="!err_">
+    <img src="assets/error.png" alt="Smiley face" >
+</div>
+
+<app-chart #chart id="plot" [hidden]="err_">
 </app-chart>
