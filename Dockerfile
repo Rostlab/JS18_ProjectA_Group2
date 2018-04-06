@@ -5,11 +5,10 @@ FROM js2018group2.azurecr.io/base
 EXPOSE 4200
 
 WORKDIR /app
+RUN pip install rasa_nlu
 COPY package.json .
 COPY package-lock.json .
-COPY docker/requirements_bare.txt .
 RUN npm install
-RUN pip install -r requirements_bare.txt
 COPY . .
 
 CMD ["./node_modules/.bin/concurrently", \
