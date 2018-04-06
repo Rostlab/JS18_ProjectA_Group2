@@ -124,12 +124,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * is called by the clear button
      */
     public clearAll() {
-        console.log("Clear was pressed");
+        // console.log("Clear was pressed");
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();
         this.textInputUpdate.clear();
         this.dataset = this.defaultDataset;
+        this.columns = null;
     }
 
     private initSelectionList(data){
