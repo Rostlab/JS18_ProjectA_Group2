@@ -1,6 +1,0 @@
-{
-  "pipeline": "spacy_sklearn",
-  "path" : "./projects",
-  "data" : "./data/test/demo-rasa-small.json",
-  "server_model_dirs": "./models/model_20180308-231616s"
-}
