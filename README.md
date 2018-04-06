@@ -25,7 +25,8 @@ Your system must have support for below stuff:
   - cd nlp_engine
   - pip install -r requirements.txt
   - pip install -e .
-  - mv projects nlp_engine
+  - cd ..
+  - cp -R projects nlp_engine
   
 ### Database Configuration
 
