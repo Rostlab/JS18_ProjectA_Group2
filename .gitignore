@@ -7,7 +7,5 @@ coverage
 *.log
 .tables.debug
 
-nlp_engine/*
-nlp_engine
 server/data/*
 log
