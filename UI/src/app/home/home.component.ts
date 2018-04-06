@@ -20,7 +20,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
     dataset: Dataset;
-    readonly defaultDataset: Dataset = new Dataset(-1, "Choose a dataset");
+    readonly defaultDataset: Dataset = new Dataset(0, "Choose a dataset");
     columns: Columns;
 
     constructor(private backendConnector: BackendConnectorService) {
@@ -137,7 +137,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
         var tables = data.tables;     
         
         //Add tables into dataset.
-        var id = 0;
+        var id = 1;
         for(let table of tables) {
             this.datasets.push(new Dataset(id, table));
             id++;
@@ -145,9 +145,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
     }
 
     public getColumns(){
-            this.backendConnector.getColumns(this.dataset.name).subscribe(
-                value => {
-                    this.columns = value;
-                });
-            }
+        this.backendConnector.getColumns(this.dataset.name).subscribe(
+             value => {
+                this.columns = value;
+        });
+    }
 }
