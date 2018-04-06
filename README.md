@@ -21,10 +21,15 @@ Your system must have support for below stuff:
   
   Follow below steps:
   
+  - https://github.com/Rostlab/JS18_ProjectA_Group2.git
+  - cd JS18_ProjectA_Group2
   - git clone https://github.com/jyotirmay123/nlp_engine.git
   - cd nlp_engine
   - pip install -r requirements.txt
   - pip install -e .
+  - pip install rasa_nlu[spacy]
+  - python -m spacy download en_core_web_md
+  - python -m spacy link en_core_web_md en
   - cd ..
   - cp -R projects nlp_engine
   
@@ -84,6 +89,32 @@ file from **server/data** and corresponding row from **config table**.
 
 Proxy configuration has been done on UI to access nlp engine **('/nlp')** and backend **('/api')**.
 
+## Supported Queries
+
+- CORE_DATASET
+
+    - Plot histogram of employee’s age.
+    - Plot number of employees for each gender as a pie chart.
+    - Plot number of employees for each gender as a pie chart for all departments.
+    - Plot average pay rate of each race as a bar chart.
+    - Plot number of employees hired each year as a line chart.
+    - Make a scatter plot with age and pay rate.
+
+
+- INDICATOR_DATASET
+
+    - Plot the histogram of Urban population (% of total) in the year 2010.
+    - Plot the life expectancy at birth for male and female each year as a line chart for Germany.
+    - Make a scatter plot of countries with birth rate and GDP per capita as two axises.
+    - Plot the CO2 emissions from gaseous fuel, liquid fuel and solid fuel as a pie chart for each country.
+
 ## Project Architecture
 
 ![Project Architecture](https://github.com/Rostlab/JS18_ProjectA_Group2/blob/develop/mockups/Team%202.%20Project%20Architecture.png)
+
+## Author
+
+- [Carsten Sehlke](https://github.com/csehlke)
+- [Irakli Tchedia](https://github.com/iraklitchedia)
+- [Shayan Siddiqui](https://www.linkedin.com/in/shayan-siddiqui/)
+- [Jyotirmay Senapati](https://www.linkedin.com/in/jyotirmay-senapati-30615421/)

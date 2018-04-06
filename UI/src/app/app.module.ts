@@ -12,7 +12,6 @@ import { ChartComponent } from './chart/chart.component';
 import { BackendConnectorService } from "./services";
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 
-
 @NgModule({
     declarations: [
         AppComponent,

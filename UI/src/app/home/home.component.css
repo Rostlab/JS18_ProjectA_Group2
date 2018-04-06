@@ -42,3 +42,7 @@
     place-content: center;
     text-align: center;
 }
+#error {
+    border: 1px solid darkred;
+    margin: 20px 20px 20px 20px;
+}

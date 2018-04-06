@@ -9,3 +9,5 @@ coverage
 
 server/data/*
 log
+
+nlp_engine

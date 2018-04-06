@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, ErrorHandler} from '@angular/core';
 import {TextInputComponent} from "../text-input";
 import {ChartComponent} from "../chart/chart.component";
 import {BackendConnectorService} from "../services";
 import {Dataset, Data, Columns} from '../../../models';
+import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'app-home',
@@ -16,24 +17,33 @@ export class HomeComponent implements AfterViewInit, OnInit {
     @ViewChild("textInputUpdate") textInputUpdate: TextInputComponent;
     @ViewChild("chart") chart: ChartComponent;
 
-
     graphIsEmpty: boolean;
     datasets: Array<Dataset>;
     dataset: Dataset;
     readonly defaultDataset: Dataset = new Dataset(0, "Choose a dataset");
+    readonly errorText: string = "OOPS!! Something Went Wrong!! ";
     columns: Columns;
+    error: string = "";
+    err_: boolean = false;
+    plot_: boolean = false;
+
 
     constructor(private backendConnector: BackendConnectorService) {
         this.graphIsEmpty = true;
         this.datasets = Array<Dataset>();
-        this.dataset=this.defaultDataset;
+        this.dataset = this.defaultDataset;
     }
 
     ngOnInit() {
         //Add default option        
         this.datasets.push(this.defaultDataset);
-        
-        this.backendConnector.getDatabaseTables().subscribe(event => this.initSelectionList(event));
+
+        this.backendConnector.getDatabaseTables().subscribe(event => this.initSelectionList(event),
+            err => {
+                this.error = this.errorText;//err.message;
+                this.err_ = true;
+
+            });
     }
 
     ngAfterViewInit() {
@@ -59,9 +69,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
                         that.chart.options = data.options;
                         that.chart.layout = data.layout;
                         that.graphIsEmpty = false;
+                        this.plot_ = true;
                         that.chart.reset();
                         that.chart.plot();
+
                     }
+                }, err => {
+                    this.error = this.errorText;//err.message;
+                    this.err_ = true;
                 });
         }
     }
@@ -76,19 +91,28 @@ export class HomeComponent implements AfterViewInit, OnInit {
                     if (res) {
                         that.chart.update(res);
                     }
+                }, err => {
+                    this.error = this.errorText;//err.message;
+                    this.err_ = true;
                 });
         }
     }
 
+    public getColumns() {
+        this.backendConnector.getColumns(this.dataset.name).subscribe(
+            value => {
+                this.columns = value;
+            }, err => {
+                this.error = this.errorText;//err.message;
+
+                this.err_ = true;
+            });
+    }
 
     /**
      * Disable method for button
      */
     public shouldDisablePlotButton() {
-        //console.log(this.textIsEmpty(this.textInput));
-        //console.log((this.dataset === this.defaultDataset));
-        //console.log(this.dataset);
-        //console.log(this.defaultDataset);
         return (this.textIsEmpty(this.textInput) || (this.dataset === this.defaultDataset));
     }
 
@@ -133,21 +157,14 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.columns = null;
     }
 
-    private initSelectionList(data){
-        var tables = data.tables;     
-        
+    private initSelectionList(data) {
+        var tables = data.tables;
+
         //Add tables into dataset.
         var id = 1;
-        for(let table of tables) {
+        for (let table of tables) {
             this.datasets.push(new Dataset(id, table));
             id++;
         }
-    }
-
-    public getColumns(){
-        this.backendConnector.getColumns(this.dataset.name).subscribe(
-             value => {
-                this.columns = value;
-        });
     }
 }
