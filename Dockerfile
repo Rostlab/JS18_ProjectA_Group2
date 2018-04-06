@@ -5,12 +5,10 @@ FROM js2018group2.azurecr.io/base
 EXPOSE 4200
 
 WORKDIR /app
-RUN git clone https://github.com/jyotirmay123/nlp_engine.git && \
-    cd nlp_engine && \
-    pip install -r requirements.txt && \
-    pip install -e . && \
-    cd .. && \
-    cp -R projects nlp_engine
+RUN git clone --depth 1 https://github.com/jyotirmay123/nlp_engine.git
+RUN pip install -r nlp_engine/requirements.txt
+RUN pip install -e nlp_engine
+RUN cp -R projects nlp_engine
 COPY package.json .
 COPY package-lock.json .
 RUN npm install
