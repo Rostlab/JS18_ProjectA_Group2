@@ -10,7 +10,7 @@ let csvToMysql = {
             try {
                 let tbl = new Tables({
                     input: filePath,
-                    inputType: "csv",
+                    //inputType: "csv",
                     db: "mysql://" + mysql.user + ":" + mysql.password + "@" + mysql.host + ":" + mysql.port +
                     "/" + mysql.database,
                     tableName: table,

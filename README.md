@@ -2,15 +2,36 @@
 
 [![Build Status](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2.svg?branch=develop)](https://travis-ci.org/Rostlab/JS18_ProjectA_Group2)
 
+### Requirements
+
+Your system must have support for below stuff:
+
+- NodeJS.
+- Python 2.7.
+- MySQL.
+- A Modern Browser.
+
 ### Set Up
 
-- Install fresh rasa_nlu instance in the root directory. **JS18_ProjectA_Group2/nlp_engine**
+- Install fresh rasa_nlu instance in the root directory. **JS18_ProjectA_Group2**
    
-- Install [Rasa_NLU](https://nlu.rasa.com/installation.html) from *[here](https://nlu.rasa.com/installation.html)*
-   
-- Copy trained model from **nlp_model/projects** folder to your **rasa_nlu** instance directory(root/nlp_engine).
+- Install [Rasa_NLU](https://nlu.rasa.com) from *[here](https://github.com/jyotirmay123/nlp_engine)*
+    
+  [ Don"t clone Rasa_NLU original git repo as it contains different version than what we use ]
+  
+  Follow below steps:
+  
+  - git clone https://github.com/jyotirmay123/nlp_engine.git
+  - cd nlp_engine
+  - pip install -r requirements.txt
+  - pip install -e .
+  - mv projects nlp_engine
+  
+### Database Configuration
 
-- Install MySql server and run **project configuration** sql script from **JS18_ProjectA_Group2/server/sql** directory.
+- Install MySql server.
+- Create a database with name **igraph**
+- Import **JS18_ProjectA_Group2/server/sql/config.sql** into igraph.
    
 - Provide MySql server credentials in **JS18_ProjectA_Group2/server/config.js**
    
@@ -40,15 +61,23 @@ commands one by one in different terminals from the **JS18_ProjectA_Group2** fol
   
       npm run start:nlp
       
-- If any issue starting nlp_engine, run below python script from terminal on **JS18_ProjectA_Group2/nlp_engine** folder.
+- If any issue running nlp_engine command mentioned above, run below python script from terminal on **JS18_ProjectA_Group2/nlp_engine** folder
+  to check the issue.
 
       python -m rasa_nlu.server -c sample_configs/config_spacy.json
       
+### How to use!
+
+- We don't have pre-uploaded dataset in the system, Please upload dataset file. 
+
 - Download sample kaggle datasets from [here](https://www.kaggle.com/rhuebner/human-resources-data-set/data) and 
 [here](https://www.kaggle.com/worldbank/world-development-indicators/data).
 
-- Upload sample datasets using the application upload feature. So that necessity features will be processed before
+- Upload sample datasets using the application upload feature. So that necessary features will be processed before
 using them for plot.
+
+- We currently don"t support deletion of files uploaded into database. If manually done, make sure to delete corresponding
+file from **server/data** and corresponding row from **config table**.
 
 ## Proxy Configuration
 
