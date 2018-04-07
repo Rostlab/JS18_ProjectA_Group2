@@ -10,6 +10,7 @@ export class Trace implements Plotly.Data {
     values: Datum[] | Datum[][];
     labels: Datum[] | Datum[][];
     type: PlotType;
+    mode:string;
 
     constructor(type: PlotType) {
         this.type = type;

@@ -19,12 +19,25 @@ export class BackendConnectorService {
     private createPlotData(queryResponse: QueryResponse) {
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
-            trace.x = queryResponse.x;
-            trace.xaxis = queryResponse.x_title;
-            trace.y = queryResponse.y;
-            trace.yaxis = queryResponse.y_title;
-            trace.labels = queryResponse.x;
-            trace.values = queryResponse.y;
+            if(queryResponse.plot_type ==='histogram'){
+                trace.x = queryResponse.y;
+            }else if(queryResponse.plot_type == 'pie'){
+                trace.labels = queryResponse.delta;
+                trace.values = queryResponse.y;
+            }
+            else if(queryResponse.plot_type == 'bar'){
+                trace.x = queryResponse.delta;
+                trace.y = queryResponse.y;
+            }
+            else{
+                trace.x = queryResponse.x;
+                trace.y = queryResponse.y;
+                trace.yaxis = queryResponse.y_title;
+                trace.xaxis = queryResponse.x_title;
+                if(queryResponse.plot_type == 'scatter'){
+                    trace.mode='markers';
+                }
+            }
 
             const layout = new Layout(queryResponse.title);
 

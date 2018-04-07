@@ -1,0 +1,2378 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "histogram",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Plot histogram of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "as a pie chart"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "as a bar chart"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "line",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "as a line chart"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 14,
+            "value": "scatter",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Make a scatter plot"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "histogram",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "as a histogram"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Plot bar chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Plot bar graph of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Make bar graph of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 14,
+            "value": "scatter",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Draw a scatter chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "on a pie chart"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 14,
+            "value": "scatter",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Plot a scatter graph of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 16,
+            "value": "histogram",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Draw a histogram of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "line",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Make a line chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Pie chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "histogram",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Histogram of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "scatter",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Scatter plot of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Bar graph of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "line",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Line chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "scatter",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "as a scatter plot"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 10,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Draw a pie chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 10,
+            "value": "pie",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Make a pie graph of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "line",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Draw a line chart of"
+      },
+      {
+        "intent": "chart",
+        "entities": [
+          {
+            "start": 7,
+            "end": 10,
+            "value": "bar",
+            "entity": "plot_type"
+          }
+        ],
+        "text": "Draw a bar graph"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 14,
+            "value": "employee’s age",
+            "entity": "col"
+          }
+        ],
+        "text": "employee’s age"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 15,
+            "end": 24,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot number of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "for each",
+            "entity": "group"
+          },
+          {
+            "start": 9,
+            "end": 15,
+            "value": "gender",
+            "entity": "col"
+          }
+        ],
+        "text": "for each gender"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 13,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 14,
+            "end": 23,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot count of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "for each",
+            "entity": "group"
+          },
+          {
+            "start": 9,
+            "end": 12,
+            "value": "abc",
+            "entity": "col"
+          }
+        ],
+        "text": "for each abc"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "for all",
+            "entity": "group"
+          },
+          {
+            "start": 8,
+            "end": 19,
+            "value": "departments",
+            "entity": "col"
+          }
+        ],
+        "text": "for all departments"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 13,
+            "end": 21,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot average pay rate of"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 5,
+            "end": 9,
+            "value": "race",
+            "entity": "col"
+          }
+        ],
+        "text": "each race"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 11,
+            "end": 20,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot total employees"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 20,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 21,
+            "end": 30,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot total number of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 10,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 11,
+            "end": 15,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 5,
+            "value": "hired",
+            "entity": "col_d"
+          }
+        ],
+        "text": "hired each year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 11,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 12,
+            "end": 16,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 5,
+            "value": "hired",
+            "entity": "col_d"
+          }
+        ],
+        "text": "hired every year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 9,
+            "end": 13,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 14,
+            "end": 19,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 8,
+            "value": "selected",
+            "entity": "col_d"
+          }
+        ],
+        "text": "selected each month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 9,
+            "end": 14,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 15,
+            "end": 20,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 8,
+            "value": "selected",
+            "entity": "col_d"
+          }
+        ],
+        "text": "selected every month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 11,
+            "end": 15,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 16,
+            "end": 20,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 10,
+            "value": "terminated",
+            "entity": "col_d"
+          }
+        ],
+        "text": "terminated each year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 11,
+            "end": 16,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 17,
+            "end": 21,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 10,
+            "value": "terminated",
+            "entity": "col_d"
+          }
+        ],
+        "text": "terminated every year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 11,
+            "end": 15,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 16,
+            "end": 21,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 10,
+            "value": "terminated",
+            "entity": "col_d"
+          }
+        ],
+        "text": "terminated each month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 11,
+            "end": 16,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 17,
+            "end": 22,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 10,
+            "value": "terminated",
+            "entity": "col_d"
+          }
+        ],
+        "text": "terminated every month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 10,
+            "end": 14,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 4,
+            "value": "quit",
+            "entity": "col_d"
+          }
+        ],
+        "text": "quit each year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 11,
+            "end": 15,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 4,
+            "value": "quit",
+            "entity": "col_d"
+          }
+        ],
+        "text": "quit every year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 10,
+            "end": 15,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 4,
+            "value": "quit",
+            "entity": "col_d"
+          }
+        ],
+        "text": "quit each month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 10,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 11,
+            "end": 16,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 4,
+            "value": "quit",
+            "entity": "col_d"
+          }
+        ],
+        "text": "quit every month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 12,
+            "end": 16,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 6,
+            "value": "joined",
+            "entity": "col_d"
+          }
+        ],
+        "text": "joined each year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 12,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 13,
+            "end": 17,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 6,
+            "value": "joined",
+            "entity": "col_d"
+          }
+        ],
+        "text": "joined every year"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 8,
+            "end": 12,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 13,
+            "end": 18,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 7,
+            "value": "joining",
+            "entity": "col_d"
+          }
+        ],
+        "text": "joining each month"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 8,
+            "end": 13,
+            "value": "every",
+            "entity": "group"
+          },
+          {
+            "start": 14,
+            "end": 19,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 0,
+            "end": 7,
+            "value": "joining",
+            "entity": "col_d"
+          }
+        ],
+        "text": "joining every month"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "age",
+            "entity": "col"
+          }
+        ],
+        "text": "with age"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 4,
+            "end": 12,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "and pay rate"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 10,
+            "end": 19,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "number of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "per",
+            "entity": "group"
+          },
+          {
+            "start": 4,
+            "end": 14,
+            "value": "department",
+            "entity": "col"
+          }
+        ],
+        "text": "per department"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 13,
+            "end": 19,
+            "value": "salary",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot average salary"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "for each",
+            "entity": "group"
+          },
+          {
+            "start": 9,
+            "end": 15,
+            "value": "gender",
+            "entity": "col"
+          }
+        ],
+        "text": "for each gender"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "for all",
+            "entity": "group"
+          },
+          {
+            "start": 12,
+            "end": 23,
+            "value": "departments",
+            "entity": "col"
+          }
+        ],
+        "text": "for all the departments"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 24,
+            "value": "salary of employees",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot salary of employees"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 19,
+            "value": "employee’s pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "employee’s pay rate"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 22,
+            "value": "employee’s salary",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot employee’s salary"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "avg pay rate"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 9,
+            "end": 12,
+            "value": "age",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot max age"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 8,
+            "end": 16,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "maximum pay rate"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "of each",
+            "entity": "group"
+          },
+          {
+            "start": 8,
+            "end": 11,
+            "value": "sex",
+            "entity": "col"
+          }
+        ],
+        "text": "of each sex"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "max pay rate"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 13,
+            "end": 21,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot minimum pay rate"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "of each",
+            "entity": "group"
+          },
+          {
+            "start": 8,
+            "end": 11,
+            "value": "xyz",
+            "entity": "col"
+          }
+        ],
+        "text": "of each xyz"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 8,
+            "end": 16,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "highest pay rate"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "per",
+            "entity": "group"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "position",
+            "entity": "col"
+          }
+        ],
+        "text": "per position"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "pay rate",
+            "entity": "col"
+          }
+        ],
+        "text": "avg pay rate"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "of every",
+            "entity": "group"
+          },
+          {
+            "start": 9,
+            "end": 15,
+            "value": "column",
+            "entity": "col"
+          }
+        ],
+        "text": "of every column"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 7,
+            "end": 12,
+            "value": "hours",
+            "entity": "col"
+          }
+        ],
+        "text": "lowest hours"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 8,
+            "end": 12,
+            "value": "wage",
+            "entity": "col"
+          }
+        ],
+        "text": "minimum wage"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 4,
+            "end": 15,
+            "value": "test_column",
+            "entity": "col"
+          }
+        ],
+        "text": "min test_column"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 9,
+            "end": 18,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "count of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "per",
+            "entity": "group"
+          },
+          {
+            "start": 4,
+            "end": 12,
+            "value": "position",
+            "entity": "col"
+          }
+        ],
+        "text": "per position"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 10,
+            "end": 17,
+            "value": "persons",
+            "entity": "col"
+          }
+        ],
+        "text": "number of persons"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 14,
+            "end": 21,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 22,
+            "end": 25,
+            "value": "age",
+            "entity": "d1"
+          }
+        ],
+        "text": "calculate the average age"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 12,
+            "end": 19,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 20,
+            "end": 23,
+            "value": "age",
+            "entity": "col"
+          }
+        ],
+        "text": "Give me the average age"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 18,
+            "value": "count",
+            "entity": "op"
+          }
+        ],
+        "text": "Display percentage"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 28,
+            "end": 31,
+            "value": "age",
+            "entity": "col"
+          }
+        ],
+        "text": "Show me the distribution of age"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 16,
+            "value": "MaritalDesc",
+            "entity": "col"
+          }
+        ],
+        "text": "Show MaritalDesc"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "of employees",
+            "entity": "col"
+          }
+        ],
+        "text": "of employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 9,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 13,
+            "end": 20,
+            "value": "between",
+            "entity": "cco"
+          },
+          {
+            "start": 21,
+            "end": 32,
+            "value": "\"28 and 32\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "whose age is between \"28 and 32\""
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 9,
+            "end": 15,
+            "value": "region",
+            "entity": "col"
+          }
+        ],
+        "text": "by using region"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 4,
+            "end": 15,
+            "value": "IncomeGroup",
+            "entity": "col"
+          }
+        ],
+        "text": "and IncomeGroup"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 10,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 11,
+            "end": 17,
+            "value": "salary",
+            "entity": "col"
+          }
+        ],
+        "text": "vs average salary"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "for each",
+            "entity": "group"
+          },
+          {
+            "start": 9,
+            "end": 19,
+            "value": "department",
+            "entity": "col"
+          }
+        ],
+        "text": "for each department"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 13,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 14,
+            "end": 20,
+            "value": "salary",
+            "entity": "col"
+          },
+          {
+            "start": 24,
+            "end": 28,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 34,
+            "end": 36,
+            "value": "10",
+            "entity": "ccv"
+          }
+        ],
+        "text": "where average salary is more than 10."
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 6,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 7,
+            "end": 13,
+            "value": "salary",
+            "entity": "col"
+          }
+        ],
+        "text": "vs max salary"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 14,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 15,
+            "end": 18,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 22,
+            "end": 26,
+            "value": "<",
+            "entity": "cco"
+          },
+          {
+            "start": 32,
+            "end": 34,
+            "value": "50",
+            "entity": "ccv"
+          }
+        ],
+        "text": "having highest age is less than 50."
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 11,
+            "end": 14,
+            "value": "desc",
+            "entity": "order"
+          },
+          {
+            "start": 15,
+            "end": 17,
+            "value": "10",
+            "entity": "limit"
+          },
+          {
+            "start": 18,
+            "end": 26,
+            "value": "salaries",
+            "entity": "col"
+          }
+        ],
+        "text": "average of top 10 salaries"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 12,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 13,
+            "end": 16,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 17,
+            "end": 24,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 30,
+            "end": 32,
+            "value": "30",
+            "entity": "ccv"
+          }
+        ],
+        "text": "with minimum age greater than 30"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 9,
+            "end": 16,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 22,
+            "end": 24,
+            "value": "20",
+            "entity": "ccv"
+          }
+        ],
+        "text": "with age greater than 20"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 11,
+            "end": 14,
+            "value": "desc",
+            "entity": "order"
+          },
+          {
+            "start": 15,
+            "end": 17,
+            "value": "10",
+            "entity": "limit"
+          },
+          {
+            "start": 18,
+            "end": 32,
+            "value": "employee’s age",
+            "entity": "col"
+          },
+          {
+            "start": 33,
+            "end": 40,
+            "value": "greater",
+            "entity": "cco"
+          },
+          {
+            "start": 46,
+            "end": 48,
+            "value": "24",
+            "entity": "ccv"
+          }
+        ],
+        "text": "average of top 10 employee’s age greater than 24"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "name",
+            "entity": "col"
+          },
+          {
+            "start": 10,
+            "end": 20,
+            "value": "“John Doe”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "with name “John Doe”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 18,
+            "end": 22,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 4,
+            "end": 10,
+            "value": "joined",
+            "entity": "col_d"
+          },
+          {
+            "start": 23,
+            "end": 29,
+            "value": "\"2015\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "who joined in the year \"2015\""
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 16,
+            "end": 21,
+            "value": "month",
+            "entity": "col"
+          },
+          {
+            "start": 4,
+            "end": 8,
+            "value": "left",
+            "entity": "col_d"
+          },
+          {
+            "start": 22,
+            "end": 30,
+            "value": "\"August\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "who left in the month \"August\""
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 12,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 13,
+            "end": 17,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 21,
+            "end": 25,
+            "value": "hire",
+            "entity": "col_d"
+          }
+        ],
+        "text": "against each year of hire"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 12,
+            "value": "steps",
+            "entity": "col"
+          },
+          {
+            "start": 13,
+            "end": 18,
+            "value": "<",
+            "entity": "cco"
+          },
+          {
+            "start": 19,
+            "end": 23,
+            "value": "\"30\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "having steps below \"30\""
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "size",
+            "entity": "col"
+          },
+          {
+            "start": 10,
+            "end": 16,
+            "value": "<",
+            "entity": "cco"
+          },
+          {
+            "start": 22,
+            "end": 26,
+            "value": "\"30\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "with size lesser than \"30\""
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 3,
+            "end": 8,
+            "value": "state",
+            "entity": "col"
+          },
+          {
+            "start": 9,
+            "end": 13,
+            "value": "“MA“",
+            "entity": "ccv"
+          }
+        ],
+        "text": "in state “MA“."
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 6,
+            "value": "max",
+            "entity": "op"
+          },
+          {
+            "start": 7,
+            "end": 13,
+            "value": "salary",
+            "entity": "col"
+          }
+        ],
+        "text": "vs max salary"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 13,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 14,
+            "end": 17,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 21,
+            "end": 25,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 31,
+            "end": 35,
+            "value": "\"50\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "having lowest age is more than \"50\""
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 10,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 11,
+            "end": 14,
+            "value": "age",
+            "entity": "col"
+          }
+        ],
+        "text": "vs average age"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 13,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 14,
+            "end": 20,
+            "value": "salary",
+            "entity": "col"
+          },
+          {
+            "start": 24,
+            "end": 28,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 34,
+            "end": 38,
+            "value": "\"10\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "where average salary is more than \"10\"."
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "avg",
+            "entity": "op"
+          },
+          {
+            "start": 12,
+            "end": 15,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 16,
+            "end": 23,
+            "value": ">",
+            "entity": "cco"
+          },
+          {
+            "start": 29,
+            "end": 33,
+            "value": "\"25\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "having mean age greater than \"25\"."
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 17,
+            "value": "department",
+            "entity": "col"
+          },
+          {
+            "start": 21,
+            "end": 30,
+            "value": "“Finance”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "in the department of “Finance”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 3,
+            "end": 11,
+            "value": "“female”",
+            "entity": "ccv"
+          },
+          {
+            "start": 12,
+            "end": 21,
+            "value": "employees",
+            "entity": "col"
+          }
+        ],
+        "text": "of “female” employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 3,
+            "end": 9,
+            "value": "“male”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "of “male”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 3,
+            "end": 11,
+            "value": "“female”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "of “female”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 3,
+            "end": 10,
+            "value": "“white”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "of “white”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "“Married”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "“Married” employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 4,
+            "end": 12,
+            "value": "“Active”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "for “Active” employees"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 6,
+            "end": 12,
+            "value": "salary",
+            "entity": "col"
+          },
+          {
+            "start": 16,
+            "end": 23,
+            "value": "between",
+            "entity": "cco"
+          },
+          {
+            "start": 24,
+            "end": 35,
+            "value": "\"19 and 50\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "whose salary is between \"19 and 50\""
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 9,
+            "value": "race",
+            "entity": "col"
+          }
+        ],
+        "text": "Plot race"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 15,
+            "value": "department",
+            "entity": "col"
+          }
+        ],
+        "text": "Show department"
+      },
+      {
+        "intent": "",
+        "entities": [
+          {
+            "start": 6,
+            "end": 9,
+            "value": "age",
+            "entity": "col"
+          },
+          {
+            "start": 13,
+            "end": 20,
+            "value": "between",
+            "entity": "cco"
+          },
+          {
+            "start": 21,
+            "end": 32,
+            "value": "\"15 and 30\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "whose age is between \"15 and 30\"."
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 5,
+            "end": 8,
+            "value": "sex",
+            "entity": "col"
+          }
+        ],
+        "text": "Show sex"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 18,
+            "end": 22,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 4,
+            "end": 10,
+            "value": "joined",
+            "entity": "col_d"
+          },
+          {
+            "start": 23,
+            "end": 29,
+            "value": "\"2015\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "who joined in the year \"2015\""
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 31,
+            "value": "“Urban population (% of total)”",
+            "entity": "ccv"
+          }
+        ],
+        "text": "“Urban population (% of total)”"
+      },
+      {
+        "intent": "l",
+        "entities": [
+          {
+            "start": 7,
+            "end": 11,
+            "value": "year",
+            "entity": "col"
+          },
+          {
+            "start": 12,
+            "end": 18,
+            "value": "\"2010\"",
+            "entity": "ccv"
+          }
+        ],
+        "text": "in the year \"2010\""
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 46,
+            "value": "“life expectancy at birth for male and female”",
+            "entity": "col"
+          }
+        ],
+        "text": "“life expectancy at birth for male and female”"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 18,
+            "value": "population",
+            "entity": "col"
+          }
+        ],
+        "text": "against population"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 13,
+            "value": "claim",
+            "entity": "col"
+          }
+        ],
+        "text": "against claim"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 19,
+            "value": "study hours",
+            "entity": "col"
+          }
+        ],
+        "text": "against study hours"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 4,
+            "value": "y",
+            "entity": "col"
+          }
+        ],
+        "text": "vs y"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 9,
+            "value": "b",
+            "entity": "col"
+          }
+        ],
+        "text": "against b"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 3,
+            "end": 7,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 8,
+            "end": 16,
+            "value": "position",
+            "entity": "col"
+          }
+        ],
+        "text": "vs each position"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 12,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 13,
+            "end": 17,
+            "value": "race",
+            "entity": "col"
+          }
+        ],
+        "text": "against each race"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 15,
+            "end": 18,
+            "value": "abc",
+            "entity": "col"
+          }
+        ],
+        "text": "Show number of abc"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 5,
+            "end": 14,
+            "value": "count",
+            "entity": "op"
+          },
+          {
+            "start": 15,
+            "end": 18,
+            "value": "xyz",
+            "entity": "col"
+          }
+        ],
+        "text": "Show number of xyz"
+      },
+      {
+        "intent": "d1",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "min",
+            "entity": "op"
+          },
+          {
+            "start": 7,
+            "end": 18,
+            "value": "temperature",
+            "entity": "col"
+          }
+        ],
+        "text": "lowest temperature"
+      },
+      {
+        "intent": "d2",
+        "entities": [
+          {
+            "start": 8,
+            "end": 12,
+            "value": "each",
+            "entity": "group"
+          },
+          {
+            "start": 13,
+            "end": 17,
+            "value": "week",
+            "entity": "col"
+          }
+        ],
+        "text": "against each week"
+      }
+    ],
+    "regex_features": [],
+    "entity_synonyms": []
+  }
+}

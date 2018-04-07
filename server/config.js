@@ -8,14 +8,16 @@ let config = (function() {
     return new function() {
 
         this.nlp_server = 'http://localhost:5000',
-        this.nlp_project = 'igraph_nlp',
-        this.nlp_model = 'model_20180313-225005',
+        this.nlp_project = 'test_project',
+        this.nlp_model_sentence = 'model_20180331-050524',
+        this.nlp_model_ops = 'model_20180404-200213',
+        this.config_table = 'config',
 
         this.mysql = {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            password: '',
+            password: 'root',
             database: 'igraph'
         },
 
