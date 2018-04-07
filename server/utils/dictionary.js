@@ -9,11 +9,11 @@ const Dictionary = {
         "min": "Minimum ",
         "avg": "Average ",
     },
-    "core_data":{
+    "core_dataset":{
         "age": ["employee’s age", "age of employees", "employee age", "distribution of age"],
         "sex": ["employee’s sex", "sex of employees", "employee sex", "gender"],
-        "status": ["employee’s sex", "sex of employees", "employee status"],
-        "salary":["pay rate", "employee’s salary", "salary of employees" ],
+        "employment_status": ["status", "employee’s sex", "sex of employees", "employee status"],
+        "pay_rate":["salary", "employee’s salary", "salary of employees","income", "salaries" ],
         "Date of Hire":["joining", "hiring", "hire"],
     },
 };

@@ -24,10 +24,29 @@ function _createColumn(raw_column) {
     }
     column.limit = raw_column.limit;
     if(raw_column.ccv){
-        column.condition_comparison_value = [raw_column.ccv];
+        if(raw_column.ccv.constructor === Array){
+            column.condition_comparison_value=raw_column.ccv;
+        }else{
+            if(raw_column.cco === 'between'){
+                let between_ccv = raw_column.ccv.split(/and|&|,/i);
+                column.condition_comparison_value = between_ccv;
+            }
+            else{
+                const num_ccv = Number.parseFloat(raw_column.ccv);
+                if(!Number.isNaN(raw_column.ccv))
+                    column.condition_comparison_value = [num_ccv];
+                else
+                    column.condition_comparison_value = [raw_column.ccv];
+            }
+        }
     }
-    column.condition_comparison_operator = raw_column.cco;
-    column.date_column = raw_column.col_d;
+    if(raw_column.cco){
+        column.condition_comparison_operator = raw_column.cco;
+    }
+    if(raw_column.col_d){
+        column.date_column = raw_column.col_d;
+    }
+
     if(raw_column.only_conditional){
         column.only_conditional=true;
     }
@@ -52,6 +71,12 @@ function _createResponseObject(raw_nlp_response, dataset, text) {
         if (nlpResponse.data2.condition_comparison_value.length > 0) {
             const condition = Object.assign({}, nlpResponse.data2);
             nlpResponse.conditions.push(condition);
+        }
+    }else if(raw_nlp_response['chart']['plot_type'] ==='line' || raw_nlp_response['chart']['plot_type'] ==='scatter'){
+        if(nlpResponse.data1.condition_comparison_value.length > 1){
+            nlpResponse.data2 = _createColumn(raw_nlp_response['d1']);
+            nlpResponse.data1.condition_comparison_value = [nlpResponse.data1.condition_comparison_value[0]];
+            nlpResponse.data2.condition_comparison_value = [nlpResponse.data2.condition_comparison_value[1]];
         }
     }
 
@@ -105,6 +130,8 @@ function _extractCCV(str) {
  */
 function _processSentenceElement(query, dataset) {
     return new Promise((resolve, reject) => {
+        console.log('Process sentence elements');
+        console.log(query);
         _callNlp(query, config.nlp_project, config.nlp_model_ops).then(function (res) {
             res=JSON.parse(res);
 
@@ -112,12 +139,14 @@ function _processSentenceElement(query, dataset) {
             res["entities"].forEach(function (obj, idx) {
                 ops[obj.entity] = obj.value;
             });
+            console.log(ops);
             if (ops.hasOwnProperty('ccv') && !ops.hasOwnProperty('col')) {
+                console.log('doing reverse mapping for :'+ops["ccv"]);
                 const ccv = _extractCCV(ops["ccv"]);
                 ReverseMappingService.getColumnAndCCV(ccv, dataset).then(obj => {
                     ops['col'] = obj['col_name'];
                     ops['ccv'] = obj['ccv_list'];
-                    //TODO: Need to think mode
+                    //TODO: Need to think more
                     ops['only_conditional'] = true;
                     resolve(ops);
                 });

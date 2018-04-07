@@ -17,8 +17,10 @@ export class BackendConnectorService {
     }
 
     private createPlotData(queryResponse: QueryResponse) {
+        console.log(queryResponse);
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
+            const layout = new Layout(queryResponse.title);
             if(queryResponse.plot_type ==='histogram'){
                 trace.x = queryResponse.y;
             }else if(queryResponse.plot_type == 'pie'){
@@ -32,14 +34,15 @@ export class BackendConnectorService {
             else{
                 trace.x = queryResponse.x;
                 trace.y = queryResponse.y;
-                trace.yaxis = queryResponse.y_title;
-                trace.xaxis = queryResponse.x_title;
+                layout.yaxis = {title :queryResponse.y_title, showgrid:true};
+                layout.xaxis = {title :queryResponse.x_title, showgrid:true};
+                trace.text = queryResponse.delta;
                 if(queryResponse.plot_type == 'scatter'){
                     trace.mode='markers';
                 }
             }
 
-            const layout = new Layout(queryResponse.title);
+
 
             const options = new Options();
             return new Data([trace], layout, options);

@@ -41,7 +41,7 @@ const func_alias = {
 };
 //TODO: Move to database
 const default_col = {
-    'core_data': 'Employee Name',
+    'core_dataset': 'employee_name',
     'indicators': 'value',
 };
 
@@ -77,7 +77,7 @@ const storage = multer.diskStorage({
 
 function _doColumnNameCorrection(nlp_column_name, actualColumns, table) {
     let column_name = null;
-    if (actualColumns.length > 0) {
+    if (nlp_column_name) {
         const bestMatch = stringSimilarity.findBestMatch(nlp_column_name, actualColumns).bestMatch;
         if (bestMatch.rating > 0.80) {
             column_name = bestMatch.target;
@@ -86,11 +86,12 @@ function _doColumnNameCorrection(nlp_column_name, actualColumns, table) {
             //TODO: Replace with the database call instead of dictionary
             const tableDictionary = Dictionary[table];
             if (tableDictionary) {
-                Object.keys(tableDictionary).forEach(key => {
+                Object.keys(tableDictionary).every(key => {
                     if (tableDictionary[key].indexOf(nlp_column_name.toLowerCase()) > -1) {
                         column_name = key;
-                        return column_name;
+                        return false;
                     }
+                    return true;
                 });
                 if (!column_name) {
                     column_name = bestMatch.target;
@@ -98,6 +99,10 @@ function _doColumnNameCorrection(nlp_column_name, actualColumns, table) {
 
             }
         }
+        console.log('printing col name');
+        console.log(column_name);
+    } else {
+        column_name = default_col[table];
     }
     return column_name;
 }
@@ -113,6 +118,16 @@ function _buildQuery(nlp_response) {
                 let queryGroup = [];
                 let queryHaving = '';
                 let queryHavingConditionValues = [];
+                let containsGroupBy = false;
+
+                nlp_response.conditions.every(function (column) {
+                    if (column.groupby) {
+                        containsGroupBy = true;
+                        return false;
+                    }
+                    return true;
+                });
+
 
                 let datapoints = [];
 
@@ -127,17 +142,24 @@ function _buildQuery(nlp_response) {
 
                 //data
                 datapoints.forEach(function (data, idx) {
-                    const col_to_use = data.only_conditional ? default_col[nlp_response.dataset] : data.name;
+                    let col_to_use = data.name;
+                    if(data.only_conditional || col_to_use === default_col[nlp_response.dataset]){
+                        if(nlp_response.plottype !== 'histogram'){
+                            data.operation = 'count';
+                        }
+                        col_to_use = default_col[nlp_response.dataset]
+                    }
+
                     if (data.operation) {
                         data.alias = Dictionary['function_alias'][data.operation] + (data.only_conditional ? data.condition_comparison_value : col_to_use);
                         querySelect += '.' + data.operation + '("' + col_to_use + ' as ' + data.alias + '")';
                     }
                     else {
                         data.alias = data.name;
-                        querySelect += '.select("' + data.name + '")';
+                        querySelect += '.select("' + col_to_use + '")';
                     }
                     if (data.orderby) {
-                        queryOrder += '.orderBy("' + data.name + "','" + data.orderby_direction + '")';
+                        queryOrder += '.orderBy("' + data.alias + '","' + data.orderby_direction + '")';
                     }
                     if (data.limit) {
                         queryLimit += '.limit(' + data.limit + ')';
@@ -153,7 +175,9 @@ function _buildQuery(nlp_response) {
                     }
                     else {
                         column.alias = column.name;
-                        querySelect += '.select("' + column.name + '")';
+                        if (!containsGroupBy || (containsGroupBy && column.groupby)) {
+                            querySelect += '.select("' + column.name + '")';
+                        }
                     }
 
 
@@ -161,12 +185,22 @@ function _buildQuery(nlp_response) {
                         queryGroup.push('"' + column.name + '"')
                     }
                     if (column.condition_comparison_value.length > 0) {
+
                         if (!column.operation) {
                             if (column.condition_comparison_value.length > 1) {
-                                queryWhere += '.andWhere("' + column.name + '"," in ","' + column.condition_comparison_value + '")'
+                                queryWhere += '.andWhere("' + column.name + '"," in ",[' + column.condition_comparison_value + '])';
                             }
                             else {
-                                queryWhere += '.andWhere("' + column.name + '","' + column.condition_comparison_operator + '","' + column.condition_comparison_value + '")'
+                                console.log(column.condition_comparison_value[0]);
+                                console.log(typeof column.condition_comparison_value[0]);
+                                if (typeof column.condition_comparison_value[0] === 'string') {
+                                    queryWhere += '.andWhereRaw("LOWER(' + column.name + ') =  LOWER(?) ", "' + column.condition_comparison_value[0] + '")';
+                                }
+                                else {
+                                    queryWhere += '.andWhere("' + column.name + '","' + column.condition_comparison_operator + '","' + column.condition_comparison_value[0] + '")';
+
+                                }
+
                             }
                         }
                         else {
@@ -183,7 +217,14 @@ function _buildQuery(nlp_response) {
                 if (queryHaving !== '') {
                     queryHaving += '",' + queryHavingConditionValues + ')';
                 }
+                if (queryOrder === '') {
+                    if (nlp_response.data2) {
+                        queryOrder += '.orderByRaw("`' + nlp_response.data2.alias + '` asc")';
 
+                    } else {
+                        queryOrder += '.orderByRaw("`' + nlp_response.data1.alias + '` asc")';
+                    }
+                }
                 let queryString = 'knex("' + nlp_response.dataset + '")' + querySelect + queryOrder + queryLimit + queryWhere;
                 if (queryGroup.length > 0) {
                     queryString += '.groupBy(' + queryGroup.join(',') + ')' + queryHaving;
@@ -278,6 +319,7 @@ function _buildQueryOld(columns, table, actualColumns) {
     return queryString;
 }
 
+
 // To handle no-column queries.
 function _reverseMapping(columns, table) {
     return new Promise((resolve, reject) => {
@@ -303,7 +345,7 @@ function _reverseMapping(columns, table) {
             });
             _executeSelectOld(columns_arr, table, null).then(rows => {
                 let promises = [];
-                let uniqueness_threshold = config.uniqueness_threshold;
+                let uniqueness_threshold = 0.1;
                 const table_count = rows[0]["primKey"];
                 columns.forEach((column) => {
                     let uniqueness = rows[0][column] / table_count;
@@ -361,9 +403,14 @@ let DataService = {
                     //Take note of the order changed here
                     let keys = Object.keys(rows[0]);
 
+                    console.log(nlp_response);
                     let y_col_name = null, x_col_name = null;
                     if (nlp_response.data1) {
-                        y_col_name = nlp_response.data1.alias;
+                        if (keys.indexOf(default_col[nlp_response.dataset]) > -1) {
+                            y_col_name = default_col[nlp_response.dataset];
+                        } else {
+                            y_col_name = nlp_response.data1.alias;
+                        }
                         if (y_col_name) {
                             keys.splice(keys.indexOf(y_col_name), 1);
                         }
@@ -384,9 +431,9 @@ let DataService = {
                             x.push(row[x_col_name]);
                         }
                         if (keys.length > 0) {
-                            let delta_val = row[keys[0]].trim();
+                            let delta_val = row[keys[0]].toString().trim();
                             for (let i = 1; i < keys.length; i++) {
-                                delta_val += '_' + row[keys[i]].trim();
+                                delta_val += '_' + row[keys[i]].toString().trim();
                             }
                             delta.push(delta_val);
                         }

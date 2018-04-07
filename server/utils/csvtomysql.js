@@ -24,7 +24,8 @@ let csvToMysql = {
                     "/" + mysql.database,
                     tableName: table,
                     dateFormat: ["MM/DD/YYYY", "M/D/YYYY"],
-                    datetimeFormat: ["MM/DD/YYYY HH:mm:ss a", "M/D/YYYY HH:mm:ss a"]
+                    datetimeFormat: ["MM/DD/YYYY HH:mm:ss a", "M/D/YYYY HH:mm:ss a"],
+                    batchSize: 250
                 });
             } catch (err) {
                 reject(err);

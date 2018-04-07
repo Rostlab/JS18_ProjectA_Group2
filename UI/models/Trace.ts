@@ -11,6 +11,7 @@ export class Trace implements Plotly.Data {
     labels: Datum[] | Datum[][];
     type: PlotType;
     mode:string;
+    text:any[];
 
     constructor(type: PlotType) {
         this.type = type;
