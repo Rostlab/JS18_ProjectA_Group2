@@ -31,7 +31,6 @@ router.get('/plot', function (req, res) {
 
 
 router.get('/columns', function (req, res) {
-    console.log('inside columns');
     dataService.getColumns(req.query.dataset).then(columns => {
         res.send(columns)
     }).catch(err => {

@@ -17,15 +17,13 @@ let config = (function() {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            password: 'root',
+            password: '',
             database: 'igraph'
         },
 
         this.logger = logger,
 
-        this.revere_mapping = {
-            uniqueness_threshold: 0.1
-        },
+        this.uniqueness_threshold = 0.1,
 
         this.knex = {
             client: 'mysql',
