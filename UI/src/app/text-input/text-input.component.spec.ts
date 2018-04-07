@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { TextInputComponent } from './text-input.component';
 import { FormsModule } from '@angular/forms';
 
@@ -26,5 +26,40 @@ describe('TextInputComponent', () => {
 
     fit('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    fit('clear text', () => {
+        const testext: string = "testtest";
+        component.textInput = testext;
+        fixture.detectChanges();
+        expect(component.textInput).toEqual(testext);
+        component.clear();
+        fixture.detectChanges();
+        expect(component.textInput).toEqual("");
+    });
+
+    fit('hitting enter plots the graph', fakeAsync(() => {
+        spyOn(component.plot, 'emit');
+
+        component.plotGraph();
+        fixture.detectChanges();
+        tick();
+        expect(component.plot.emit).toHaveBeenCalled();
+    }));
+
+    fit('test textIsEmpty()', () => {
+        component.textInput = "testtest";
+        fixture.detectChanges();
+        expect(component.textIsEmpty()).toBeFalsy();
+
+        component.textInput = "";
+        fixture.detectChanges();
+        expect(component.textIsEmpty()).toBeTruthy();
+    });
+
+    fit('gets correct input', () => {
+        const testext: string = "testtest";
+        component.textInput = testext;
+        expect(component.getTextInput()).toEqual(testext);
     });
 });
