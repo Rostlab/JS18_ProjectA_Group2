@@ -1,14 +1,14 @@
-
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ScatterData } from 'plotly.js/lib/core';
-import {Data, Dataset, Layout, Options, Trace} from "../../../models";
-import { BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ScatterData} from 'plotly.js/lib/core';
+import {Data, Layout, Options, Trace} from "../../../models";
+import {BehaviorSubject} from 'rxjs';
 import {PlotType} from '../../../models/Types';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import {QueryResponse} from "../../../models/QueryResponse";
 import {Columns} from "../../../models/Columns";
 import 'rxjs/Rx';
+
 
 @Injectable()
 export class BackendConnectorService {
@@ -56,10 +56,10 @@ export class BackendConnectorService {
                 sentence: userInput,
                 data: data.traces,
                 layout: data.layout
-            });
+            }).catch(error => Observable.throw(error));
     };
 
-    public fileUpload(fileItem: File, extraData?: object): any {
+    fileUpload(fileItem: File, extraData?: object): any {
         var apiCreateEndpoint = '/api/upload';
         const formData: FormData = new FormData();
 
@@ -83,7 +83,7 @@ export class BackendConnectorService {
 
     public getDatabaseTables() {
         var apiCreateEndpoint = '/api/getTables';
-        return this.http.get<Dataset[]>(apiCreateEndpoint);
+        return this.http.get(apiCreateEndpoint).catch(error => Observable.throw(error));
     }
 
     public getColumns(table) {
@@ -94,7 +94,7 @@ export class BackendConnectorService {
                     dataset: table
                 }
             }).map((columns: Columns) => {
-                return columns;
-        });
+            return columns;
+        }).catch(error => Observable.throw(error));
     }
 }

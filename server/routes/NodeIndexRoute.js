@@ -10,7 +10,7 @@ var router = express.Router();
 var path = require('path');
 
 
-router.get('/test', function (req, res) {
+router.get('/', function (req, res) {
     res.send("Welcome to iGraph");
 });
 
@@ -25,7 +25,7 @@ router.get('/plot', function (req, res) {
     }).then(query_response => {
         res.send(query_response)
     }).catch(err => {
-        res.send(err);
+        res.status(500).send(err);
     });
 });
 
@@ -35,7 +35,7 @@ router.get('/columns', function (req, res) {
     dataService.getColumns(req.query.dataset).then(columns => {
         res.send(columns)
     }).catch(err => {
-        res.send(err);
+        res.ststus(500).send(err);
     });
 });
 
@@ -44,7 +44,7 @@ router.post('/upload', function (req, res) {
   dataService.upload(req, res, function (err) {
     if (err) {
       console.log(err.toString());
-      res.send({"Error" : err.toString()});
+      res.status(500).send({"Error" : err.toString()});
       return;
     } else {
       var filePath = req.file.path;      
@@ -55,7 +55,7 @@ router.post('/upload', function (req, res) {
               res.status(202).send({"fileName" : tableName});
               return;
           }, err => {
-              res.send(err);
+              res.status(500).send(err);
               return;
       });
     // Not waiting for dataset to get uploaded to mysql database. Sent a request above and assuming it will get
@@ -73,7 +73,7 @@ router.get('/getTables', function(req, res){
     return;
   }).catch(err => {
     console.log("Err");
-    res.send(err);
+    res.status(500).send(err);
     return;
   });
 });
@@ -83,7 +83,7 @@ router.get('/getTables', function(req, res){
 router.get('/func_test', function(req, res){
     dataService.test(function(err, data) {
         if(err) {
-            res.send(err)
+            res.status(500).send(err)
         } else {
             res.send(data);
         }

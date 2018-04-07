@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { TextInputComponent } from './text-input';
-import { ChartComponent } from './chart';
+import { ChartComponent } from './chart/chart.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
 

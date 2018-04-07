@@ -1,11 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, Input, Output } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEventType, HttpRequest, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-import { EventEmitter } from 'events';
-import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { BackendConnectorService } from "../services";
 import { Dataset} from '../../../models';
-
-
 
 @Component({
   selector: 'app-file-upload',
@@ -16,11 +12,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     fileSelected: boolean = true;
     statusFormGroup: FormGroup;
     fileToUpload: File  = null;
-    uploadProgress:number = 0;
-    uploadComplete:boolean = false;
-    uploadingProgressing:boolean = false;
     fileUploadSub: any;
-    serverResponse: any;
 
     @ViewChild('myInput') myFileInput: any;
 
@@ -50,7 +42,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
                 submittedData).subscribe(
                     event=>{ this.handleResponse(event); }, 
                     error=>{
-                        console.log("Server error: " + error.message);
+                        console.log( error.error);
                     });
 
           statusNgForm.resetForm({});          

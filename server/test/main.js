@@ -20,7 +20,7 @@ describe('## Misc', () => {
 describe('## Testing NodeIndexRoute', function() {
   it('## Testing GET endpoint', (done) => {
     request(app)
-      .get('/api/test')
+      .get('/api/')
       .expect(httpStatus.OK)
       .then((res) => {
         expect(res.text).to.equal("Welcome to iGraph");
