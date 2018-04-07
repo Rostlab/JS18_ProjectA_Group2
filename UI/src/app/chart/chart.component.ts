@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Data, Layout, Options, Trace} from "../../../models";
 import * as Plotly from 'plotly.js';
-import { Layout, Options, Trace } from "../../../models";
-import {Data} from "../../../models/Data";
 
 @Component({
     selector: 'app-chart',
@@ -26,9 +25,8 @@ export class ChartComponent implements OnInit {
 
     plot() {
         if ((this.layout === undefined) || (this.data === undefined) || (this.options === undefined)) {
-            alert("Wrong input");
+            alert("Error @ Chart Component: Wrong input");
         } else {
-            console.log(this.data);
             Plotly.newPlot("plot", this.data, this.layout, this.options);
         }
     };
@@ -49,7 +47,6 @@ export class ChartComponent implements OnInit {
         });
     };
 
-    //TODO: Needs to improve
     public getData(){
         return new Data(this.data, this.layout, this.options);
     }

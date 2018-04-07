@@ -1,19 +1,25 @@
-import {TestBed, inject} from '@angular/core/testing';
-
-import {BackendConnectorService} from './backend-connector.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {Columns, Data, Dataset} from "../../../models";
+import { TestBed, inject, async } from '@angular/core/testing';
+import { BackendConnectorService } from './backend-connector.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Columns, Data, Dataset, QueryResponse } from "../../../models";
 
 describe('BackendConnectorService', () => {
     let service: BackendConnectorService;
     let httpMock: HttpTestingController;
 
-    beforeEach(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [BackendConnectorService]
-        });
+            imports: [
+                HttpClientTestingModule
+            ],
+            providers: [
+                BackendConnectorService
+            ]
+        })
+            .compileComponents();
+    }));
 
+    beforeEach(() => {
         service = TestBed.get(BackendConnectorService);
         httpMock = TestBed.get(HttpTestingController);
     });

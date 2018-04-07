@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
-import { TextInputComponent } from '../text-input';
+import { TextInputComponent } from '../text-input/text-input.component';
 import { ChartComponent } from '../chart/chart.component';
 import { BackendConnectorService } from "../services";
 import { FileUploadComponent } from '../file-upload/file-upload.component';

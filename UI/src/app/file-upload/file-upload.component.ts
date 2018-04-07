@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChild, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { BackendConnectorService } from "../services";
-import { Dataset} from '../../../models';
+import {Component, OnInit, OnDestroy, ViewChild, Input} from '@angular/core';
+import {FormGroup, NgForm} from '@angular/forms';
+import {BackendConnectorService} from "../services";
+import {Dataset} from '../../../models';
 
 @Component({
     selector: 'app-file-upload',
@@ -24,7 +24,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     }
 
     @Input() dataList;
-    //@Output() datasetsChange = new EventEmitter();
 
     ngOnDestroy() {
         if (this.fileUploadSub){
@@ -69,7 +68,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
         this.fileToUpload = fileItem;
 
         //If file was selected enable submit button else disable
-        this.fileSelected = fileItem ? false : true;
+        this.fileSelected = !fileItem;
     }
 
     handleCancel() {
