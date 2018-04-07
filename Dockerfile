@@ -6,8 +6,13 @@ EXPOSE 4200
 
 WORKDIR /app
 RUN git clone --depth 1 https://github.com/jyotirmay123/nlp_engine.git
-RUN pip install -r nlp_engine/requirements.txt
-RUN pip install -e nlp_engine
+RUN cd nlp_engine && \
+    pip install -r requirements.txt && \
+    pip install -e . && \
+    pip install rasa_nlu[spacy] && \
+    python -m spacy download en_core_web_md && \
+    python -m spacy link en_core_web_md en && \
+    cd ..
 RUN cp -R projects nlp_engine
 COPY package.json .
 COPY package-lock.json .
