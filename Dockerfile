@@ -13,11 +13,11 @@ RUN cd nlp_engine && \
     python -m spacy download en_core_web_md && \
     python -m spacy link en_core_web_md en && \
     cd ..
-RUN cp -R projects nlp_engine
 COPY package.json .
 COPY package-lock.json .
 RUN npm install
 COPY . .
+RUN cp -R projects nlp_engine
 
 CMD ["./node_modules/.bin/concurrently", \
     "PORT=3001 node server/server.js", \
