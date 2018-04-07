@@ -34,4 +34,10 @@ describe('FileUploadComponent', () => {
     fit('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    fit('cancel', () => {
+       component.handleCancel();
+       fixture.detectChanges();
+       expect(component.fileSelected).toBeTruthy();
+    });
 });

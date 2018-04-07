@@ -64,7 +64,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
     handleFileInput(files: FileList) {
         let fileItem = files.item(0);
-        console.log("file input has changed. The file is", fileItem);
+        // console.log("file input has changed. The file is", fileItem);
         this.fileToUpload = fileItem;
 
         //If file was selected enable submit button else disable
