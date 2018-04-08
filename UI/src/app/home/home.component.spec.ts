@@ -8,7 +8,6 @@ import { BackendConnectorService } from "../services";
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { Columns, Dataset } from "../../../models";
 import { By } from "@angular/platform-browser";
-import {Button} from "primeng/button";
 
 describe('HomeComponent', () => {
     let component: HomeComponent;

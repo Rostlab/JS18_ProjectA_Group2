@@ -1,6 +1,7 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { TextInputComponent } from './text-input.component';
 import { FormsModule } from '@angular/forms';
+import {By} from "@angular/platform-browser";
 
 describe('TextInputComponent', () => {
     let component: TextInputComponent;
@@ -62,4 +63,14 @@ describe('TextInputComponent', () => {
         component.textInput = testext;
         expect(component.getTextInput()).toEqual(testext);
     });
+
+    fit('hitting Enter in text field triggers plotGraph()', fakeAsync(() => {
+        spyOn(component, 'plotGraph');
+
+        fixture.debugElement.query(By.css('textarea.textField')).triggerEventHandler('keyup.enter', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.plotGraph).toHaveBeenCalled();
+    }));
 });
