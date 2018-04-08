@@ -6,6 +6,7 @@ import { TextInputComponent } from '../text-input';
 import { ChartComponent } from '../chart/chart.component';
 import { BackendConnectorService } from "../services";
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { WorkingCommandsComponent } from "../working-commands/working-commands.component";
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -22,7 +23,8 @@ describe('HomeComponent', () => {
                 HomeComponent,
                 TextInputComponent,
                 ChartComponent,
-                FileUploadComponent
+                FileUploadComponent,
+                WorkingCommandsComponent
             ],
             providers: [
                 BackendConnectorService
