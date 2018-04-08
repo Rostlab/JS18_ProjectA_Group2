@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
@@ -7,6 +7,8 @@ import { ChartComponent } from '../chart/chart.component';
 import { BackendConnectorService } from "../services";
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { Columns, Dataset } from "../../../models";
+import { By } from "@angular/platform-browser";
+import {Button} from "primeng/button";
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -212,5 +214,53 @@ describe('HomeComponent', () => {
         expect(component.columns).toEqual(null);
     });
 
+    fit('hitting plot button triggers plotGraph()', fakeAsync(() => {
+        spyOn(component, 'plotGraph');
 
+        fixture.debugElement.query(By.css('button.plotButton')).triggerEventHandler('click', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.plotGraph).toHaveBeenCalled();
+    }));
+
+    fit('hitting update button triggers updateGraph()', fakeAsync(() => {
+        spyOn(component, 'updateGraph');
+
+        fixture.debugElement.query(By.css('button.updateButton')).triggerEventHandler('click', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.updateGraph).toHaveBeenCalled();
+    }));
+
+    fit('hitting reset button triggers clearAll()', fakeAsync(() => {
+        spyOn(component, 'clearAll');
+
+        fixture.debugElement.query(By.css('button.resetButton')).triggerEventHandler('click', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.clearAll).toHaveBeenCalled();
+    }));
+
+    fit('hitting Enter in garph text field triggers plotGraph()', fakeAsync(() => {
+        spyOn(component, 'plotGraph');
+
+        fixture.debugElement.query(By.css('app-text-input.textInputPlot')).triggerEventHandler('plot', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.plotGraph).toHaveBeenCalled();
+    }));
+
+    fit('hitting Enter in update text field triggers updateGraph()', fakeAsync(() => {
+        spyOn(component, 'updateGraph');
+
+        fixture.debugElement.query(By.css('app-text-input.textInputUpdate')).triggerEventHandler('plot', null);
+
+        fixture.detectChanges();
+        tick();
+        expect(component.updateGraph).toHaveBeenCalled();
+    }));
 });
