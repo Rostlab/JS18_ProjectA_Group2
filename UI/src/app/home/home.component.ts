@@ -57,9 +57,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
         //TODO
         // call plot in the graph
         if (!this.shouldDisablePlotButton()) {
-            console.log("Plot was pressed");
-            console.log(this.textInput.getTextInput());
-            console.log(this.dataset.name);
             const that = this;
             this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
                 .subscribe((data: Data) => {
@@ -83,7 +80,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
     public updateGraph() {
         if (!this.shouldDisableUpdateButton()) {
-            console.log("Update was pressed");
             const that = this;
             this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
                 .subscribe((res) => {
@@ -148,7 +144,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * is called by the clear button
      */
     public clearAll() {
-        // console.log("Clear was pressed");
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();
