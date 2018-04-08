@@ -30,7 +30,7 @@ describe('TextInputComponent', () => {
     });
 
     fit('clear text', () => {
-        const testext: string = "testtest";
+        const testext: string = "test";
         component.textInput = testext;
         fixture.detectChanges();
         expect(component.textInput).toEqual(testext);
@@ -49,7 +49,7 @@ describe('TextInputComponent', () => {
     }));
 
     fit('test textIsEmpty()', () => {
-        component.textInput = "testtest";
+        component.textInput = "test";
         fixture.detectChanges();
         expect(component.textIsEmpty()).toBeFalsy();
 
@@ -59,7 +59,7 @@ describe('TextInputComponent', () => {
     });
 
     fit('gets correct input', () => {
-        const testext: string = "testtest";
+        const testext: string = "test";
         component.textInput = testext;
         expect(component.getTextInput()).toEqual(testext);
     });
@@ -67,7 +67,7 @@ describe('TextInputComponent', () => {
     fit('hitting Enter in text field triggers plotGraph()', fakeAsync(() => {
         spyOn(component, 'plotGraph');
 
-        fixture.debugElement.query(By.css('textarea.textField')).triggerEventHandler('keyup.enter', null);
+        fixture.debugElement.query(By.css('#text-input-area')).triggerEventHandler('keyup.enter', null);
 
         fixture.detectChanges();
         tick();

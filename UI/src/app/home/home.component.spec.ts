@@ -216,7 +216,7 @@ describe('HomeComponent', () => {
     fit('hitting plot button triggers plotGraph()', fakeAsync(() => {
         spyOn(component, 'plotGraph');
 
-        fixture.debugElement.query(By.css('button.plotButton')).triggerEventHandler('click', null);
+        fixture.debugElement.query(By.css('#plotButton')).triggerEventHandler('click', null);
 
         fixture.detectChanges();
         tick();
@@ -226,7 +226,7 @@ describe('HomeComponent', () => {
     fit('hitting update button triggers updateGraph()', fakeAsync(() => {
         spyOn(component, 'updateGraph');
 
-        fixture.debugElement.query(By.css('button.updateButton')).triggerEventHandler('click', null);
+        fixture.debugElement.query(By.css('#updateButton')).triggerEventHandler('click', null);
 
         fixture.detectChanges();
         tick();
@@ -236,7 +236,7 @@ describe('HomeComponent', () => {
     fit('hitting reset button triggers clearAll()', fakeAsync(() => {
         spyOn(component, 'clearAll');
 
-        fixture.debugElement.query(By.css('button.resetButton')).triggerEventHandler('click', null);
+        fixture.debugElement.query(By.css('#resetButton')).triggerEventHandler('click', null);
 
         fixture.detectChanges();
         tick();
@@ -246,7 +246,7 @@ describe('HomeComponent', () => {
     fit('hitting Enter in garph text field triggers plotGraph()', fakeAsync(() => {
         spyOn(component, 'plotGraph');
 
-        fixture.debugElement.query(By.css('app-text-input.textInputPlot')).triggerEventHandler('plot', null);
+        fixture.debugElement.query(By.css('#text-input')).triggerEventHandler('plot', null);
 
         fixture.detectChanges();
         tick();
@@ -256,7 +256,7 @@ describe('HomeComponent', () => {
     fit('hitting Enter in update text field triggers updateGraph()', fakeAsync(() => {
         spyOn(component, 'updateGraph');
 
-        fixture.debugElement.query(By.css('app-text-input.textInputUpdate')).triggerEventHandler('plot', null);
+        fixture.debugElement.query(By.css('#text-input-update')).triggerEventHandler('plot', null);
 
         fixture.detectChanges();
         tick();
