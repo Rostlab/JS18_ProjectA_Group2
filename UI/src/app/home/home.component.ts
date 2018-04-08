@@ -148,7 +148,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
      * is called by the clear button
      */
     public clearAll() {
-        // console.log("Clear was pressed");
         this.graphIsEmpty = true;
         this.chart.reset();
         this.textInput.clear();

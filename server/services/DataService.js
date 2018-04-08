@@ -99,8 +99,6 @@ function _doColumnNameCorrection(nlp_column_name, actualColumns, table) {
 
             }
         }
-        console.log('printing col name');
-        console.log(column_name);
     } else {
         column_name = default_col[table];
     }
@@ -191,8 +189,6 @@ function _buildQuery(nlp_response) {
                                 queryWhere += '.andWhere("' + column.name + '"," in ",[' + column.condition_comparison_value + '])';
                             }
                             else {
-                                console.log(column.condition_comparison_value[0]);
-                                console.log(typeof column.condition_comparison_value[0]);
                                 if (typeof column.condition_comparison_value[0] === 'string') {
                                     queryWhere += '.andWhereRaw("LOWER(' + column.name + ') =  LOWER(?) ", "' + column.condition_comparison_value[0] + '")';
                                 }
@@ -402,8 +398,6 @@ let DataService = {
                 _executeSelect(nlp_response).then(function (rows) {
                     //Take note of the order changed here
                     let keys = Object.keys(rows[0]);
-
-                    console.log(nlp_response);
                     let y_col_name = null, x_col_name = null;
                     if (nlp_response.data1) {
                         if (keys.indexOf(default_col[nlp_response.dataset]) > -1) {

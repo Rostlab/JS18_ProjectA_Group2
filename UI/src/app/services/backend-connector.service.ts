@@ -17,7 +17,6 @@ export class BackendConnectorService {
     }
 
     private createPlotData(queryResponse: QueryResponse) {
-        console.log(queryResponse);
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
             const layout = new Layout(queryResponse.title);

@@ -6,7 +6,6 @@ let ReverseMappingService = {
         return new Promise((resolve,reject)=>{
             knex(config.config_table).select('meta').where('tablename', dataset).then(rows => {
                 const meta = JSON.parse(rows[0]['meta']);
-                console.log('CCV recieved :'+ccv);
                 //TODO:Remove before push
                 let col_name=meta[ccv.trim()];
                 let ccv_list =[];
@@ -36,12 +35,10 @@ let ReverseMappingService = {
                             resolve({col_name:col_name, ccv_list:ccv_list});
                         }
                         else{
-                            console.log("@#$@#$@$@#$@$@#$@#$@#$@#$@#$@#$");
                             reject(new Error("Not able to find any relevant columns"));
                         }
                     }
                     else{
-                        console.log("+++++++++++++++++++");
                         reject(new Error("Not able to find any relevant columns"));
                     }
                 }

@@ -55,7 +55,6 @@ function _createColumn(raw_column) {
 
 
 function _createResponseObject(raw_nlp_response, dataset, text) {
-    console.log('creating response');
     const nlpResponse = new NlpResponse(dataset);
     nlpResponse.title = text;
     if (raw_nlp_response['d1']) {
@@ -89,8 +88,6 @@ function _createResponseObject(raw_nlp_response, dataset, text) {
             nlpResponse.conditions.push(condition);
         })
     }
-    console.log('after create response');
-    console.log(nlpResponse);
 
     return nlpResponse;
 }
@@ -130,8 +127,6 @@ function _extractCCV(str) {
  */
 function _processSentenceElement(query, dataset) {
     return new Promise((resolve, reject) => {
-        console.log('Process sentence elements');
-        console.log(query);
         _callNlp(query, config.nlp_project, config.nlp_model_ops).then(function (res) {
             res=JSON.parse(res);
 
@@ -139,9 +134,7 @@ function _processSentenceElement(query, dataset) {
             res["entities"].forEach(function (obj, idx) {
                 ops[obj.entity] = obj.value;
             });
-            console.log(ops);
             if (ops.hasOwnProperty('ccv') && !ops.hasOwnProperty('col')) {
-                console.log('doing reverse mapping for :'+ops["ccv"]);
                 const ccv = _extractCCV(ops["ccv"]);
                 ReverseMappingService.getColumnAndCCV(ccv, dataset).then(obj => {
                     ops['col'] = obj['col_name'];
