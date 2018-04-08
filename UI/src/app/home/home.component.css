@@ -41,7 +41,7 @@
     width: 840px;
     height: 560px;
     border: solid white 2px;
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
 }
 .plot-div{
     text-align: center;
