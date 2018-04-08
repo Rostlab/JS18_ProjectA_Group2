@@ -460,7 +460,10 @@ let DataService = {
                     .andWhere("TABLE_NAME", "=", dataset).then(rows => {
                     let column_names = [];
                     rows.forEach((row) => {
-                        column_names.push(row['COLUMN_NAME']);
+                        let name = row['COLUMN_NAME'];
+                        if(name !== 'primKey') {
+                            column_names.push(row['COLUMN_NAME']);
+                        }
                     });
                     resolve(column_names);
                 }).catch(function (err) {
