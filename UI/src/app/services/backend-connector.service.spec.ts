@@ -1,7 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { BackendConnectorService } from './backend-connector.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Columns, Data, Dataset, QueryResponse } from "../../../models";
+import {Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace} from "../../../models";
 
 describe('BackendConnectorService', () => {
     let service: BackendConnectorService;
@@ -32,7 +32,7 @@ describe('BackendConnectorService', () => {
         expect(service).toBeTruthy();
     }));
 
-    /*fit('should get data to plot from the API via GET', () => {
+    fit('should get data to plot from the API via GET', () => {
         const dummyPosts: QueryResponse = {
             x: [1,2,3],
             x_title: "X",
@@ -43,23 +43,19 @@ describe('BackendConnectorService', () => {
             delta_title: "D",
             title: "Tit"
         };
-        const dummyQueryResponse: Data = {
-            traces: [{
-                type: "bar",
-                x: [1,2,3],
-                xaxis: "X",
-                y: [4,5,6],
-                yaxis: "Y",
-                labels: [1,2,3],
-                values: [4,5,6]
-            }],
-            layout: {},
-            options: {}
-        };
+
+        const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
+        dummytrace.x = dummyPosts.x;
+        dummytrace.xaxis = dummyPosts.x_title;
+        dummytrace.y = dummyPosts.y;
+        dummytrace.yaxis = dummyPosts.y_title;
+        dummytrace.labels = dummyPosts.x;
+        dummytrace.values = dummyPosts.y;
+        const dummyQueryResponse: Data = new Data([dummytrace], new Layout(dummyPosts.title), new Options());
 
         service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
-            console.log(dummyQueryResponse);
-            expect(posts).toBe(dummyQueryResponse);
+            console.log(dummyQueryResponse as Data);
+            expect(posts).toEqual(dummyQueryResponse);
         });
 
         const request = httpMock.expectOne(request => request.url === '/api/plot');
@@ -68,7 +64,7 @@ describe('BackendConnectorService', () => {
         expect(request.request.method).toEqual('GET');
 
         request.flush(dummyPosts);
-    });*/
+    });
 
     fit('should get update from the API via GET', () => {
         const dummyResponse: any[] = [
@@ -104,7 +100,7 @@ describe('BackendConnectorService', () => {
         request.flush(dummyResponse);
     });
 
-    /*fit('should upload file to the API via POST', () => {
+    fit('should upload file to the API via POST', () => {
         const dummyPosts: any = {
             filename: 'Value 1'
         };
@@ -113,13 +109,13 @@ describe('BackendConnectorService', () => {
             expect(event).toEqual(dummyPosts);
         });
 
-        const request = httpMock.expectOne(request => request.url === '/api/getTables');
+        const request = httpMock.expectOne(request => request.url === '/api/upload');
 
-        expect(request.request.url).toEqual('/api/getTables');
+        expect(request.request.url).toEqual('/api/upload');
         expect(request.request.method).toEqual('POST');
 
         request.flush(dummyPosts);
-    });*/
+    });
 
     fit('should retrieve names of data tables from the API via GET', () => {
         const dummyPosts: Dataset[] = [
