@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScatterData } from 'plotly.js/lib/core';
-import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
+import { Columns, Data, Dataset, Layout, ModeType, Options, PlotType, QueryResponse, Trace } from "../../../models";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
@@ -29,11 +29,11 @@ export class BackendConnectorService {
             else{
                 trace.x = queryResponse.x;
                 trace.y = queryResponse.y;
-                layout.yaxis = {title :queryResponse.y_title, showgrid:true};
-                layout.xaxis = {title :queryResponse.x_title, showgrid:true};
+                layout.yaxis = {title: queryResponse.y_title, showgrid: true};
+                layout.xaxis = {title: queryResponse.x_title, showgrid: true};
                 trace.text = queryResponse.delta;
                 if(queryResponse.plot_type == 'scatter'){
-                    trace.mode='markers' as ModeType;
+                    trace.mode = 'markers' as ModeType;
                 }
             }
 

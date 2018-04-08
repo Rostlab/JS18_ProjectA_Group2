@@ -1,7 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { BackendConnectorService } from './backend-connector.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
+import { Columns, Data, Dataset, Layout, ModeType, Options, PlotType, QueryResponse, Trace } from "../../../models";
 
 describe('BackendConnectorService', () => {
     let service: BackendConnectorService;
@@ -32,7 +32,7 @@ describe('BackendConnectorService', () => {
         expect(service).toBeTruthy();
     }));
 
-    fit('should get data to plot from the API via GET', () => {
+    fit('should get data to plot from the API via GET for bar chart', () => {
         const dummyPosts: QueryResponse = {
             x: [1,2,3],
             x_title: "X",
@@ -45,13 +45,133 @@ describe('BackendConnectorService', () => {
         };
 
         const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
-        dummytrace.x = dummyPosts.x;
-        dummytrace.xaxis = dummyPosts.x_title;
+        dummytrace.x = dummyPosts.delta;
         dummytrace.y = dummyPosts.y;
-        dummytrace.yaxis = dummyPosts.y_title;
-        dummytrace.labels = dummyPosts.x;
+        const dummyQueryResponse: Data = new Data([dummytrace], new Layout(dummyPosts.title), new Options());
+
+        service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
+            expect(posts).toEqual(dummyQueryResponse);
+        });
+
+        const request = httpMock.expectOne(request => request.url === '/api/plot');
+
+        expect(request.request.url).toEqual('/api/plot');
+        expect(request.request.method).toEqual('GET');
+
+        request.flush(dummyPosts);
+    });
+
+    fit('should get data to plot from the API via GET for histogram', () => {
+        const dummyPosts: QueryResponse = {
+            x: [1,2,3],
+            x_title: "X",
+            y: [4,5,6],
+            y_title: "Y",
+            plot_type: "histogram",
+            delta: [1,3,5],
+            delta_title: "D",
+            title: "Tit"
+        };
+
+        const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
+        dummytrace.x = dummyPosts.y;
+        const dummyQueryResponse: Data = new Data([dummytrace], new Layout(dummyPosts.title), new Options());
+
+        service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
+            expect(posts).toEqual(dummyQueryResponse);
+        });
+
+        const request = httpMock.expectOne(request => request.url === '/api/plot');
+
+        expect(request.request.url).toEqual('/api/plot');
+        expect(request.request.method).toEqual('GET');
+
+        request.flush(dummyPosts);
+    });
+
+    fit('should get data to plot from the API via GET for pie chart', () => {
+        const dummyPosts: QueryResponse = {
+            x: [1,2,3],
+            x_title: "X",
+            y: [4,5,6],
+            y_title: "Y",
+            plot_type: "pie",
+            delta: [1,3,5],
+            delta_title: "D",
+            title: "Tit"
+        };
+
+        const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
+        dummytrace.labels = dummyPosts.delta;
         dummytrace.values = dummyPosts.y;
         const dummyQueryResponse: Data = new Data([dummytrace], new Layout(dummyPosts.title), new Options());
+
+        service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
+            expect(posts).toEqual(dummyQueryResponse);
+        });
+
+        const request = httpMock.expectOne(request => request.url === '/api/plot');
+
+        expect(request.request.url).toEqual('/api/plot');
+        expect(request.request.method).toEqual('GET');
+
+        request.flush(dummyPosts);
+    });
+
+    fit('should get data to plot from the API via GET for scatter chart', () => {
+        const dummyPosts: QueryResponse = {
+            x: [1,2,3],
+            x_title: "X",
+            y: [4,5,6],
+            y_title: "Y",
+            plot_type: "scatter",
+            delta: [1,3,5],
+            delta_title: "D",
+            title: "Tit"
+        };
+
+        const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
+        const dummylayout = new Layout(dummyPosts.title);
+        dummytrace.x = dummyPosts.x;
+        dummytrace.y = dummyPosts.y;
+        dummylayout.yaxis = {title: dummyPosts.y_title, showgrid: true};
+        dummylayout.xaxis = {title: dummyPosts.x_title, showgrid: true};
+        dummytrace.text = dummyPosts.delta;
+        dummytrace.mode = 'markers' as ModeType;
+        const dummyQueryResponse: Data = new Data([dummytrace], dummylayout, new Options());
+
+        service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
+            expect(posts).toEqual(dummyQueryResponse);
+        });
+
+        const request = httpMock.expectOne(request => request.url === '/api/plot');
+
+        expect(request.request.url).toEqual('/api/plot');
+        expect(request.request.method).toEqual('GET');
+
+        request.flush(dummyPosts);
+    });
+
+    fit('should get data to plot from the API via GET for line chart', () => {
+        const dummyPosts: QueryResponse = {
+            x: [1,2,3],
+            x_title: "X",
+            y: [4,5,6],
+            y_title: "Y",
+            plot_type: "line",
+            delta: [1,3,5],
+            delta_title: "D",
+            title: "Tit"
+        };
+
+        const dummytrace = new Trace(dummyPosts.plot_type as PlotType);
+        const dummylayout = new Layout(dummyPosts.title);
+        dummytrace.x = dummyPosts.x;
+        dummytrace.y = dummyPosts.y;
+        dummylayout.yaxis = {title: dummyPosts.y_title, showgrid: true};
+        dummylayout.xaxis = {title: dummyPosts.x_title, showgrid: true};
+        dummytrace.text = dummyPosts.delta;
+        const dummyQueryResponse: Data = new Data([dummytrace], dummylayout, new Options());
 
         service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
             expect(posts).toEqual(dummyQueryResponse);
@@ -78,9 +198,14 @@ describe('BackendConnectorService', () => {
                 yaxis: "",
                 values: [],
                 labels: [],
-                type: 'bar'
+                type: 'bar',
+                mode: 'lines',
+                text: [""],
             }],
             layout: {
+                title: "",
+                xaxis: "",
+                yaxis: ""
             },
             options: {
             }
