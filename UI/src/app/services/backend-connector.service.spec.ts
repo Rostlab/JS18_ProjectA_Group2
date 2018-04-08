@@ -54,7 +54,6 @@ describe('BackendConnectorService', () => {
         const dummyQueryResponse: Data = new Data([dummytrace], new Layout(dummyPosts.title), new Options());
 
         service.getData("DummyPlotRequest", "DatasetName").subscribe((posts: Data) => {
-            console.log(dummyQueryResponse as Data);
             expect(posts).toEqual(dummyQueryResponse);
         });
 

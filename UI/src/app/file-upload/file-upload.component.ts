@@ -35,13 +35,14 @@ export class FileUploadComponent implements OnInit, OnDestroy {
         event.preventDefault();
         if (statusNgForm.submitted){
             let submittedData = statusFormGroup.value;
-            console.log(submittedData);
 
             this.fileUploadSub = this.fileUploadService.fileUpload(this.fileToUpload, submittedData)
                 .subscribe(
-                    event=>{ this.handleResponse(event); },
-                    error=>{
-                        console.log( error.error);
+                    event => {
+                        this.handleResponse(event);
+                    },
+                    error => {
+                        alert(error.error);
                     });
 
             statusNgForm.resetForm({});
@@ -50,21 +51,20 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
     handleResponse(response){
         if(response.fileName){
-            var fileName = response.fileName;
+            const fileName = response.fileName;
 
             //Insert new file into dataset selection list
-            var id = this.dataList[this.dataList.length - 1].id + 1;
+            const id = this.dataList[this.dataList.length - 1].id + 1;
             this.dataList.push(new Dataset(id, fileName));
-            window.alert(response.fileName+" has been uploaded to database!");
+            alert(response.fileName + " has been uploaded to database!");
         }else{
-            window.alert(response.Error);
+            alert(response.Error);
         }
     }
 
 
     handleFileInput(files: FileList) {
         let fileItem = files.item(0);
-        // console.log("file input has changed. The file is", fileItem);
         this.fileToUpload = fileItem;
 
         //If file was selected enable submit button else disable
