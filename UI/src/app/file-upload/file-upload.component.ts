@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewChild, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 import { BackendConnectorService } from "../services";
-import { Dataset} from '../../../models';
+import { Dataset } from '../../../models';
 
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.css']
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
     fileSelected: boolean = true;
@@ -20,11 +20,10 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     constructor(private fileUploadService: BackendConnectorService) {}
 
     ngOnInit() {
-      this.statusFormGroup = new FormGroup({});
+        this.statusFormGroup = new FormGroup({});
     }
 
     @Input() dataList;
-    //@Output() datasetsChange = new EventEmitter();
 
     ngOnDestroy() {
         if (this.fileUploadSub){
@@ -33,43 +32,43 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     }
 
     handleSubmit(event:any, statusNgForm:NgForm, statusFormGroup: FormGroup){
-      event.preventDefault()
-      if (statusNgForm.submitted){
-          let submittedData = statusFormGroup.value;
+        event.preventDefault();
+        if (statusNgForm.submitted){
+            let submittedData = statusFormGroup.value;
 
-          this.fileUploadSub = this.fileUploadService.fileUpload(
-                this.fileToUpload, 
-                submittedData).subscribe(
-                    event=>{ this.handleResponse(event); }, 
-                    error=>{
-                        console.log( error.error);
+            this.fileUploadSub = this.fileUploadService.fileUpload(this.fileToUpload, submittedData)
+                .subscribe(
+                    event => {
+                        this.handleResponse(event);
+                    },
+                    error => {
+                        alert(error.error);
                     });
 
-          statusNgForm.resetForm({});          
-      }
-  }
-
-  handleResponse(response){
-    if(response.fileName){      
-      var fileName = response.fileName;
-
-      //Insert new file into dataset selection list
-      var id = this.dataList[this.dataList.length - 1].id + 1;
-      this.dataList.push(new Dataset(id, fileName));
-      window.alert(response.fileName+" has been uploaded to database!");
-    }else{
-      window.alert(response.Error);
+            statusNgForm.resetForm({});
+        }
     }
-  }
+
+    handleResponse(response){
+        if(response.fileName){
+            const fileName = response.fileName;
+
+            //Insert new file into dataset selection list
+            const id = this.dataList[this.dataList.length - 1].id + 1;
+            this.dataList.push(new Dataset(id, fileName));
+            alert(response.fileName + " has been uploaded to database!");
+        }else{
+            alert(response.Error);
+        }
+    }
 
 
     handleFileInput(files: FileList) {
         let fileItem = files.item(0);
-        console.log("file input has changed. The file is", fileItem);
         this.fileToUpload = fileItem;
-        
+
         //If file was selected enable submit button else disable
-        this.fileSelected = fileItem ? false : true;
+        this.fileSelected = !fileItem;
     }
 
     handleCancel() {

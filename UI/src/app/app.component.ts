@@ -11,9 +11,5 @@ export class AppComponent {
     public spinkit = Spinkit;
 
     constructor(private spinner: SpinnerVisibilityService) {
-        // show the spinner
-        //spinner.show();
-        // hide the spinner
-        //spinner.hide();
     }
 }

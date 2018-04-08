@@ -6,7 +6,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { TextInputComponent } from './text-input';
+import { TextInputComponent } from './text-input/text-input.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ChartComponent } from './chart/chart.component';
 import { BackendConnectorService } from "./services";

@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewChild, AfterViewInit, ErrorHandler} from '@angular/core';
-import {TextInputComponent} from "../text-input";
-import {ChartComponent} from "../chart/chart.component";
-import {BackendConnectorService} from "../services";
-import {Dataset, Data, Columns} from '../../../models';
-import {Observable} from "rxjs/Observable";
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { TextInputComponent } from "../text-input/text-input.component";
+import { ChartComponent } from "../chart/chart.component";
+import { BackendConnectorService } from "../services";
+import { Dataset, Data, Columns } from '../../../models';
 
 @Component({
     selector: 'app-home',
@@ -57,9 +56,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
         //TODO
         // call plot in the graph
         if (!this.shouldDisablePlotButton()) {
-            console.log("Plot was pressed");
-            console.log(this.textInput.getTextInput());
-            console.log(this.dataset.name);
             const that = this;
             this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
                 .subscribe((data: Data) => {
@@ -82,11 +78,9 @@ export class HomeComponent implements AfterViewInit, OnInit {
 
     public updateGraph() {
         if (!this.shouldDisableUpdateButton()) {
-            console.log("Update was pressed");
             const that = this;
             this.backendConnector.update(this.textInputUpdate.getTextInput(), this.chart.getData())
                 .subscribe((res) => {
-                    console.log("Backendconnector" + res);
                     if (res) {
                         that.chart.update(res);
                     }

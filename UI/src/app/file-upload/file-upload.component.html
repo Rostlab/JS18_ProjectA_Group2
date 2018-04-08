@@ -1,4 +1,5 @@
-<form [formGroup]='statusFormGroup'
+<form class="uploadForm"
+      [formGroup]='statusFormGroup'
       #statusNgForm='ngForm'
       (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
     <input #myInput
