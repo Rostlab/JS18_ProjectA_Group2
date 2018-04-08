@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy, ViewChild, Input} from '@angular/core';
-import {FormGroup, NgForm} from '@angular/forms';
-import {BackendConnectorService} from "../services";
-import {Dataset} from '../../../models';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
+import { BackendConnectorService } from "../services";
+import { Dataset } from '../../../models';
 
 @Component({
     selector: 'app-file-upload',

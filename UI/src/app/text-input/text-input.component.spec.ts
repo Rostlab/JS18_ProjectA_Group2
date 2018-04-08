@@ -1,7 +1,7 @@
-import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { TextInputComponent } from './text-input.component';
 import { FormsModule } from '@angular/forms';
-import {By} from "@angular/platform-browser";
+import { By } from "@angular/platform-browser";
 
 describe('TextInputComponent', () => {
     let component: TextInputComponent;

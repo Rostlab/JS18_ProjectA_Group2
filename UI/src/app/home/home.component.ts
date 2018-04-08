@@ -1,9 +1,8 @@
-import {Component, OnInit, ViewChild, AfterViewInit, ErrorHandler} from '@angular/core';
-import {TextInputComponent} from "../text-input/text-input.component";
-import {ChartComponent} from "../chart/chart.component";
-import {BackendConnectorService} from "../services";
-import {Dataset, Data, Columns} from '../../../models';
-import {Observable} from "rxjs/Observable";
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { TextInputComponent } from "../text-input/text-input.component";
+import { ChartComponent } from "../chart/chart.component";
+import { BackendConnectorService } from "../services";
+import { Dataset, Data, Columns } from '../../../models';
 
 @Component({
     selector: 'app-home',

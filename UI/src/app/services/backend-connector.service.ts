@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ScatterData} from 'plotly.js/lib/core';
-import {Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace} from "../../../models";
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ScatterData } from 'plotly.js/lib/core';
+import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 

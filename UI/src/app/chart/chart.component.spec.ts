@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChartComponent } from './chart.component';
 import { FormsModule } from '@angular/forms';
-import {Data} from "../../../models";
+import { Data } from "../../../models";
 
 describe('ChartComponent', () => {
     let component: ChartComponent;

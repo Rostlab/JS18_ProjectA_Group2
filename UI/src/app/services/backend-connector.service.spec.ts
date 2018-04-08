@@ -1,7 +1,7 @@
 import { TestBed, inject, async } from '@angular/core/testing';
 import { BackendConnectorService } from './backend-connector.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import {Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace} from "../../../models";
+import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
 
 describe('BackendConnectorService', () => {
     let service: BackendConnectorService;
