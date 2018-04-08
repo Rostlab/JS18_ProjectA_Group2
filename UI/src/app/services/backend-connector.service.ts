@@ -1,12 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ScatterData} from 'plotly.js/lib/core';
-import {Data, Layout, Options, Trace} from "../../../models";
-import {BehaviorSubject} from 'rxjs';
-import {ModeType, PlotType} from '../../../models/Types';
-import {Observable} from 'rxjs/Observable';
-import {QueryResponse} from "../../../models/QueryResponse";
-import {Columns} from "../../../models/Columns";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ScatterData } from 'plotly.js/lib/core';
+import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 
@@ -41,8 +37,6 @@ export class BackendConnectorService {
                 }
             }
 
-
-
             const options = new Options();
             return new Data([trace], layout, options);
 
@@ -74,8 +68,8 @@ export class BackendConnectorService {
             }).catch(error => Observable.throw(error));
     };
 
-    fileUpload(fileItem: File, extraData?: object): any {
-        var apiCreateEndpoint = '/api/upload';
+    public fileUpload(fileItem: File, extraData?: object): any {
+        const apiCreateEndpoint = '/api/upload';
         const formData: FormData = new FormData();
 
         formData.append('fileItem', fileItem, fileItem.name);
@@ -85,11 +79,14 @@ export class BackendConnectorService {
                 formData.append(key, extraData[key])
             }
         }
-        var headers = new HttpHeaders();
+        const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
 
-        return this.http.post(apiCreateEndpoint, formData, {headers: headers})
+        return this.http.post(apiCreateEndpoint, formData,
+            {
+                headers: headers
+            })
             .map((res: Response) => {
                 return res;
             })
@@ -97,19 +94,22 @@ export class BackendConnectorService {
     };
 
     public getDatabaseTables() {
-        var apiCreateEndpoint = '/api/getTables';
-        return this.http.get(apiCreateEndpoint).catch(error => Observable.throw(error));
+        const apiCreateEndpoint = '/api/getTables';
+        return this.http.get<Dataset[]>(apiCreateEndpoint)
+            .catch(error => Observable.throw(error));
     }
 
-    public getColumns(table) {
-        var apiGetColumnsEndpoint = '/api/columns';
-        return this.http.get(apiGetColumnsEndpoint,
+    public getColumns(table: string) {
+        const apiGetColumnsEndpoint = '/api/columns';
+        return this.http.get<Columns>(apiGetColumnsEndpoint,
             {
                 params: {
                     dataset: table
                 }
-            }).map((columns: Columns) => {
-            return columns;
-        }).catch(error => Observable.throw(error));
+            })
+            .map((columns: Columns) => {
+                return columns;
+            })
+            .catch(error => Observable.throw(error));
     }
 }
