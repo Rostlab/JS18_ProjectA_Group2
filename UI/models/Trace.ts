@@ -1,6 +1,6 @@
 import * as Plotly from 'plotly.js';
 import {Datum} from 'plotly.js';
-import {PlotType} from './Types'
+import {PlotType, ModeType} from './Types'
 
 export class Trace implements Plotly.Data {
     x: Datum[] | Datum[][];
@@ -10,8 +10,8 @@ export class Trace implements Plotly.Data {
     values: Datum[] | Datum[][];
     labels: Datum[] | Datum[][];
     type: PlotType;
-    mode:string;
-    text:any[];
+    mode:ModeType;
+    text:string[];
 
     constructor(type: PlotType) {
         this.type = type;

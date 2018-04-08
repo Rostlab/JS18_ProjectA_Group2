@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ScatterData} from 'plotly.js/lib/core';
 import {Data, Layout, Options, Trace} from "../../../models";
 import {BehaviorSubject} from 'rxjs';
-import {PlotType} from '../../../models/Types';
+import {ModeType, PlotType} from '../../../models/Types';
 import {Observable} from 'rxjs/Observable';
 import {QueryResponse} from "../../../models/QueryResponse";
 import {Columns} from "../../../models/Columns";
@@ -19,6 +19,7 @@ export class BackendConnectorService {
     private createPlotData(queryResponse: QueryResponse) {
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
+            console.log(queryResponse.title);
             const layout = new Layout(queryResponse.title);
             if(queryResponse.plot_type ==='histogram'){
                 trace.x = queryResponse.y;
@@ -37,7 +38,7 @@ export class BackendConnectorService {
                 layout.xaxis = {title :queryResponse.x_title, showgrid:true};
                 trace.text = queryResponse.delta;
                 if(queryResponse.plot_type == 'scatter'){
-                    trace.mode='markers';
+                    trace.mode='markers' as ModeType;
                 }
             }
 

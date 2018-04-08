@@ -63,7 +63,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
             const that = this;
             this.backendConnector.getData(this.textInput.getTextInput(), this.dataset.name)
                 .subscribe((data: Data) => {
-                    console.log("Backendconnector" + data);
                     if (data) {
                         that.chart.data = data.traces;
                         that.chart.options = data.options;
