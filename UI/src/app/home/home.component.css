@@ -7,6 +7,11 @@
 
 .textinput {
     margin-right: 5px;
+    margin-left: 35px;
+}
+label{
+    margin-top: 5px;
+    color: white;
 }
 
 #plotButton {
@@ -29,20 +34,29 @@
 }
 
 .column-box {
+    font-size: 12px;
     text-align: center;
     padding: 2px;
-    border: 1px solid black;
+    border: 1px solid white;
     box-sizing: border-box;
-    background-color: lightgrey;
+    background-color: #f48642;
+    border-radius: 8px;
     margin: 2px 2px 2px 2px;
-    font-family: monospace;
 }
 
 #row-box {
     place-content: center;
     text-align: center;
 }
-#error {
-    border: 1px solid darkred;
-    margin: 20px 20px 20px 20px;
+.msg-div {
+    margin: 150px 20px 20px 20px;
+}
+.display-container{
+    width: 840px;
+    height: 560px;
+    border: solid white 2px;
+    margin-left: 300px;
+}
+.plot-div{
+    text-align: center;
 }

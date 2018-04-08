@@ -1,88 +1,116 @@
-<p>Text to Plot.</p>
 <hr>
 <div>
-  <div>
-    <div id="selectBox" >
-    <select  class="form-control" (change)="getColumns()" [(ngModel)]="dataset">
-      <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id == 0">{{ x.name }}</option>
-    </select>
-    </div>
-    <app-file-upload #fileUpload
-                     id="file-upload"
-                      [dataList]="datasets">
-    </app-file-upload>
-  </div>
-
-  <hr>
-
-  <div class="row" id="row-box">
-    <div *ngFor="let col of columns"  class="column-box">
-      {{col}}
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-2">
-
-    </div>
-    <div class="col-4 textinput">
-      <div class="row">
-        <app-text-input #textInput
-                        id="text-input"
-                        (plot)="plotGraph()"
-                        [isPlotTextInput]="true"
-                        [disabled]="false">
-        </app-text-input>
-      </div>
-      <div class="row button">
-        <button id="plotButton"
-                class="btn btn-md btn-success"
-                type="button"
-                (click)="plotGraph()"
-                [disabled]="shouldDisablePlotButton()">
-          <i class="fa fa-chart-line"></i> Plot
-        </button>
-      </div>
-    </div>
-    <div class="col-4 textinput">
-      <div class="row">
-        <app-text-input #textInputUpdate
-                        id="text-input-update"
-                        (plot)="updateGraph()"
-                        [isPlotTextInput]="false"
-                        [disabled]="disableUpdateTextField()" >
-        </app-text-input>
-      </div>
-      <div class="row button">
-        <button id="updateButton"
-                class="btn btn-md btn-warning"
-                type="button"
-                (click)="updateGraph()"
-                [disabled]="shouldDisableUpdateButton()">
-          <i class="fa fa-chart-line"></i> Update
-        </button>
-      </div>
-    </div>
-    <div class="col-2">
-
+    <div>
+        <div id="selectBox" class="form-group">
+            <div class="col-2" style="text-align: right">
+                <label>Available datasets</label>
+            </div>
+            <div class="col-3">
+                <select class="form-control" (change)="getColumns()" [(ngModel)]="dataset">
+                    <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id == 0">{{ x.name }}</option>
+                </select>
+            </div>
+            <div class="col-2" style="text-align: right">
+                <label>Upload new dataset</label>
+            </div>
+            <div class="col-4">
+                <app-file-upload #fileUpload
+                                 id="file-upload"
+                                 [dataList]="datasets">
+                </app-file-upload>
+            </div>
+        </div>
     </div>
 
-  </div>
-  <hr>
-  <div class="row button">
-    <button id="resetButton"
-            class="btn btn-md btn-danger"
-            type="button"
-            (click)="clearAll()"
-            [disabled]="shouldDisableClearButton()">
-      <i class="fa fa-redo"></i> Clear
-    </button>
-  </div>
+    <hr>
+
+    <div class="row" id="row-box">
+        <div *ngFor="let col of columns" class="column-box">
+            {{col}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-6 textinput">
+            <app-text-input #textInput
+                            id="text-input"
+                            (plot)="plotGraph()"
+                            [isPlotTextInput]="true"
+                            [disabled]="false">
+            </app-text-input>
+        </div>
+        <div class="col-1" style="margin-left: 33px">
+            <div class="row button">
+                <button id="plotButton"
+                        class="btn btn-md btn-primary"
+                        type="button"
+                        (click)="plotGraph()"
+                        [disabled]="shouldDisablePlotButton()">
+                    <i class="fa fa-chart-line"></i> Plot
+                </button>
+            </div>
+        </div>
+        <div class="col-1" style="margin-left: 25px">
+            <div class="row button">
+                <button id="resetButton"
+                        class="btn btn-md btn-danger"
+                        type="button"
+                        (click)="clearAll()"
+                        [disabled]="shouldDisableClearButton()">
+                    <i class="fa fa-redo"></i> Clear
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div id="error" [hidden]="!err_">
-    <img src="assets/error.png" alt="Smiley face" >
+<hr>
+<div>
+    <div class="display-container">
+        <div id="error" [hidden]="!err_" class="msg-div">
+            <i class="fa fa-exclamation-triangle" style="font-size: 56px"></i>
+            <br>
+            <p>OOPS! Something went wrong.</p>
+        </div>
+        <div class="plot-div" [hidden]="err_">
+            <div [hidden]="!disableUpdateTextField()" class="msg-div">
+                <i class="fa fa-pie-chart" style="font-size: 56px"></i>
+                <br>
+                <p>Your plot will be shown here.</p>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                </div>
+                <div class="col-6 textinput">
+                    <app-text-input #textInputUpdate
+                                    id="text-input-update"
+                                    (plot)="updateGraph()"
+                                    [isPlotTextInput]="false"
+                                    [hidden]="disableUpdateTextField()">
+                    </app-text-input>
+                </div>
+                <div class="col-1">
+                    <div class="row button">
+                        <button id="updateButton"
+                                class="btn btn-md btn-warning"
+                                type="button"
+                                (click)="updateGraph()"
+                                [hidden]="disableUpdateTextField()">
+                            <i class="fa fa-chart-line"></i> Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <app-chart #chart id="plot">
+                    </app-chart>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<app-chart #chart id="plot" [hidden]="err_">
-</app-chart>
