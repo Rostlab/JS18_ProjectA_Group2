@@ -19,7 +19,6 @@ export class BackendConnectorService {
     private createPlotData(queryResponse: QueryResponse) {
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
-            console.log(queryResponse.title);
             const layout = new Layout(queryResponse.title);
             if(queryResponse.plot_type ==='histogram'){
                 trace.x = queryResponse.y;
