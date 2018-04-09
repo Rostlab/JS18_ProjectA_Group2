@@ -1,15 +1,13 @@
 <form class="uploadForm"
       [formGroup]='statusFormGroup'
       #statusNgForm='ngForm'
-      (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'
-      style="text-align: left;">
+      (submit)='handleSubmit($event, statusNgForm, statusFormGroup)'>
     <input #myInput
            type="file"
            id="file"
            name="fileItem"
            accept=".csv"
-           (change)="handleFileInput($event.target.files)"
-           style="width: 225px; margin-top: 5px;">
+           (change)="handleFileInput($event.target.files)">
     <button type='submit'
             class='btn btn-sm btn-primary'
             [disabled]='this.fileSelected'>

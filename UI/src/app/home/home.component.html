@@ -1,17 +1,24 @@
 <hr>
-<div>
+<div id="home">
     <div>
-        <div id="selectBox" class="form-group">
-            <div class="col-2" style="text-align: right">
+        <div id="selectBox"
+             class="form-group">
+            <div class="col-2 textRight">
                 <label>Available datasets</label>
             </div>
             <div class="col-3">
-                <select class="form-control" (change)="getColumns()" [(ngModel)]="dataset">
-                    <option *ngFor="let x of datasets" [ngValue]="x" [selected]="x.id == 0">{{ x.name }}</option>
+                <select class="form-control"
+                        (change)="getColumns()"
+                        [(ngModel)]="dataset">
+                    <option *ngFor="let x of datasets"
+                            [ngValue]="x"
+                            [selected]="x.id == 0">
+                        {{ x.name }}
+                    </option>
                 </select>
             </div>
-            <div class="col-2" style="text-align: right">
-                <label>Upload new dataset</label>
+            <div class="col-2 textRight">
+                <label>Upload a new dataset</label>
             </div>
             <div class="col-4">
                 <app-file-upload #fileUpload
@@ -24,8 +31,9 @@
 
     <hr>
 
-    <div class="row" id="row-box">
-        <div *ngFor="let col of columns" class="column-box">
+    <div class="row row-box">
+        <div class="column-box"
+             *ngFor="let col of columns">
             {{col}}
         </div>
     </div>
@@ -33,7 +41,7 @@
     <div class="row">
         <div class="col-1">
         </div>
-        <div class="col-6 textinput">
+        <div class="col-5">
             <app-text-input #textInput
                             id="text-input"
                             (plot)="plotGraph()"
@@ -41,76 +49,71 @@
                             [disabled]="false">
             </app-text-input>
         </div>
-        <div class="col-1" style="margin-left: 33px">
-            <div class="row button">
-                <button id="plotButton"
-                        class="btn btn-md btn-primary"
-                        type="button"
-                        (click)="plotGraph()"
-                        [disabled]="shouldDisablePlotButton()">
-                    <i class="fa fa-chart-line"></i> Plot
-                </button>
-            </div>
+        <div class="col-5"
+             id="leftTextBox">
+            <app-text-input #textInputUpdate
+                            id="text-input-update"
+                            (plot)="updateGraph()"
+                            [isPlotTextInput]="false"
+                            [disabled]="disableUpdateTextField()">
+            </app-text-input>
         </div>
-        <div class="col-1" style="margin-left: 25px">
-            <div class="row button">
-                <button id="resetButton"
-                        class="btn btn-md btn-danger"
-                        type="button"
-                        (click)="clearAll()"
-                        [disabled]="shouldDisableClearButton()">
-                    <i class="fa fa-redo"></i> Clear
-                </button>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-5 button-div">
+            <button id="plotButton"
+                    class="btn btn-md btn-primary button"
+                    type="button"
+                    (click)="plotGraph()"
+                    [disabled]="shouldDisablePlotButton()">
+                <i class="fa fa-chart-line"></i> Plot
+            </button>
+        </div>
+        <div class="col-5 button-div">
+            <button id="updateButton"
+                    class="btn btn-md btn-warning button"
+                    type="button"
+                    (click)="updateGraph()"
+                    [disabled]="disableUpdateTextField()">
+                <i class="fa fa-chart-line"></i> Update
+            </button>
+        </div>
+    </div>
+    <div class="row row-box">
+        <div class="button-div">
+            <button id="resetButton"
+                    class="btn btn-md btn-danger button"
+                    type="button"
+                    (click)="clearAll()"
+                    [disabled]="shouldDisableClearButton()">
+                <i class="fa fa-redo"></i> Clear
+            </button>
         </div>
     </div>
 </div>
 <hr>
 <div>
     <div class="display-container">
-        <div id="error" [hidden]="!err_" class="msg-div">
-            <i class="fa fa-exclamation-triangle" style="font-size: 56px"></i>
+        <div id="error"
+             class="msg-div"
+             [hidden]="!err_">
+            <i class="fa fa-exclamation-triangle icon"></i>
             <br>
             <p>OOPS! Something went wrong.</p>
         </div>
-        <div class="plot-div" [hidden]="err_">
-            <div [hidden]="!disableUpdateTextField()" class="msg-div">
-                <i class="fa fa-pie-chart" style="font-size: 56px"></i>
+        <div class="plot-div"
+             [hidden]="err_">
+            <div class="msg-div"
+                 [hidden]="!graphIsEmpty">
+                <i class="fa fa-pie-chart icon"></i>
                 <br>
                 <p>Your plot will be shown here.</p>
             </div>
-            <div class="row">
-                <div class="col-2">
-                </div>
-                <div class="col-6 textinput">
-                    <app-text-input #textInputUpdate
-                                    id="text-input-update"
-                                    (plot)="updateGraph()"
-                                    [isPlotTextInput]="false"
-                                    [hidden]="disableUpdateTextField()">
-                    </app-text-input>
-                </div>
-                <div class="col-1">
-                    <div class="row button">
-                        <button id="updateButton"
-                                class="btn btn-md btn-warning"
-                                type="button"
-                                (click)="updateGraph()"
-                                [hidden]="disableUpdateTextField()">
-                            <i class="fa fa-chart-line"></i> Update
-                        </button>
-                    </div>
-                </div>
-            </div>
             <br>
-            <div class="row">
-                <div class="col-1">
-                </div>
-                <div class="col-6">
-                    <app-chart #chart id="plot">
-                    </app-chart>
-                </div>
-            </div>
+            <app-chart #chart id="plot">
+            </app-chart>
         </div>
     </div>
 </div>

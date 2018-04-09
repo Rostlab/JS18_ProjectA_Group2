@@ -1,5 +1,7 @@
-.form-group {
-    /*margin-top: 20px;*/
-    display: flex;
-    justify-content: center;
+#file {
+    width: 300px;
+}
+
+form {
+    text-align: left;
 }
