@@ -1,25 +1,10 @@
-.button{
+.button-div {
     margin-top: 10px;
     display: flex;
     justify-content: center;
-    /*padding: 20px;*/
 }
 
-.textinput {
-    margin-right: 5px;
-    margin-left: 35px;
-}
-label{
-    margin-top: 5px;
-    color: white;
-}
-
-#plotButton {
-    width:100px;
-    margin-right: 10px;
-}
-
-#resetButton {
+.button {
     width:100px;
 }
 
@@ -44,19 +29,36 @@ label{
     margin: 2px 2px 2px 2px;
 }
 
-#row-box {
+.row-box {
     place-content: center;
     text-align: center;
 }
 .msg-div {
-    margin: 150px 20px 20px 20px;
+    width: 50%;
+    margin: 250px auto 0 auto;
 }
 .display-container{
     width: 840px;
     height: 560px;
     border: solid white 2px;
-    margin-left: 300px;
+    margin: 0 auto 10px auto;
 }
 .plot-div{
     text-align: center;
+}
+
+#home {
+    margin: 0.5cm;
+}
+
+.textRight {
+    text-align: right;
+}
+
+#leftTextBox {
+    margin-left: 1cm;
+}
+
+.icon {
+    font-size: 56px;
 }
