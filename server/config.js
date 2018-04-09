@@ -9,7 +9,9 @@ let config = (function() {
 
         this.nlp_server = 'http://localhost:5000',
         this.nlp_project = 'igraph_nlp',
-        this.nlp_model = 'model_20180313-225005',
+        this.nlp_model_sentence = 'model_20180407-125051',
+        this.nlp_model_ops = 'model_20180407-234649',
+        this.config_table = 'config',
 
         this.mysql = {
             host: 'localhost',
@@ -21,9 +23,7 @@ let config = (function() {
 
         this.logger = logger,
 
-        this.revere_mapping = {
-            uniqueness_threshold: 0.1
-        },
+        this.uniqueness_threshold = 0.1,
 
         this.knex = {
             client: 'mysql',

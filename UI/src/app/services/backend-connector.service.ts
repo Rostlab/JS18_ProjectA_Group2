@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScatterData } from 'plotly.js/lib/core';
-import { Columns, Data, Dataset, Layout, Options, PlotType, QueryResponse, Trace } from "../../../models";
+import { Columns, Data, Dataset, Layout, ModeType, Options, PlotType, QueryResponse, Trace } from "../../../models";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
@@ -15,14 +15,27 @@ export class BackendConnectorService {
     private createPlotData(queryResponse: QueryResponse) {
         if (queryResponse) {
             const trace = new Trace(queryResponse.plot_type as PlotType);
-            trace.x = queryResponse.x;
-            trace.xaxis = queryResponse.x_title;
-            trace.y = queryResponse.y;
-            trace.yaxis = queryResponse.y_title;
-            trace.labels = queryResponse.x;
-            trace.values = queryResponse.y;
-
             const layout = new Layout(queryResponse.title);
+            if(queryResponse.plot_type ==='histogram'){
+                trace.x = queryResponse.y;
+            }else if(queryResponse.plot_type == 'pie'){
+                trace.labels = queryResponse.delta;
+                trace.values = queryResponse.y;
+            }
+            else if(queryResponse.plot_type == 'bar'){
+                trace.x = queryResponse.delta;
+                trace.y = queryResponse.y;
+            }
+            else{
+                trace.x = queryResponse.x;
+                trace.y = queryResponse.y;
+                layout.yaxis = {title: queryResponse.y_title, showgrid: true};
+                layout.xaxis = {title: queryResponse.x_title, showgrid: true};
+                trace.text = queryResponse.delta;
+                if(queryResponse.plot_type == 'scatter'){
+                    trace.mode = 'markers' as ModeType;
+                }
+            }
 
             const options = new Options();
             return new Data([trace], layout, options);
