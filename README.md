@@ -112,6 +112,9 @@ Proxy configuration has been done on UI to access nlp engine **('/nlp')** and ba
 
 ![Project Architecture](https://github.com/Rostlab/JS18_ProjectA_Group2/blob/develop/mockups/Team%202.%20Project%20Architecture.png)
 
+## Credits
+Logo is taken from [Vecteezy](https://www.vecteezy.com/)
+
 ## Author
 
 - [Carsten Sehlke](https://github.com/csehlke)
