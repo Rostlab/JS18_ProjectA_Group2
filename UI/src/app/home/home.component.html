@@ -76,7 +76,7 @@
                     class="btn btn-md btn-warning button"
                     type="button"
                     (click)="updateGraph()"
-                    [disabled]="disableUpdateTextField()">
+                    [disabled]="shouldDisableUpdateButton()">
                 <i class="fa fa-chart-line"></i> Update
             </button>
         </div>

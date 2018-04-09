@@ -4,7 +4,7 @@ import { WorkingCommandsComponent } from "./working-commands.component";
 
 import { FormsModule } from '@angular/forms';
 
-describe('ChartComponent', () => {
+describe('WorkingCommandsComponent', () => {
     let component: WorkingCommandsComponent;
     let fixture: ComponentFixture<WorkingCommandsComponent>;
 
