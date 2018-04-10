@@ -59,11 +59,11 @@ describe('## Test file upload functionality', function(){
     //Remove file if it exists in server
      fs.stat(resPath, function(err, stats){
       if(err){
-        return console.log("First error: " + err);        
+        return console.log(err);        
       };
 
       fs.unlink(resPath, function(err){
-        if(err) return console.log("Second error: " + err);
+        if(err) return console.log(err);
         console.log('file deleted successfully')
       });
 
