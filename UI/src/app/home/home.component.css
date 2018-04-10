@@ -33,16 +33,24 @@
     place-content: center;
     text-align: center;
 }
+
 .msg-div {
     width: 50%;
     margin: 250px auto 0 auto;
 }
+
 .display-container{
     width: 840px;
     height: 560px;
     border: solid white 2px;
     margin: 0 auto 10px auto;
 }
+
+.graph {
+    width: 50%;
+    margin: 0 auto;
+}
+
 .plot-div{
     text-align: center;
 }

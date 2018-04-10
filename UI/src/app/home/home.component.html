@@ -97,7 +97,8 @@
 </div>
 <hr>
 <div>
-    <div class="display-container">
+    <div class="display-container"
+         [hidden]="!graphIsEmpty">
         <div id="error"
              class="msg-div"
              [hidden]="!err_">
@@ -114,9 +115,12 @@
                 <p>Your plot will be shown here.</p>
             </div>
             <br>
-            <app-chart #chart id="plot">
-            </app-chart>
         </div>
+    </div>
+    <div class="graph"
+         [hidden]="graphIsEmpty">
+        <app-chart #chart id="plot">
+        </app-chart>
     </div>
 </div>
 <hr>
