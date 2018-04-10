@@ -50,8 +50,8 @@ describe('# Test get database tables functionality', function() {
 
 describe('## Test file upload functionality', function(){
   this.timeout(15000);
-  var filePath = './server/test/files/testfile.csv';
-  var resPath = './server/data/testfile.csv'
+  var filePath = 'server/test/files/testFile.csv';
+  var resPath = 'server/data/testFile.csv'
   var tableName = 'testfile';
 
   //Clear everything before file upload.
@@ -71,7 +71,7 @@ describe('## Test file upload functionality', function(){
 
     //Remove table if it exists in db
     db.deleteTable(tableName);
-    console.log("Table removed form database");  
+    console.log("Table removed from database");  
   });
 
   //Upload file. Status must be 200 OK and result should contain table name.
