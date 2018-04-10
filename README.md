@@ -21,7 +21,7 @@ Your system must have support for below stuff:
   
   Follow below steps:
   
-  - https://github.com/Rostlab/JS18_ProjectA_Group2.git
+  - git clone https://github.com/Rostlab/JS18_ProjectA_Group2.git
   - cd JS18_ProjectA_Group2
   - git clone https://github.com/jyotirmay123/nlp_engine.git
   - cd nlp_engine
