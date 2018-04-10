@@ -59,8 +59,9 @@ describe('## Test file upload functionality', function(){
     });
 
     //Remove table if it exists in db
-    db.deleteTable(tableName);
-    console.log("Table removed from database");  
+    db.deleteTable(tableName).then(() => {
+      console.log("Table removed from database"); 
+    });    
   });
 
   //Upload file. Status must be 200 OK and result should contain table name.
@@ -120,6 +121,26 @@ describe('## Test file upload functionality', function(){
         done();
     });
   });  
+
+  after(function() {  
+    //Remove file if it exists in server
+     fs.stat(resPath, function(err, stats){
+      if(err){
+        return console.log(err);        
+      };
+
+      fs.unlink(resPath, function(err){
+        if(err) return console.log(err);
+        console.log('file deleted successfully');
+      });
+
+    });
+
+    //Remove table if it exists in db
+    db.deleteTable(tableName).then( () => {
+      console.log("Table removed from database"); 
+    });     
+  });
 });
 
 // More information: https://mochajs.org/
