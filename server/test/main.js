@@ -32,6 +32,21 @@ describe('## Testing NodeIndexRoute', function() {
   });*/
 });
 
+describe('# Test get database tables functionality', function() {
+  it('## Testing getTables', (done) => {
+    //Send get request.
+    //Expect status 200 OK and result should contain tables array.
+    request(app)
+      .get('/api/getTables')
+      .expect(httpStatus.OK)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        assert(res.body.tables != undefined);
+        done();
+    });
+  });
+});
+
 
 describe('## Test file upload functionality', function(){
   this.timeout(15000);
@@ -71,6 +86,19 @@ describe('## Test file upload functionality', function(){
     });
   });
 
+  //Send get request.
+  //Expect status 200 OK and result should contain testfile table
+  it('## Testing getTables', (done) => {    
+    request(app)
+      .get('/api/getTables')
+      .expect(httpStatus.OK)
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        assert(res.body.tables.includes(tableName));
+        done();
+    });
+  });
+
   //Try to upload testfile again.
   //Expect error - file already exists.
   it('## Testing file upload twice', (done) => {    
@@ -103,21 +131,6 @@ describe('## Test file upload functionality', function(){
         done();
     });
   });  
-});
-
-describe('# Test get database tables functionality', function() {
-  it('## Testing getTables', (done) => {
-    //Send get request.
-    //Expect status 200 OK and result should contain tables array.
-    request(app)
-      .get('/api/getTables')
-      .expect(httpStatus.OK)
-      .expect('Content-Type', /json/)
-      .then((res) => {
-        assert(res.body.tables != undefined);
-        done();
-    });
-  });
 });
 
 // More information: https://mochajs.org/

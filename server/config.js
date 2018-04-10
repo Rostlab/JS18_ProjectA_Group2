@@ -1,6 +1,5 @@
 import { logger, log }  from './logger';
 
-
 let config = (function() {
     // Just to ensure if file structure for logs are ready before use.
     log.setUp();
