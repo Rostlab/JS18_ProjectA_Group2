@@ -1,4 +1,6 @@
-import { logger, log }  from './logger';
+var LoggerModule = require('./logger.js');
+var logger = LoggerModule.logger;
+var log = LoggerModule.log;
 
 let config = (function() {
     // Just to ensure if file structure for logs are ready before use.
