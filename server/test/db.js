@@ -11,12 +11,22 @@ con.connect(function(err) {
 
 let dbFunctions = {
     deleteTable: function(tableName){    
-        con.query('DROP TABLE IF EXISTS igraph.' + tableName, function (err, result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-        });     
+        return new Promise((done) => {
+            con.query('DROP TABLE IF EXISTS igraph.' + tableName, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    reject();
+                }
+            });     
+            con.query('DELETE FROM config WHERE tablename = \'' + tableName + '\';', function (err, result) {
+                if (err) {
+                    console.log(err);
+                    reject();
+                    return;
+                }
+            });   
+            done();
+        });
     }
 }
 
