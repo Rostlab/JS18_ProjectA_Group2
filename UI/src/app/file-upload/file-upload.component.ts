@@ -58,7 +58,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             this.dataList.push(new Dataset(id, fileName));
             alert(response.fileName + " has been uploaded to database!");
         }else{
-            alert(response.Error);
+            alert("Upload Failed! Please upload a file with a different name or reset the database! See the Readme file.");
         }
     }
 
