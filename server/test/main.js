@@ -19,17 +19,6 @@ describe('## Testing NodeIndexRoute', function() {
         done();
     });
   });
-
-  /*it('## Testing nlptodata functionality', (done) => {
-    request(app)
-      .get('/api/nlptodata?userquery=plot bar chart of maximum pay rate per department&dataset=core_data')
-      .expect(httpStatus.OK)
-      .expect('Content-Type', /json/)
-      .then((res) => {
-        expect(res.body.userQuery).to.equal('plot bar chart of maximum pay rate per department');
-        done();
-    });
-  });*/
 });
 
 describe('# Test get database tables functionality', function() {
@@ -64,7 +53,7 @@ describe('## Test file upload functionality', function(){
 
       fs.unlink(resPath, function(err){
         if(err) return console.log(err);
-        console.log('file deleted successfully')
+        console.log('file deleted successfully');
       });
 
     });
