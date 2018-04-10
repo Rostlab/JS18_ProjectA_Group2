@@ -7,7 +7,7 @@
 Your system must have support for below stuff:
 
 - NodeJS.
-- Python 2.7.
+- Python 3.6.
 - MySQL.
 - A Modern Browser.
 
@@ -21,7 +21,7 @@ Your system must have support for below stuff:
   
   Follow below steps:
   
-  - https://github.com/Rostlab/JS18_ProjectA_Group2.git
+  - git clone https://github.com/Rostlab/JS18_ProjectA_Group2.git
   - cd JS18_ProjectA_Group2
   - git clone https://github.com/jyotirmay123/nlp_engine.git
   - cd nlp_engine
@@ -36,10 +36,15 @@ Your system must have support for below stuff:
 ### Database Configuration
 
 - Install MySql server.
-- Create a database with name **igraph**
+- Create database with name **igraph**
 - Import **JS18_ProjectA_Group2/server/sql/config.sql** into igraph.
    
 - Provide MySql server credentials in **JS18_ProjectA_Group2/server/config.js**
+
+### Reset Database to original(No dataset)
+- Drop all the tables except config.
+- Delete all the entries from config table
+- Delete all the files from server/data folder
    
 ### Starting Project
 
@@ -93,20 +98,34 @@ Proxy configuration has been done on UI to access nlp engine **('/nlp')** and ba
 
 - CORE_DATASET
 
-    - Plot histogram of employee’s age.
-    - Plot number of employees for each gender as a pie chart.
-    - Plot number of employees for each gender as a pie chart for all departments.
-    - Plot average pay rate of each race as a bar chart.
-    - Plot number of employees hired each year as a line chart.
-    - Make a scatter plot with age and pay rate.
+    - Plot histogram of employee’s age
+    - Plot number of employees for each gender as a pie chart
+    - Plot count of employees for each gender as a pie chart for all departments
+    - Plot average pay rate of each race as a bar chart
+    - Make a scatter plot with age and pay rate
+    - plot histogram of number of employees per department
+    - Draw bar chart of number of employees of each status
+    - Plot count of employees at each position in every department as a bar chart
+    - Show me the distribution of age on a histogram
+    - Show number of employees for each MaritalDesc whose age is between 28 and 32 on a bar chart
+    - Plot a scatter graph of average age vs average salary for each department where average salary is more than 10.
+    - Plot a line graph of maximum age vs max salary for each department having highest age is less than 50.
+    - Plot a scatter graph of average salary vs average age for each department where average salary is more than 10.
+    - Pie chart of average salary per department having mean age greater than 25.
+    - average age vs maximum salary on a bar chart per department
+    - Show number of employees vs maximum salary on a bar chart per department
 
 
 - INDICATOR_DATASET
 
-    - Plot the histogram of Urban population (% of total) in the year 2010.
-    - Plot the life expectancy at birth for male and female each year as a line chart for Germany.
-    - Make a scatter plot of countries with birth rate and GDP per capita as two axises.
-    - Plot the CO2 emissions from gaseous fuel, liquid fuel and solid fuel as a pie chart for each country.
+    - Plot the histogram of “Urban population (% of total)” in the year 2010
+    - Plot the pie chart of “CO2 emissions (kt)” for each year
+    - Plot the pie chart of “Debt buyback (current US$)” each countryname.
+    - Plot the bar chart of “Debt buyback (current US$)” for each countryname per year 
+    - Plot the bar chart of “External debt stocks (% of GNI)” for each countryname with year lesser than 2000
+    - Plot the bar chart of “Debt buyback (current US$)” for each countryname where year is between 2000 and 2010
+    - Plot the scatter chart of “GDP per capita (current US$)” vs year for each year
+    - Plot the line chart of “Mobile cellular subscriptions” vs year for every year
 
 ## Project Architecture
 

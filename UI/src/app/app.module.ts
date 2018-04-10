@@ -11,6 +11,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ChartComponent } from './chart/chart.component';
 import { BackendConnectorService } from "./services";
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { WorkingCommandsComponent } from "./working-commands/working-commands.component";
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
         HomeComponent,
         TextInputComponent,
         ChartComponent,
-		FileUploadComponent
+		FileUploadComponent,
+        WorkingCommandsComponent
     ],
     imports: [
         BrowserModule,

@@ -7,6 +7,7 @@ import { ChartComponent } from '../chart/chart.component';
 import { BackendConnectorService } from "../services";
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { Columns, Dataset } from "../../../models";
+import { WorkingCommandsComponent } from "../working-commands/working-commands.component";
 import { By } from "@angular/platform-browser";
 
 describe('HomeComponent', () => {
@@ -24,7 +25,8 @@ describe('HomeComponent', () => {
                 HomeComponent,
                 TextInputComponent,
                 ChartComponent,
-                FileUploadComponent
+                FileUploadComponent,
+                WorkingCommandsComponent
             ],
             providers: [
                 BackendConnectorService

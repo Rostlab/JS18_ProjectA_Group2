@@ -30,6 +30,8 @@
     </div>
 
     <hr>
+	
+    <label *ngIf="columns && columns.length > 0">Available columns in the table</label> 
 
     <div class="row row-box">
         <div class="column-box"
@@ -76,7 +78,7 @@
                     class="btn btn-md btn-warning button"
                     type="button"
                     (click)="updateGraph()"
-                    [disabled]="disableUpdateTextField()">
+                    [disabled]="shouldDisableUpdateButton()">
                 <i class="fa fa-chart-line"></i> Update
             </button>
         </div>
@@ -95,7 +97,8 @@
 </div>
 <hr>
 <div>
-    <div class="display-container">
+    <div class="display-container"
+         [hidden]="!graphIsEmpty">
         <div id="error"
              class="msg-div"
              [hidden]="!err_">
@@ -112,8 +115,16 @@
                 <p>Your plot will be shown here.</p>
             </div>
             <br>
-            <app-chart #chart id="plot">
-            </app-chart>
         </div>
     </div>
+    <div class="graph"
+         [hidden]="graphIsEmpty">
+        <app-chart #chart id="plot">
+        </app-chart>
+    </div>
+</div>
+<hr>
+<div>
+    <app-working-commands>
+    </app-working-commands>
 </div>
