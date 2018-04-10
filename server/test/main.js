@@ -50,8 +50,8 @@ describe('# Test get database tables functionality', function() {
 
 describe('## Test file upload functionality', function(){
   this.timeout(15000);
-  var filePath = 'server/test/files/testfile.csv';
-  var resPath = 'server/data/testfile.csv'
+  var filePath = './server/test/files/testfile.csv';
+  var resPath = './server/data/testfile.csv'
   var tableName = 'testfile';
 
   //Clear everything before file upload.
