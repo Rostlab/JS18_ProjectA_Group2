@@ -15,11 +15,11 @@ let config = (function() {
         this.config_table = 'config',
 
         this.mysql = {
-            host: 'localhost',
+            host: 'js2018-group2-mysqldbserver.mysql.database.azure.com',
             port: '3306',
-            user: 'root',
-            password: '',
-            database: 'igraph'
+            user: 'group2@js2018-group2-mysqldbserver',
+            password: 'Mn5Ehoq3BEsKnJV4XQvW',
+            database: 'group2'
         },
 
         this.logger = logger,
