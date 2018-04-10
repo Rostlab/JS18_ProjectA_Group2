@@ -1,0 +1,100 @@
+CountryName,CountryCode,IndicatorName,IndicatorCode,Year,Value
+Arab World,ARB,"Adolescent fertility rate (births per 1,000 women ages 15-19)",SP.ADO.TFRT,1960,133.56090740552298
+Arab World,ARB,Age dependency ratio (% of working-age population),SP.POP.DPND,1960,87.7976011532547
+Arab World,ARB,"Age dependency ratio, old (% of working-age population)",SP.POP.DPND.OL,1960,6.634579191565161
+Arab World,ARB,"Age dependency ratio, young (% of working-age population)",SP.POP.DPND.YG,1960,81.02332950839141
+Arab World,ARB,Arms exports (SIPRI trend indicator values),MS.MIL.XPRT.KD,1960,3000000.0
+Arab World,ARB,Arms imports (SIPRI trend indicator values),MS.MIL.MPRT.KD,1960,538000000.0
+Arab World,ARB,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1960,47.697888095096395
+Arab World,ARB,CO2 emissions (kt),EN.ATM.CO2E.KT,1960,59563.9892169935
+Arab World,ARB,CO2 emissions (metric tons per capita),EN.ATM.CO2E.PC,1960,0.6439635478877049
+Arab World,ARB,CO2 emissions from gaseous fuel consumption (% of total),EN.ATM.CO2E.GF.ZS,1960,5.041291753975099
+Arab World,ARB,CO2 emissions from liquid fuel consumption (% of total),EN.ATM.CO2E.LF.ZS,1960,84.8514729446567
+Arab World,ARB,CO2 emissions from liquid fuel consumption (kt),EN.ATM.CO2E.LF.KT,1960,49541.707291032304
+Arab World,ARB,CO2 emissions from solid fuel consumption (% of total),EN.ATM.CO2E.SF.ZS,1960,4.72698138789597
+Arab World,ARB,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1960,19.7544519237187
+Arab World,ARB,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1960,6.92402738655897
+Arab World,ARB,Fixed telephone subscriptions,IT.MLT.MAIN,1960,406833.0
+Arab World,ARB,Fixed telephone subscriptions (per 100 people),IT.MLT.MAIN.P2,1960,0.6167005703199
+Arab World,ARB,"Hospital beds (per 1,000 people)",SH.MED.BEDS.ZS,1960,1.9296220724398703
+Arab World,ARB,International migrant stock (% of population),SM.POP.TOTL.ZS,1960,2.9906371279862403
+Arab World,ARB,"International migrant stock, total",SM.POP.TOTL,1960,3324685.0
+Arab World,ARB,"Life expectancy at birth, female (years)",SP.DYN.LE00.FE.IN,1960,47.883245863348506
+Arab World,ARB,"Life expectancy at birth, male (years)",SP.DYN.LE00.MA.IN,1960,45.8629492346331
+Arab World,ARB,"Life expectancy at birth, total (years)",SP.DYN.LE00.IN,1960,46.847058559012794
+Arab World,ARB,Merchandise exports (current US$),TX.VAL.MRCH.CD.WT,1960,4645918768.64097
+Arab World,ARB,Merchandise exports by the reporting economy (current US$),TX.VAL.MRCH.WL.CD,1960,2468800000.0
+Arab World,ARB,"Merchandise exports by the reporting economy, residual (% of total merchandise exports)",TX.VAL.MRCH.RS.ZS,1960,16.4695398574206
+Arab World,ARB,Merchandise exports to developing economies in East Asia & Pacific (% of total merchandise exports),TX.VAL.MRCH.R1.ZS,1960,2.2602073882047997
+Arab World,ARB,Merchandise exports to developing economies in Latin America & the Caribbean (% of total merchandise exports),TX.VAL.MRCH.R3.ZS,1960,0.449611147116008
+Arab World,ARB,Merchandise exports to developing economies in Middle East & North Africa (% of total merchandise exports),TX.VAL.MRCH.R4.ZS,1960,6.37961762799741
+Arab World,ARB,Merchandise exports to developing economies in South Asia (% of total merchandise exports),TX.VAL.MRCH.R5.ZS,1960,2.7908295528191798
+Arab World,ARB,Merchandise exports to developing economies in Sub-Saharan Africa (% of total merchandise exports),TX.VAL.MRCH.R6.ZS,1960,2.03742709008425
+Arab World,ARB,Merchandise exports to developing economies outside region (% of total merchandise exports),TX.VAL.MRCH.OR.ZS,1960,9.02867790019443
+Arab World,ARB,Merchandise exports to developing economies within region (% of total merchandise exports),TX.VAL.MRCH.WR.ZS,1960,5.94215813350616
+Arab World,ARB,Merchandise exports to economies in the Arab World (% of total merchandise exports),TX.VAL.MRCH.AL.ZS,1960,8.5102073882048
+Arab World,ARB,Merchandise exports to high-income economies (% of total merchandise exports),TX.VAL.MRCH.HI.ZS,1960,68.5596241088788
+Arab World,ARB,Merchandise imports (current US$),TM.VAL.MRCH.CD.WT,1960,5130862535.56409
+Arab World,ARB,Merchandise imports by the reporting economy (current US$),TM.VAL.MRCH.WL.CD,1960,3924800000.0
+Arab World,ARB,"Merchandise imports by the reporting economy, residual (% of total merchandise imports)",TM.VAL.MRCH.RS.ZS,1960,12.471973094170401
+Arab World,ARB,Merchandise imports from developing economies in East Asia & Pacific (% of total merchandise imports),TM.VAL.MRCH.R1.ZS,1960,0.580921320831635
+Arab World,ARB,Merchandise imports from developing economies in Latin America & the Caribbean (% of total merchandise imports),TM.VAL.MRCH.R3.ZS,1960,1.11343253159397
+Arab World,ARB,Merchandise imports from developing economies in Middle East & North Africa (% of total merchandise imports),TM.VAL.MRCH.R4.ZS,1960,4.74164288626172
+Arab World,ARB,Merchandise imports from developing economies in South Asia (% of total merchandise imports),TM.VAL.MRCH.R5.ZS,1960,2.7695678760701203
+Arab World,ARB,Merchandise imports from developing economies in Sub-Saharan Africa (% of total merchandise imports),TM.VAL.MRCH.R6.ZS,1960,2.38993069710558
+Arab World,ARB,Merchandise imports from developing economies outside region (% of total merchandise imports),TM.VAL.MRCH.OR.ZS,1960,5.872910721565431
+Arab World,ARB,Merchandise imports from developing economies within region (% of total merchandise imports),TM.VAL.MRCH.WR.ZS,1960,4.22951487973909
+Arab World,ARB,Merchandise imports from economies in the Arab World (% of total merchandise imports),TM.VAL.MRCH.AL.ZS,1960,6.028332653893191
+Arab World,ARB,Merchandise imports from high-income economies (% of total merchandise imports),TM.VAL.MRCH.HI.ZS,1960,77.42560130452509
+Arab World,ARB,Merchandise trade (% of GDP),TG.VAL.TOTL.GD.ZS,1960,47.242123160500796
+Arab World,ARB,Mobile cellular subscriptions,IT.CEL.SETS,1960,0.0
+Arab World,ARB,Mobile cellular subscriptions (per 100 people),IT.CEL.SETS.P2,1960,0.0
+Arab World,ARB,"Mortality rate, adult, female (per 1,000 female adults)",SP.DYN.AMRT.FE,1960,298.935703480322
+Arab World,ARB,"Mortality rate, adult, male (per 1,000 male adults)",SP.DYN.AMRT.MA,1960,357.705583991762
+Arab World,ARB,"Mortality rate, infant (per 1,000 live births)",SP.DYN.IMRT.IN,1960,159.950233564465
+Arab World,ARB,"Mortality rate, under-5 (per 1,000)",SH.DYN.MORT,1960,249.36022483248402
+Arab World,ARB,"Net bilateral aid flows from DAC donors, European Union institutions (current US$)",DC.DAC.CECL.CD,1960,70000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, France (current US$)",DC.DAC.FRAL.CD,1960,354000000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, Germany (current US$)",DC.DAC.DEUL.CD,1960,2060000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, Italy (current US$)",DC.DAC.ITAL.CD,1960,71540000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, Japan (current US$)",DC.DAC.JPNL.CD,1960,50000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, Total (current US$)",DC.DAC.TOTL.CD,1960,845270000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, United Kingdom (current US$)",DC.DAC.GBRL.CD,1960,42550000.0
+Arab World,ARB,"Net bilateral aid flows from DAC donors, United States (current US$)",DC.DAC.USAL.CD,1960,375000000.0
+Arab World,ARB,Net ODA received per capita (current US$),DT.ODA.ODAT.PC.ZS,1960,9.53544947321017
+Arab World,ARB,Net official development assistance and official aid received (constant 2012 US$),DT.ODA.ALLD.KD,1960,7296220000.0
+Arab World,ARB,Net official development assistance and official aid received (current US$),DT.ODA.ALLD.CD,1960,881990000.0
+Arab World,ARB,Net official development assistance received (constant 2012 US$),DT.ODA.ODAT.KD,1960,7296220000.0
+Arab World,ARB,Net official development assistance received (current US$),DT.ODA.ODAT.CD,1960,881990000.0
+Arab World,ARB,Population ages 65 and above (% of total),SP.POP.65UP.TO.ZS,1960,3.53546477371962
+Arab World,ARB,Population in the largest city (% of urban population),EN.URB.LCTY.UR.ZS,1960,33.7129877968159
+Arab World,ARB,Population in urban agglomerations of more than 1 million (% of total population),EN.URB.MCTY.TL.ZS,1960,14.644958059548399
+Arab World,ARB,"Population, ages 0-14 (% of total)",SP.POP.0014.TO.ZS,1960,43.1760796812111
+Arab World,ARB,"Population, ages 15-64 (% of total)",SP.POP.1564.TO.ZS,1960,53.2884555450693
+Arab World,ARB,"Population, female (% of total)",SP.POP.TOTL.FE.ZS,1960,49.61296007297771
+Arab World,ARB,"Population, total",SP.POP.TOTL,1960,92495902.0
+Arab World,ARB,Rural population,SP.RUR.TOTL,1960,63558203.0
+Arab World,ARB,Rural population (% of total population),SP.RUR.TOTL.ZS,1960,68.71461578839461
+Arab World,ARB,"Survival to age 65, female (% of cohort)",SP.DYN.TO65.FE.ZS,1960,44.769226869581004
+Arab World,ARB,"Survival to age 65, male (% of cohort)",SP.DYN.TO65.MA.ZS,1960,39.516459951616795
+Arab World,ARB,Urban population,SP.URB.TOTL,1960,28937699.0
+Arab World,ARB,Urban population (% of total),SP.URB.TOTL.IN.ZS,1960,31.285384211605397
+Caribbean small states,CSS,"Adolescent fertility rate (births per 1,000 women ages 15-19)",SP.ADO.TFRT,1960,162.871211572184
+Caribbean small states,CSS,Age dependency ratio (% of working-age population),SP.POP.DPND,1960,90.5425607126017
+Caribbean small states,CSS,"Age dependency ratio, old (% of working-age population)",SP.POP.DPND.OL,1960,7.87499865987421
+Caribbean small states,CSS,"Age dependency ratio, young (% of working-age population)",SP.POP.DPND.YG,1960,82.2875457798623
+Caribbean small states,CSS,"Birth rate, crude (per 1,000 people)",SP.DYN.CBRT.IN,1960,40.017000543436
+Caribbean small states,CSS,CO2 emissions (kt),EN.ATM.CO2E.KT,1960,5878.201
+Caribbean small states,CSS,CO2 emissions (metric tons per capita),EN.ATM.CO2E.PC,1960,1.4026407782743702
+Caribbean small states,CSS,CO2 emissions from gaseous fuel consumption (% of total),EN.ATM.CO2E.GF.ZS,1960,25.0155957579538
+Caribbean small states,CSS,CO2 emissions from liquid fuel consumption (% of total),EN.ATM.CO2E.LF.ZS,1960,71.4909544603868
+Caribbean small states,CSS,CO2 emissions from liquid fuel consumption (kt),EN.ATM.CO2E.LF.KT,1960,2318.7362206420003
+Caribbean small states,CSS,CO2 emissions from solid fuel consumption (% of total),EN.ATM.CO2E.SF.ZS,1960,0.124766063630692
+Caribbean small states,CSS,"Death rate, crude (per 1,000 people)",SP.DYN.CDRT.IN,1960,9.81316662675259
+Caribbean small states,CSS,Exports of goods and services (current US$),NE.EXP.GNFS.CD,1960,872575670.352893
+Caribbean small states,CSS,"Fertility rate, total (births per woman)",SP.DYN.TFRT.IN,1960,5.52010293883625
+Caribbean small states,CSS,GDP at market prices (current US$),NY.GDP.MKTP.CD,1960,1917147689.8557198
+Caribbean small states,CSS,GDP per capita (current US$),NY.GDP.PCAP.CD,1960,457.46471203794
+Caribbean small states,CSS,GNI (current US$),NY.GNP.MKTP.CD,1960,1783460941.4022102
+Caribbean small states,CSS,Gross capital formation (current US$),NE.GDI.TOTL.CD,1960,608620983.865654
+Caribbean small states,CSS,"Hospital beds (per 1,000 people)",SH.MED.BEDS.ZS,1960,5.054265970578981

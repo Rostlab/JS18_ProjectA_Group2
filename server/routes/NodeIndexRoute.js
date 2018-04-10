@@ -51,7 +51,7 @@ router.post('/upload', function (req, res) {
       var tableName = path.basename(filePath, path.extname(filePath)).toLowerCase();
 
       dataService.importCsvToMysql(filePath, tableName).then(tableName => {
-              res.status(202).send({"fileName" : tableName});
+              res.status(200).send({"fileName" : tableName});
               return;
           }, err => {
               res.status(500).send(err);
@@ -68,7 +68,7 @@ router.post('/upload', function (req, res) {
 
 router.get('/getTables', function(req, res){
   dataService.getTables().then(tables => {
-    res.status(202).send({"tables" : tables});
+    res.status(200).send({"tables" : tables});
     return;
   }).catch(err => {
     console.log("Err");
