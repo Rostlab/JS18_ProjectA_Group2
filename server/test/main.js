@@ -4,7 +4,7 @@ var httpStatus = require('http-status');
 var chai = require('chai');  
 var expect = chai.expect;
 var  app = require('../app');
-const db = require('./db');
+//const db = require('./db');
 const fs = require('fs');
 
 chai.config.includeStack = true;
@@ -59,9 +59,9 @@ describe('## Test file upload functionality', function(){
     });
 
     //Remove table if it exists in db
-    db.deleteTable(tableName).then(() => {
+    /*db.deleteTable(tableName).then(() => {
       console.log("Table removed from database"); 
-    });    
+    });  */  
   });
 
   //Upload file. Status must be 200 OK and result should contain table name.
@@ -137,9 +137,9 @@ describe('## Test file upload functionality', function(){
     });
 
     //Remove table if it exists in db
-    db.deleteTable(tableName).then( () => {
+    /*db.deleteTable(tableName).then( () => {
       console.log("Table removed from database"); 
-    });     
+    });*/     
   });
 });
 
