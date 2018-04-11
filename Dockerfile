@@ -6,7 +6,7 @@ FROM ubuntu:16.04
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y --no-install-recommends python3 python3-pip nodejs git
+    apt-get install -y python3 python3-pip nodejs git
 
 EXPOSE 4200
 
@@ -19,7 +19,7 @@ RUN cd nlp_engine && \
     python3 -m spacy download en_core_web_md && \
     python3 -m spacy link en_core_web_md en && \
     cd ..
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN cp -R projects nlp_engine
