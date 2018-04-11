@@ -21,7 +21,7 @@ describe('## Testing NodeIndexRoute', function() {
   });
 });
 
-describe('# Test get database tables functionality', function() {
+/*describe('# Test get database tables functionality', function() {
   it('## Testing getTables', (done) => {
     //Send get request.
     //Expect status 200 OK and result should contain tables array.
@@ -59,9 +59,9 @@ describe('## Test file upload functionality', function(){
     });
 
     //Remove table if it exists in db
-    /*db.deleteTable(tableName).then(() => {
+    db.deleteTable(tableName).then(() => {
       console.log("Table removed from database"); 
-    });  */  
+    });  
   });
 
   //Upload file. Status must be 200 OK and result should contain table name.
@@ -134,14 +134,14 @@ describe('## Test file upload functionality', function(){
         console.log('file deleted successfully');
       });
 
-    });
+    });*/
 
     //Remove table if it exists in db
     /*db.deleteTable(tableName).then( () => {
       console.log("Table removed from database"); 
-    });*/     
+    });    
   });
-});
+});*/ 
 
 // More information: https://mochajs.org/
 
