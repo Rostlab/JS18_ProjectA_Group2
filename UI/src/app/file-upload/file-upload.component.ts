@@ -42,7 +42,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
                         this.handleResponse(event);
                     },
                     error => {
-                        alert(error.error);
+                        alert(error.error.Error);
                     });
 
             statusNgForm.resetForm({});
