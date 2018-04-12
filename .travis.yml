@@ -1,6 +1,9 @@
+sudo: required
 language: node_js
 node_js:
 - "8"
+services:
+  - docker
 before_install:
   - export CHROME_BIN=chromium-browser
   - export FIREFOX_BIN=firefox
@@ -14,3 +17,9 @@ install:
 script:
   - npm run test:server
   - npm run test:ui
+
+deploy:
+  provider: script
+  script: bash docker/deploy.sh
+  on:
+    branch: develop
