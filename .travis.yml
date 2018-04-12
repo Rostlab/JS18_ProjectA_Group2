@@ -22,4 +22,4 @@ deploy:
   provider: script
   script: bash docker/deploy.sh
   on:
-    branch: feature-8-azure
+    branch: develop
